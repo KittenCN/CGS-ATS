@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<appSettings>
+	<!-- 连接字符串是否加密-->
+	<add key="ConStringEncrypt" value="false" />
+	<!-- SqlServer连接字符串:Server=服务器地址;Database=库名;Uid=用户;Pwd=密码-->
+	<add key="SqlServer_RM_DB" value="Server=localhost;Database=RM_DB;Uid=sa;Pwd=sa123" />
+	<!-- 系统默认登录账户 -->
+	<add key="CurrentUserName" value="superman" />
+	<!-- 系统默认登录密码 -->
+	<add key="CurrentPassword" value="3FDE6BB0541387E4EBDADF7C2FF31123" />
+	<!-- 是否启动服务器缓存-->
+	<add key="IsCache" value="false" />
+	<!-- 服务器缓存设置时间（分钟）-->
+	<add key="TimeCache" value="30" />
+	<!-- 是否自动重启IIS-->
+	<add key="IsRestartIIS" value="false" />
+	<!-- 自动重启IIS设置时间（每天凌晨05点）-->
+	<add key="RestartIISTime" value="22:33:00" />
+	<!-- 是否写日志-->
+	<add key="LogIsWrite" value="true" />
+	<!-- 系统日志保存路径-->
+	<add key="LogFilePath" value="D://RM_Log//SysLog" />
+	<!-- 允许恢复数据库-->
+	<add key="IsRecoverData" value="false" />
+	<!-- 是否启动自动备份数据库-->
+	<add key="IsBackupsData" value="false" />
+	<!-- 自动启动备份数据库设置时间（每天凌晨05点）-->
+	<add key="BackupsDataTime" value="05:00:00" />
+	<!-- 备份数据库设置保存路径 -->
+	<add key="BackupsDataPath" value="D://RM_Log//DataBackups" />
+	<!-- 发出系统异常错误邮箱的地址 -->
+	<add key="ErrorReportMailUserName" value="00000000@qq.com" />
+	<!-- 软件注册码 -->
+	<add key="RegistrationCode" value="2A1B132C0E64FA299B014B39F7DE5C2F" />
+	<!-- 公司信息 -->
+	<add key="CustomerCompanyName" value="XXX有限公司" />
+	<!-- 软件名称 -->
+	<add key="SoftName" value=".NET快速开发架构" />
+	<!-- 当前软件版本 -->
+	<add key="Version" value="2.0" />
+</appSettings>

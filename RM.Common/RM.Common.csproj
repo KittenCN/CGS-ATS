@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4AF69D49-B0E8-4041-905D-0ABE81C53932}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RM.Common</RootNamespace>
+    <AssemblyName>RM.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.SQLDMO, Version=8.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>Lib\Interop.SQLDMO.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DotNetBean\CookieHelper.cs" />
+    <Compile Include="DotNetBean\RequestSession.cs" />
+    <Compile Include="DotNetBean\SessionUser.cs" />
+    <Compile Include="DotNetCode\CacheHelper.cs" />
+    <Compile Include="DotNetCode\CommonHelper.cs" />
+    <Compile Include="DotNetCode\ConvertHelper.cs" />
+    <Compile Include="DotNetCode\DateTimeHelper.cs" />
+    <Compile Include="DotNetCode\LogHelper.cs" />
+    <Compile Include="DotNetCode\PinyinHelper.cs" />
+    <Compile Include="DotNetCode\RequestHelper.cs" />
+    <Compile Include="DotNetCode\RMBHelper.cs" />
+    <Compile Include="DotNetCode\SqlFilterHelper.cs" />
+    <Compile Include="DotNetCode\SqlParam.cs" />
+    <Compile Include="DotNetCode\StringHelper.cs" />
+    <Compile Include="DotNetCode\ValidateUtil.cs" />
+    <Compile Include="DotNetConfig\ConfigHelper.cs" />
+    <Compile Include="DotNetData\DataTableHelper.cs" />
+    <Compile Include="DotNetData\HashtableHelper.cs" />
+    <Compile Include="DotNetData\ReaderToIListHelper.cs" />
+    <Compile Include="DotNetData\XMLHelper.cs" />
+    <Compile Include="DotNetEamil\SMTPManager.cs" />
+    <Compile Include="DotNetEncrypt\DESEncrypt.cs" />
+    <Compile Include="DotNetEncrypt\Md5Helper.cs" />
+    <Compile Include="DotNetFile\DirFileHelper.cs" />
+    <Compile Include="DotNetFile\FileDownHelper.cs" />
+    <Compile Include="DotNetFile\FileHelper.cs" />
+    <Compile Include="DotNetFile\FTPHelper.cs" />
+    <Compile Include="DotNetFile\GZipHelper.cs" />
+    <Compile Include="DotNetFile\UploadHelper.cs" />
+    <Compile Include="DotNetImage\ImageHelper.cs" />
+    <Compile Include="DotNetJson\JsonHelper.cs" />
+    <Compile Include="DotNetUI\ControlBindHelper.cs" />
+    <Compile Include="DotNetUI\ExcelHelper.cs" />
+    <Compile Include="DotNetUI\IPScanerHelper.cs" />
+    <Compile Include="DotNetUI\ShowMsgHelper.cs" />
+    <Compile Include="DotNetUI\WebHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Lib\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

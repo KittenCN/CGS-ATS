@@ -1,0 +1,39 @@
+﻿/**分页 begin**/
+.pagination
+{
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+    background-image: url('../images/datagrid_header_bg.gif');
+    background-repeat: repeat-x;
+    height: 27px;
+    width: auto;
+}
+.pagination-btn-separator
+{
+    float: left;
+    height: 24px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #fff;
+    margin: 1px;
+}
+.first
+{
+    background: url('../images/first.gif') no-repeat 0px 2px;
+    cursor: pointer;
+}
+.prev
+{
+    background: url('../images/prev.gif') no-repeat 0px 2px;
+    cursor: pointer;
+}
+.next
+{
+    background: url('../images/next.gif') no-repeat 0px 2px;
+    cursor: pointer;
+}
+.last
+{
+    background: url('../images/last.gif') no-repeat 0px 2px;
+    cursor: pointer;
+}
+/**分页 end**/
