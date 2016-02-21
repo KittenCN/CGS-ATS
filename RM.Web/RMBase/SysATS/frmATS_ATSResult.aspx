@@ -86,6 +86,11 @@
             }
         }
     </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 20px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -110,44 +115,44 @@
         <table id="table1" class="grid" singleselect="true">
             <thead>
                 <tr>
-                    <td style="width: 20px; text-align: left;">
+                    <td style="text-align: left;" class="auto-style1">
                         <label id="checkAllOff">
                             &nbsp;</label>
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         员工姓名
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         审查状态
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         考勤日期
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         日期状态
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         节日名称
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         节日状态
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         休    假
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         公    出
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         上班打卡
                     </td>
-                    <td style="width: 110px; text-align: center;">
+                    <td style=" text-align: center;">
                         午餐打卡
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         下班打卡
                     </td>
-                    <td style="width: 90px; text-align: center;">
+                    <td style=" text-align: center;">
                         考勤结果
                     </td>
                 </tr>
@@ -156,43 +161,43 @@
                 <asp:Repeater ID="rp_Item" runat="server" OnItemDataBound="rp_ItemDataBound" >
                     <ItemTemplate>
                         <tr id="tbtr">
-                            <td id="tbtrtd" style="width: 20px; text-align: left;">
-                                <input id="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" name="checkbox" />
+                            <td id="tbtrtd" style=" text-align: left;" class="auto-style1">
+                                <input id="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" name="checkbox" class="auto-style1" />
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                  <asp:Label ID="EmpID" runat="server" Text='<%#Eval("EmpID")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                  <asp:Label ID="Flag" runat="server" Text='<%#Eval("Flag")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <%#Eval("ATS_Date", "{0:d}")%></a>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <asp:Label ID="ATS_DateStatus" runat="server" Text='<%#Eval("ATS_DateStatus")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <asp:Label ID="ATS_Holiday" runat="server" Text='<%#Eval("ATS_Holiday")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <asp:Label ID="ATS_HolidayStatus" runat="server" Text='<%#Eval("ATS_HolidayStatus")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <asp:Label ID="ATS_Leave" runat="server" Text='<%#Eval("ATS_Leave")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                  <asp:Label ID="ATS_Travel" runat="server" Text='<%#Eval("ATS_Travel")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <%#Eval("PunchINTime","{0:T}")%>
                             </td>
-                            <td style="width: 100px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <%#Eval("LunchTime")%>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <%#Eval("PunchOutTime","{0:T}")%>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style=" text-align: center;">
                                 <asp:Label ID="ATS_Result" runat="server" Text='<%#Eval("ATS_Result")%>'></asp:Label>
                             </td>
                         </tr>

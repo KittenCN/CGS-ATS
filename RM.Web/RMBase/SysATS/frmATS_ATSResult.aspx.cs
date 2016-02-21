@@ -227,7 +227,7 @@ namespace RM.Web.RMBase.SysATS
                     TimeSpan tsPunchInTime = new TimeSpan(dtPunchInTime.Ticks);
                     TimeSpan tsPunchOutTime = new TimeSpan(dtPunchOutTime.Ticks);
                     int intResult = tsPunchOutTime.Subtract(tsPunchInTime).Hours;
-;
+
                     if(txt_PunchInTime==null || txt_PunchInTime=="" || txt_PunchInTime=="00:00:00" || txt_PunchOutTime==null || txt_PunchOutTime=="" || txt_PunchOutTime=="00:00:00")
                     {
                         intATSResult = 0; //打卡异常
@@ -317,16 +317,33 @@ namespace RM.Web.RMBase.SysATS
                     }
 
                     //更新所有人节日记录
-                    insql = "update Base_ATSResult ";
-                    insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
-                    insql = insql + ", ATS_Result=" + intATSResult + " ";
-                    insql = insql + " where ATS_Date='" + txt_ATS_Date + "' ";
-                    insb_sql = new StringBuilder(insql);
-                    int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
-                    if (int_sqlresult <= 0)
+                    if(int_ATS_Holiday==0)
                     {
-                        ShowMsgHelper.Alert_Wern("审查失败");
+                        insql = "update Base_ATSResult ";
+                        insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
+                        //insql = insql + ", ATS_Result=" + intATSResult + " ";
+                        insql = insql + " where ATS_Date='" + txt_ATS_Date + "' ";
+                        insb_sql = new StringBuilder(insql);
+                        int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
+                        if (int_sqlresult <= 0)
+                        {
+                            ShowMsgHelper.Alert_Wern("审查失败");
+                        }
                     }
+                    else
+                    {
+                        insql = "update Base_ATSResult ";
+                        insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
+                        insql = insql + ", ATS_Result=" + intATSResult + " ";
+                        insql = insql + " where ATS_Date='" + txt_ATS_Date + "' ";
+                        insb_sql = new StringBuilder(insql);
+                        int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
+                        if (int_sqlresult <= 0)
+                        {
+                            ShowMsgHelper.Alert_Wern("审查失败");
+                        }
+                    }
+                    
 
                     //获取休假记录
                     int int_ATS_Leave = 0;
