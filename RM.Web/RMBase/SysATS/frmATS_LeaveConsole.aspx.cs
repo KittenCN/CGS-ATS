@@ -11,6 +11,9 @@ using System.Web.UI.WebControls;
 using RM.Busines.IDAO;
 using RM.Busines.DAL;
 using RM.Common.DotNetData;
+using System.Collections;
+using System.Threading;
+
 namespace RM.Web.RMBase.SysATS
 {
     public partial class frmATS_LeaveConsole : PageBase
@@ -119,6 +122,14 @@ namespace RM.Web.RMBase.SysATS
             }
 
             return txt_Result;
+        }
+
+        protected void btn_RunSQL_Click(object sender, EventArgs e)
+        {
+            Hashtable ht = new Hashtable();
+            int intResult = DataFactory.SqlDataBase().ExecuteByProc("proLeaveConsole", ht);
+            DataBindGrid();
+            //Thread.Sleep(5000);
         }
     }
 }

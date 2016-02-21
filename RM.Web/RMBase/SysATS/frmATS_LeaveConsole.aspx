@@ -107,6 +107,7 @@
             <asp:Button ID="btn_ATSCheck" Text="考勤审查" runat="server"  OnClick="btn_ATSCheck_Click"/>
             <asp:Button ID="btn_Search" Text="查询" runat="server" OnClick="btn_Search_Click" />--%>
             <asp:Button ID="btn_EditLeaveConsole" Text="修改休假结果" runat="server"  OnClientClick="edit()" />
+            <asp:Button ID="btn_RunSQL" Text="计算所有年假" runat="server" OnClick="btn_RunSQL_Click" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
