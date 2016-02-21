@@ -54,10 +54,16 @@ namespace RM.Web.RMBase.SysATS
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 Label lab_EmpID = e.Item.FindControl("EmpID") as Label;
+                Label lab_JZDate = e.Item.FindControl("JZDate") as Label;
 
                 if (lab_EmpID != null)
                 {
                     lab_EmpID.Text = GetNameFromID(lab_EmpID.Text);
+                }
+
+                if(lab_JZDate.Text=="1900-1-1" || lab_JZDate==null)
+                {
+                    lab_JZDate.Text = "-";
                 }
             }
 

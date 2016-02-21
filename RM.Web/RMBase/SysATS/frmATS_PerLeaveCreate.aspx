@@ -60,6 +60,13 @@
                 </td>
             </tr>
             <tr>
+                <th>休假天数</th>
+                <td>
+                    <asp:Label ID="LeaveDays" runat="server"></asp:Label>
+                    <asp:Button ID="btnLeaveDays" runat="server" OnClick="btnLeaveDays_Click" />
+                </td>
+            </tr>
+            <tr>
                 <th>备注:</th>
                 <td><textarea id="Remark" runat="server" maxlength="500" rows="3"></textarea></td>
             </tr>

@@ -76,6 +76,24 @@ namespace RM.Web.RMBase.SysATS {
         protected global::System.Web.UI.HtmlControls.HtmlSelect EndFlag;
         
         /// <summary>
+        /// TravelDays 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TravelDays;
+        
+        /// <summary>
+        /// btnTravelDays 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTravelDays;
+        
+        /// <summary>
         /// Place 控件。
         /// </summary>
         /// <remarks>

@@ -57,6 +57,8 @@ namespace RM.Web.RMBase.SysATS
 
         protected void Save_Click(object sender, EventArgs e)
         {
+            btnLeaveDays_Click(null,null);
+
             DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
             dtFormat.ShortDatePattern = "yyyy/MM/dd";
             if ((Convert.ToDateTime(BeginDate.Text, dtFormat) > Convert.ToDateTime(EndDate.Text, dtFormat)) || (Convert.ToDateTime(BeginDate.Text, dtFormat) == Convert.ToDateTime(EndDate.Text, dtFormat) && BeginFlag.Value == "0" && EndFlag.Value == "1"))
@@ -87,6 +89,7 @@ namespace RM.Web.RMBase.SysATS
                     ht["NextApprover"] = txt_NextApprover;
                     ht["LeaveID"] = LeaveID.SelectedValue;
                     ht["FilesAdd"] = txt_FilesAdd;
+                    ht["LeaveDays"] = LeaveDays.Text;
                     int IsOk = DataFactory.SqlDataBase().InsertByHashtableReturnPkVal("Base_PerLeaveApply", ht);
                     if (IsOk > 0)
                     {
@@ -141,6 +144,42 @@ namespace RM.Web.RMBase.SysATS
                 //Response.Write("Please select a file to upload.");
                 ShowMsgHelper.Alert_Wern("Please select a file to upload.");
             }
+        }
+
+        protected void btnLeaveDays_Click(object sender, EventArgs e)
+        {
+            DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
+            dtFormat.ShortDatePattern = "yyyy/MM/dd";
+            DateTime dtBeginDate = Convert.ToDateTime(BeginDate.Text, dtFormat);
+            DateTime dtEndDate = Convert.ToDateTime(EndDate.Text, dtFormat);
+            int intBeginFlag = int.Parse(BeginFlag.Value);
+            int intEndFlag = int.Parse(EndFlag.Value);
+            float fResult = 0;
+            TimeSpan ts;
+            //int differenceInDays = ts.Days;
+
+            if (intBeginFlag==1 && intEndFlag==1)
+            {
+                ts = dtEndDate - dtBeginDate;
+                fResult = ts.Days + float.Parse("1");
+            }
+            if(intBeginFlag==0&&intEndFlag==1)
+            {
+                ts = dtEndDate - dtBeginDate.AddDays(1);
+                fResult = ts.Days + float.Parse("0.5") + float.Parse("1");            
+            }
+            if (intBeginFlag == 1 && intEndFlag == 0)
+            {
+                ts = dtEndDate - dtBeginDate;
+                fResult = ts.Days - float.Parse("0.5") + float.Parse("1");
+            }
+            if (intBeginFlag == 0 && intEndFlag == 0)
+            {
+                ts = dtEndDate - dtBeginDate;
+                fResult = ts.Days;
+            }
+
+            LeaveDays.Text = fResult.ToString();
         }
     }
 }

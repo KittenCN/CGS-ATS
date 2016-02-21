@@ -67,6 +67,13 @@
                 </td>
             </tr>
             <tr>
+                <th>休假天数</th>
+                <td>
+                    <asp:Label ID="LeaveDays" runat="server"></asp:Label>
+                    <asp:Button ID="btnLeaveDays" runat="server" OnClick="btnLeaveDays_Click" />
+                </td>
+            </tr>
+            <tr>
                 <th>备注:</th>
                 <td>
                     <%--<input id="Remark" type="text" class="txt" runat="server" />--%>

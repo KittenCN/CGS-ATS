@@ -63,6 +63,13 @@
                 </td>
             </tr>
             <tr>
+                <th>休假天数</th>
+                <td>
+                    <asp:Label ID="TravelDays" runat="server"></asp:Label>
+                    <asp:Button ID="btnTravelDays" runat="server" OnClick="btnTravelDays_Click" />
+                </td>
+            </tr>
+            <tr>
                 <th>公出地点:</th>
                 <td><textarea id="Place" runat="server" maxlength="500" rows="3"></textarea></td>
             </tr>

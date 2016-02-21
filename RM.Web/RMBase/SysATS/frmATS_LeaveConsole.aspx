@@ -146,7 +146,13 @@
                         当前总可用年假
                     </td>
                     <td style=" text-align: center;">
-                        剩余调休天数
+                        总可用调休天数
+                    </td>
+                    <td style=" text-align: center;">
+                        已用调休天数
+                    </td>
+                    <td style=" text-align: center;">
+                        现可用调休天数
                     </td>
                 </tr>
             </thead>
@@ -183,6 +189,12 @@
                             </td>
                             <td style=" text-align: center;">
                                  <asp:Label ID="SYTX" runat="server" Text='<%#Eval("SYTX")%>'></asp:Label>
+                            </td>
+                            <td style=" text-align: center;">
+                                 <asp:Label ID="UsedTX" runat="server" Text='<%#Eval("UsedTX")%>'></asp:Label>
+                            </td>
+                            <td style=" text-align: center;">
+                                 <asp:Label ID="UseTX" runat="server" Text='<%#Eval("UseTX")%>'></asp:Label>
                             </td>
                         </tr>
                     </ItemTemplate>
