@@ -31,12 +31,11 @@ namespace RM.Web.RMBase.SysATS
         private void DataBindGrid()
         {
             int count = 0;
-            float intUsedAL = 0;
-            float intUseAL = 0;
 
-            StringBuilder SqlWhere = new StringBuilder();
-            IList<SqlParam> IList_param = new List<SqlParam>();
+            //StringBuilder SqlWhere = new StringBuilder();
+            //IList<SqlParam> IList_param = new List<SqlParam>();
             string sql = "select * from uvw_Base_LeaveConsole ";
+            //string sql = "select '06E75A21-5274-40AA-9263-E21C56F7B539' AS EmpID, 'Roy Wang' as User_Name, 0 AS JZAL, '1900-1-1' AS JZDate, 0 AS CKAL, 0 AS CYAL, 0 AS SYTX, 0 AS UsedAL, 0 AS UseAL, 0 AS ALEdit, 0 AS UsedTX, 0 AS UseTX";
             StringBuilder sb_sql = new StringBuilder(sql);
             DataTable dt = DataFactory.SqlDataBase().GetPageList(sql, null, "User_Name", "asc", PageControl1.PageIndex, PageControl1.PageSize, ref count);
             ControlBindHelper.BindRepeaterList(dt, rp_Item);
@@ -61,7 +60,7 @@ namespace RM.Web.RMBase.SysATS
                     lab_EmpID.Text = GetNameFromID(lab_EmpID.Text);
                 }
 
-                if(lab_JZDate.Text=="1900-1-1" || lab_JZDate==null)
+                if(lab_JZDate.Text=="1900/1/1" || lab_JZDate==null)
                 {
                     lab_JZDate.Text = "-";
                 }
