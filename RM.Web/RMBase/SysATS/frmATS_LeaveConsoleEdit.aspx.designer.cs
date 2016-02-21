@@ -55,7 +55,7 @@ namespace RM.Web.RMBase.SysATS {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CKAL;
+        protected global::System.Web.UI.WebControls.Label CKAL;
         
         /// <summary>
         /// CYAL 控件。
@@ -64,7 +64,16 @@ namespace RM.Web.RMBase.SysATS {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CYAL;
+        protected global::System.Web.UI.WebControls.Label CYAL;
+        
+        /// <summary>
+        /// ALEdit 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ALEdit;
         
         /// <summary>
         /// SYTX 控件。

@@ -193,13 +193,13 @@ namespace RM.Web.RMBase.SysUser {
         protected global::System.Web.UI.HtmlControls.HtmlInputText ModifyDate;
         
         /// <summary>
-        /// Title 控件。
+        /// Boss_Flag 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Title;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect Boss_Flag;
         
         /// <summary>
         /// User_Remark 控件。

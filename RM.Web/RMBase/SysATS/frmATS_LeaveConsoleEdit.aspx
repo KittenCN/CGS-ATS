@@ -30,11 +30,15 @@
             </tr>
             <tr>
                 <th>当年可生成年假</th>
-                <td><asp:TextBox ID="CKAL" runat="server"></asp:TextBox></td>
+                <td><asp:Label ID="CKAL" runat="server"></asp:Label></td>
             </tr>
             <tr>
                 <th>当年已生成年假</th>
-                <td><asp:TextBox ID="CYAL" runat="server"></asp:TextBox></td>
+                <td><asp:Label ID="CYAL" runat="server"></asp:Label></td>
+            </tr>
+            <tr>
+                <th>当年调整年假</th>
+                <td><asp:TextBox ID="ALEdit" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <th>剩余调休天数</th>

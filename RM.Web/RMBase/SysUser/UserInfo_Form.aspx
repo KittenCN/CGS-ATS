@@ -158,10 +158,10 @@
                         附加信息</div>
                     <div id="tab2" class="Tabremovesel" onclick="GetTabClick(this);panel(3);">
                         所属部门</div>
-                    <div id="tab3" class="Tabremovesel" onclick="GetTabClick(this);panel(4);">
+<%--                    <div id="tab3" class="Tabremovesel" onclick="GetTabClick(this);panel(4);">
                         所属角色</div>
                     <div id="tab4" class="Tabremovesel" onclick="GetTabClick(this);panel(5);">
-                        所属工作组</div>
+                        所属工作组</div>--%>
                     <div id="tab5" class="Tabremovesel" onclick="GetTabClick(this);panel(6);">
                         用户权限</div>
                 </td>
@@ -298,12 +298,15 @@
                 </td>
             </tr>
             <tr>
-                <th>
-                    职称:
-                </th>
-                <td colspan="3">
-                    <input id="Title" runat="server" type="text" class="txt" style="width: 550px" />
-                </td>
+            <th>
+                员工等级
+            </th>
+             <td>
+                 <select id="Boss_Flag" runat="server">
+                     <option value="0" selected="selected">普通员工</option>
+                     <option value="1">经理及以上</option>
+                 </select>
+             </td>
             </tr>
             <tr>
                 <th>

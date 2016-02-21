@@ -411,7 +411,7 @@ namespace RM.Web.RMBase.SysUser
             ht["User_Pwd"] = Md5Helper.MD5(User_Pwd.Value,32);
             ht["User_Sex"] = User_Sex.Value;
             ht["Email"] = Email.Value;
-            ht["Title"] = Title.Value;
+            //ht["Title"] = Title.Value;
             ht["User_Remark"] = User_Remark.Value;
             ht["birthday"] = birthday.Text;
             ht["Sage_b"] = Sage_b.Value;
@@ -419,6 +419,7 @@ namespace RM.Web.RMBase.SysUser
             ht["out_date"] = out_date.Text;
             ht["work_flag"] = work_flag.Value;
             ht["Boss_id"] = GetIDFromName(Boss_id.Value);
+            ht["Boss_Flag"] = Boss_Flag.Value;
             if (!string.IsNullOrEmpty(_key))
             {
                 guid = _key;

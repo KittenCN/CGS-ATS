@@ -136,6 +136,9 @@
                         当年已生成年假
                     </td>
                     <td style=" text-align: center;">
+                        当年调整年假
+                    </td>
+                    <td style=" text-align: center;">
                         当前已使用年假
                     </td>
                     <td style=" text-align: center;">
@@ -167,6 +170,9 @@
                             </td>
                             <td style=" text-align: center;">
                                  <asp:Label ID="CYAL" runat="server" Text='<%#Eval("CYAL")%>'></asp:Label>
+                            </td>
+                            <td style=" text-align: center;">
+                                 <asp:Label ID="ALEdit" runat="server" Text='<%#Eval("ALEdit")%>'></asp:Label>
                             </td>
                             <td style=" text-align: center;">
                                  <asp:Label ID="UsedAL" runat="server" Text='<%#Eval("UsedAL")%>'></asp:Label>

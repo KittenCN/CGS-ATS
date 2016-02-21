@@ -19,7 +19,6 @@ namespace RM.Web.RMBase.SysATS
             if (!IsPostBack)
             {
                 InitData();
-
             }
         }
 
