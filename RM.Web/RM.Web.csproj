@@ -108,6 +108,7 @@
     <Content Include="RMBase\SysATS\frmATS_PerTravelAppPro.aspx" />
     <Content Include="RMBase\SysATS\frmATS_PerTravelCreate.aspx" />
     <Content Include="RMBase\SysATS\frmATS_PerTravelEdit.aspx" />
+    <Content Include="RMBase\SysATS\frmATS_WorkRecord.aspx" />
     <Content Include="RMBase\SysConfig\Config_Form.aspx" />
     <Content Include="RMBase\SysDataCenter\Backup_Confirm.aspx" />
     <Content Include="RMBase\SysDataCenter\Backup_List.aspx" />
@@ -2959,6 +2960,7 @@
     <Compile Include="RMBase\SysAppend\AppendProperty_List.aspx.designer.cs">
       <DependentUpon>AppendProperty_List.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RMBase\SysATS\classTask.cs" />
     <Compile Include="RMBase\SysATS\frmATS_ATSResult.aspx.cs">
       <DependentUpon>frmATS_ATSResult.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3112,6 +3114,16 @@
     </Compile>
     <Compile Include="RMBase\SysATS\frmATS_PerTravelEdit.aspx.designer.cs">
       <DependentUpon>frmATS_PerTravelEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RMBase\SysATS\frmATS_WorkRecord.aspx.cs">
+      <DependentUpon>frmATS_WorkRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RMBase\SysATS\frmATS_WorkRecord.aspx.designer.cs">
+      <DependentUpon>frmATS_WorkRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RMBase\SysATS\hanATS_WorkRecord.ashx.cs">
+      <DependentUpon>hanATS_WorkRecord.ashx</DependentUpon>
     </Compile>
     <Compile Include="RMBase\SysConfig\Config_Form.aspx.cs">
       <DependentUpon>Config_Form.aspx</DependentUpon>
@@ -3499,6 +3511,7 @@
     <Content Include="RMBase\SysUser\UserInfo.ashx" />
     <Content Include="RMBase\SysMenu\Menu_List.ashx" />
     <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
+    <Content Include="RMBase\SysATS\hanATS_WorkRecord.ashx" />
     <None Include="Themes\IPScaner\QQWry.Dat" />
     <None Include="Themes\Scripts\DatePicker\skin\default\.svn\all-wcprops" />
     <None Include="Themes\Scripts\DatePicker\skin\default\.svn\entries" />
