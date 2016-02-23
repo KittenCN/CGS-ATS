@@ -15,7 +15,7 @@
     <AssemblyName>RM.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -65,6 +65,23 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\GVdata.dll" />
+    <Content Include="bin\GVdata.pdb" />
+    <Content Include="bin\Interop.SQLDMO.dll" />
+    <Content Include="bin\Microsoft.Practices.EnterpriseLibrary.Common.dll" />
+    <Content Include="bin\Microsoft.Practices.EnterpriseLibrary.Data.dll" />
+    <Content Include="bin\Microsoft.Practices.ServiceLocation.dll" />
+    <Content Include="bin\Microsoft.Practices.Unity.dll" />
+    <Content Include="bin\Microsoft.Practices.Unity.Interception.dll" />
+    <Content Include="bin\Oracle.DataAccess.dll" />
+    <Content Include="bin\RM.Busines.dll" />
+    <Content Include="bin\RM.Busines.pdb" />
+    <Content Include="bin\RM.Common.dll" />
+    <Content Include="bin\RM.Common.pdb" />
+    <Content Include="bin\RM.DataBase.dll" />
+    <Content Include="bin\RM.DataBase.pdb" />
+    <Content Include="bin\RM.Web.dll" />
+    <Content Include="bin\RM.Web.pdb" />
     <Content Include="Config.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -153,6 +170,97 @@
     <Content Include="RMBase\SysUser\UserInfo_Index.aspx" />
     <Content Include="RMBase\SysUser\UserInfo_Left.aspx" />
     <Content Include="RMBase\SysUser\UserInfo_List.aspx" />
+    <Content Include="Themes\fullcalendar\CHANGELOG.txt" />
+    <Content Include="Themes\fullcalendar\CONTRIBUTING.txt" />
+    <Content Include="Themes\fullcalendar\demos\agenda-views.html" />
+    <Content Include="Themes\fullcalendar\demos\background-events.html" />
+    <Content Include="Themes\fullcalendar\demos\basic-views.html" />
+    <Content Include="Themes\fullcalendar\demos\default.html" />
+    <Content Include="Themes\fullcalendar\demos\external-dragging.html" />
+    <Content Include="Themes\fullcalendar\demos\gcal.html" />
+    <Content Include="Themes\fullcalendar\demos\json.html" />
+    <Content Include="Themes\fullcalendar\demos\languages.html" />
+    <Content Include="Themes\fullcalendar\demos\selectable.html" />
+    <Content Include="Themes\fullcalendar\demos\theme.html" />
+    <Content Include="Themes\fullcalendar\demos\timezones.html" />
+    <Content Include="Themes\fullcalendar\fullcalendar.css" />
+    <Content Include="Themes\fullcalendar\fullcalendar.js" />
+    <Content Include="Themes\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Themes\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Themes\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Themes\fullcalendar\gcal.js" />
+    <Content Include="Themes\fullcalendar\lang-all.js" />
+    <Content Include="Themes\fullcalendar\lang\ar-ma.js" />
+    <Content Include="Themes\fullcalendar\lang\ar-sa.js" />
+    <Content Include="Themes\fullcalendar\lang\ar-tn.js" />
+    <Content Include="Themes\fullcalendar\lang\ar.js" />
+    <Content Include="Themes\fullcalendar\lang\bg.js" />
+    <Content Include="Themes\fullcalendar\lang\ca.js" />
+    <Content Include="Themes\fullcalendar\lang\cs.js" />
+    <Content Include="Themes\fullcalendar\lang\da.js" />
+    <Content Include="Themes\fullcalendar\lang\de-at.js" />
+    <Content Include="Themes\fullcalendar\lang\de.js" />
+    <Content Include="Themes\fullcalendar\lang\el.js" />
+    <Content Include="Themes\fullcalendar\lang\en-au.js" />
+    <Content Include="Themes\fullcalendar\lang\en-ca.js" />
+    <Content Include="Themes\fullcalendar\lang\en-gb.js" />
+    <Content Include="Themes\fullcalendar\lang\en-ie.js" />
+    <Content Include="Themes\fullcalendar\lang\en-nz.js" />
+    <Content Include="Themes\fullcalendar\lang\es.js" />
+    <Content Include="Themes\fullcalendar\lang\fa.js" />
+    <Content Include="Themes\fullcalendar\lang\fi.js" />
+    <Content Include="Themes\fullcalendar\lang\fr-ca.js" />
+    <Content Include="Themes\fullcalendar\lang\fr-ch.js" />
+    <Content Include="Themes\fullcalendar\lang\fr.js" />
+    <Content Include="Themes\fullcalendar\lang\he.js" />
+    <Content Include="Themes\fullcalendar\lang\hi.js" />
+    <Content Include="Themes\fullcalendar\lang\hr.js" />
+    <Content Include="Themes\fullcalendar\lang\hu.js" />
+    <Content Include="Themes\fullcalendar\lang\id.js" />
+    <Content Include="Themes\fullcalendar\lang\is.js" />
+    <Content Include="Themes\fullcalendar\lang\it.js" />
+    <Content Include="Themes\fullcalendar\lang\ja.js" />
+    <Content Include="Themes\fullcalendar\lang\ko.js" />
+    <Content Include="Themes\fullcalendar\lang\lt.js" />
+    <Content Include="Themes\fullcalendar\lang\lv.js" />
+    <Content Include="Themes\fullcalendar\lang\nb.js" />
+    <Content Include="Themes\fullcalendar\lang\nl.js" />
+    <Content Include="Themes\fullcalendar\lang\pl.js" />
+    <Content Include="Themes\fullcalendar\lang\pt-br.js" />
+    <Content Include="Themes\fullcalendar\lang\pt.js" />
+    <Content Include="Themes\fullcalendar\lang\ro.js" />
+    <Content Include="Themes\fullcalendar\lang\ru.js" />
+    <Content Include="Themes\fullcalendar\lang\sk.js" />
+    <Content Include="Themes\fullcalendar\lang\sl.js" />
+    <Content Include="Themes\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="Themes\fullcalendar\lang\sr.js" />
+    <Content Include="Themes\fullcalendar\lang\sv.js" />
+    <Content Include="Themes\fullcalendar\lang\th.js" />
+    <Content Include="Themes\fullcalendar\lang\tr.js" />
+    <Content Include="Themes\fullcalendar\lang\uk.js" />
+    <Content Include="Themes\fullcalendar\lang\vi.js" />
+    <Content Include="Themes\fullcalendar\lang\zh-cn.js" />
+    <Content Include="Themes\fullcalendar\lang\zh-tw.js" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Themes\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Themes\fullcalendar\lib\jquery-ui.custom.min.js" />
+    <Content Include="Themes\fullcalendar\lib\jquery.min.js" />
+    <Content Include="Themes\fullcalendar\lib\moment.min.js" />
+    <Content Include="Themes\fullcalendar\LICENSE.txt" />
     <Content Include="Themes\Images\16\01.png" />
     <Content Include="Themes\Images\16\02.gif" />
     <Content Include="Themes\Images\16\03.gif" />
@@ -2689,11 +2797,14 @@
     <Content Include="Themes\Images\32\userregedit.png" />
     <Content Include="Themes\Images\32\users_business_32.png" />
     <Content Include="Themes\Images\4963_home.png" />
+    <Content Include="Themes\Images\accent.png" />
     <Content Include="Themes\Images\arrow_down.png" />
     <Content Include="Themes\Images\arrow_left.png" />
     <Content Include="Themes\Images\arrow_right.png" />
     <Content Include="Themes\Images\arrow_up.png" />
+    <Content Include="Themes\Images\bmslogo.jpg" />
     <Content Include="Themes\Images\bmslogo.png" />
+    <Content Include="Themes\Images\bullet.png" />
     <Content Include="Themes\Images\button-white-stop.png" />
     <Content Include="Themes\Images\button_a_bg.gif" />
     <Content Include="Themes\Images\button_span_bg.gif" />
@@ -2708,6 +2819,7 @@
     <Content Include="Themes\Images\exclamation_octagon_fram.png" />
     <Content Include="Themes\Images\first.gif" />
     <Content Include="Themes\Images\Headerbotton.png" />
+    <Content Include="Themes\Images\heroAccent.png" />
     <Content Include="Themes\Images\illustration.png" />
     <Content Include="Themes\Images\input_text_bg.gif" />
     <Content Include="Themes\Images\last.gif" />
@@ -2730,6 +2842,16 @@
     <Content Include="Themes\Images\nav_link.gif" />
     <Content Include="Themes\Images\networking.png" />
     <Content Include="Themes\Images\next.gif" />
+    <Content Include="Themes\Images\orderedList0.png" />
+    <Content Include="Themes\Images\orderedList1.png" />
+    <Content Include="Themes\Images\orderedList2.png" />
+    <Content Include="Themes\Images\orderedList3.png" />
+    <Content Include="Themes\Images\orderedList4.png" />
+    <Content Include="Themes\Images\orderedList5.png" />
+    <Content Include="Themes\Images\orderedList6.png" />
+    <Content Include="Themes\Images\orderedList7.png" />
+    <Content Include="Themes\Images\orderedList8.png" />
+    <Content Include="Themes\Images\orderedList9.png" />
     <Content Include="Themes\Images\prev.gif" />
     <Content Include="Themes\Images\refresh.png" />
     <Content Include="Themes\Images\Search.png" />
@@ -2798,6 +2920,13 @@
     <Content Include="Themes\Scripts\artDialog\skins\icons\question.png" />
     <Content Include="Themes\Scripts\artDialog\skins\icons\succeed.png" />
     <Content Include="Themes\Scripts\artDialog\skins\icons\warning.png" />
+    <Content Include="Themes\Scripts\fullcalendar\fullcalendar.css" />
+    <Content Include="Themes\Scripts\fullcalendar\fullcalendar.js" />
+    <Content Include="Themes\Scripts\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Themes\Scripts\fullcalendar\jquery-1.7.min.js" />
+    <Content Include="Themes\Scripts\fullcalendar\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Themes\Scripts\fullcalendar\jquery.ui.css" />
+    <Content Include="Themes\Scripts\fullcalendar\style.default.css" />
     <Content Include="Themes\Scripts\FunctionJS.js" />
     <Content Include="Themes\Scripts\jquery-1.8.2.min.js" />
     <Content Include="Themes\Scripts\jquery.md5.js" />
@@ -3510,8 +3639,13 @@
     <Content Include="RMBase\SysPersonal\Recyclebin.ashx" />
     <Content Include="RMBase\SysUser\UserInfo.ashx" />
     <Content Include="RMBase\SysMenu\Menu_List.ashx" />
+    <None Include="bin\RM.Web.dll.config" />
     <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
     <Content Include="RMBase\SysATS\hanATS_WorkRecord.ashx" />
+    <Content Include="Themes\fullcalendar\demos\json\events.json" />
+    <Content Include="Themes\fullcalendar\demos\php\get-events.php" />
+    <Content Include="Themes\fullcalendar\demos\php\get-timezones.php" />
+    <Content Include="Themes\fullcalendar\demos\php\utils.php" />
     <None Include="Themes\IPScaner\QQWry.Dat" />
     <None Include="Themes\Scripts\DatePicker\skin\default\.svn\all-wcprops" />
     <None Include="Themes\Scripts\DatePicker\skin\default\.svn\entries" />
@@ -3578,7 +3712,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>16674</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:16674/</IISUrl>
+          <IISUrl>http://localhost/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://127.0.0.1</CustomServerUrl>
