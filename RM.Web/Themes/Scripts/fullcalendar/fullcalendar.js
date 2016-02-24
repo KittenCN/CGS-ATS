@@ -26,10 +26,10 @@ jQuery(document).ready(function () {
    
     /* 初始化calendar */
     jQuery('#calendar').fullCalendar({
-        //height: window.innerHeight - 20,
-        //windowResize: function (view) {
-        //    $('#calendar').fullCalendar('option', 'height', window.innerHeight - 20);
-        //},
+        height: window.innerHeight - 20,
+        windowResize: function (view) {
+            $('#calendar').fullCalendar('option', 'height', window.innerHeight - 20);
+        },
         weekMode: 'liquid',
         allDaySlot: false,
         header: {
