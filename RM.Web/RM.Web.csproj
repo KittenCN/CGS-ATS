@@ -96,6 +96,7 @@
     <Content Include="Global.asax" />
     <Content Include="Index.htm" />
     <Content Include="Lib\AspNetPager.dll" />
+    <Content Include="RMBase\SysATS\frmATS_WorkRecordTest.aspx" />
     <Content Include="RMBase\SysAppend\AppendProperty_Form.aspx" />
     <Content Include="RMBase\SysAppend\AppendProperty_Function.aspx" />
     <Content Include="RMBase\SysAppend\AppendProperty_Function_Form.aspx" />
@@ -2931,6 +2932,13 @@
     <Content Include="Themes\Scripts\jquery-1.8.2.min.js" />
     <Content Include="Themes\Scripts\jquery.md5.js" />
     <Content Include="Themes\Scripts\jquery.pullbox.js" />
+    <Content Include="Themes\Scripts\Plugins\fullcalendar.css" />
+    <Content Include="Themes\Scripts\Plugins\fullcalendar.js" />
+    <Content Include="Themes\Scripts\Plugins\fullcalendar.min.js" />
+    <Content Include="Themes\Scripts\Plugins\jquery-1.7.min.js" />
+    <Content Include="Themes\Scripts\Plugins\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Themes\Scripts\Plugins\jquery.ui.css" />
+    <Content Include="Themes\Scripts\Plugins\style.default.css" />
     <Content Include="Themes\Scripts\ShowMsg\gb_tip_layer.png" />
     <Content Include="Themes\Scripts\ShowMsg\msgbox.css" />
     <Content Include="Themes\Scripts\ShowMsg\msgbox.js" />
@@ -3040,6 +3048,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RMBase\SysATS\frmATS_WorkRecordTest.aspx.cs">
+      <DependentUpon>frmATS_WorkRecordTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RMBase\SysATS\frmATS_WorkRecordTest.aspx.designer.cs">
+      <DependentUpon>frmATS_WorkRecordTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RMBase\SysAppend\AppendProperty_Form.aspx.cs">
       <DependentUpon>AppendProperty_Form.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

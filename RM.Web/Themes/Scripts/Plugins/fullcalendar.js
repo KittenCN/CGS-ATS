@@ -26,12 +26,6 @@ jQuery(document).ready(function () {
    
     /* 初始化calendar */
     jQuery('#calendar').fullCalendar({
-        //height: window.innerHeight - 20,
-        //windowResize: function (view) {
-        //    $('#calendar').fullCalendar('option', 'height', window.innerHeight - 20);
-        //},
-        weekMode: 'liquid',
-        allDaySlot: false,
         header: {
             left: 'month,agendaWeek,agendaDay',
             center: 'title',
@@ -48,16 +42,15 @@ jQuery(document).ready(function () {
             next: '&raquo;',
             prevYear: '&nbsp;&lt;&lt;&nbsp;',
             nextYear: '&nbsp;&gt;&gt;&nbsp;',
-            today: 'Today',
-            month: 'Month',
-            week: 'Week',
-            day: 'Day'
+            today: '今天',
+            month: '月',
+            week: '周',
+            day: '日'
         },
         viewDisplay: function (view) {
             //动态把数据查出，按照月份动态查询
-            var viewStart = $.fullCalendar.formatDate(view.start, "yyyy-MM-dd");
-            var viewEnd = $.fullCalendar.formatDate(view.end, "yyyy-MM-dd");
-            var viewEmpID = $("#EmpID").val();
+            var viewStart = $.fullCalendar.formatDate(view.start, "yyyy-MM-dd HH:mm:ss");
+            var viewEnd = $.fullCalendar.formatDate(view.end, "yyyy-MM-dd HH:mm:ss");
             $("#calendar").fullCalendar('removeEvents');
             $.post("../SysATS/hanATS_WorkRecord.ashx?start=" + viewStart + "&end=" + viewEnd + "&empid=" + viewEmpID, { start: viewStart, end: viewEnd,empid:viewEmpID }, function (data) {
                 var resultCollection = jQuery.parseJSON(data);
@@ -80,28 +73,27 @@ jQuery(document).ready(function () {
         //#region 数据绑定上去后添加相应信息在页面上(一开始加载数据时运行)
         eventAfterRender: function (event, element, view) {
 
-            var fstart = $.fullCalendar.formatDate(event.start, "yyyy-MM-dd HH:mm");
-            var fend = $.fullCalendar.formatDate(event.end, "yyyy-MM-dd HH:mm");
+            var fstart = $.fullCalendar.formatDate(event.start, "HH:mm");
+            var fend = $.fullCalendar.formatDate(event.end, "HH:mm");
             var confbg = '<span class="fc-event-bg"></span>';
             if (view.name == "month") {//按月份                
                 var evtcontent = '<div class="fc-event-vert"><a>';
                 evtcontent = evtcontent + confbg;
                 //evtcontent = evtcontent + '<span class="fc-event-titlebg">' + fstart + " - " + fend  + event.fullname + '</span>';   
-                evtcontent = evtcontent + '<span class="fc-event-titlebg">' + event.title + '</span>';
+                evtcontent = evtcontent + '<span class="fc-event-titlebg">' + event.fullname + '</span>';
                 element.html(evtcontent);
             } else if (view.name == "agendaWeek") {//按周
-           
+
                 var evtcontent = '<a>';
                 evtcontent = evtcontent + confbg;
                 evtcontent = evtcontent + '<span class="fc-event-time">' + fstart + "-" + fend + '</span>';
                 evtcontent = evtcontent + '<span>' + event.fullname + '</span>';
                 element.html(evtcontent);
             } else if (view.name == "agendaDay") {//按日
-                
+
                 var evtcontent = '<a>';
                 evtcontent = evtcontent + confbg;
                 evtcontent = evtcontent + '<span class="fc-event-time">' + fstart + " - " + fend + '</span>';
-                evtcontent = evtcontent + '<span>' + event.fullname + '</span>';
                 element.html(evtcontent);
             }
         },

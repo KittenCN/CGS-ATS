@@ -7,21 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>工作日程安排</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
-<%--    <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
-    <script src="/Themes/Scripts/FunctionJS.js" type="text/javascript"></script>--%>
-   <%-- <link href='/Themes/fullcalendar/fullcalendar.css' rel='stylesheet' />
+    <script src="/Themes/Scripts/FunctionJS.js" type="text/javascript"></script>
+<%--    <link href='/Themes/fullcalendar/fullcalendar.css' rel='stylesheet' />
     <link href='/Themes/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />--%>
-    <script src='/Themes/fullcalendar/lib/moment.min.js'></script>
-    <script src='/Themes/fullcalendar/lib/jquery.min.js'></script>
+<%--    <script src='/Themes/fullcalendar/lib/moment.min.js'></script>
+    <script src='/Themes/fullcalendar/lib/jquery.min.js'></script>--%>
 <%--    <script src='/Themes/fullcalendar/fullcalendar.min.js'></script>
     <script src='/Themes/fullcalendar/fullcalendar.js'></script>--%>
-    <link href="/Themes/Scripts/fullcalendar/fullcalendar.css" rel="stylesheet" />
-    <link href="/Themes/Scripts/fullcalendar/jquery.ui.css" rel="stylesheet" />
-    <link href="/Themes/Scripts/fullcalendar/style.default.css" rel="stylesheet" />
-    <script src="/Themes/Scripts/fullcalendar/jquery-1.7.min.js"></script>
-    <script src="/Themes/Scripts/fullcalendar/jquery-ui-1.8.16.custom.min.js"></script>
-    <script src="/Themes/Scripts/fullcalendar/fullcalendar.min.js"></script>
+    <link href="/Themes/Scripts/Plugins/fullcalendar.css" rel="stylesheet" />
+    <link href="/Themes/Scripts/Plugins/jquery.ui.css" rel="stylesheet" />
+    <%--<link href="/Themes/Scripts/Plugins/style.default.css" rel="stylesheet" />--%>
+    <script src="/Themes/Scripts/Plugins/jquery-1.7.min.js"></script>
+    <script src="/Themes/Scripts/Plugins/jquery-ui-1.8.16.custom.min.js"></script>
+    <script src="/Themes/Scripts/Plugins/fullcalendar.min.js"></script>
     <script src="/Themes/Scripts/fullcalendar/fullcalendar.js"></script>
     <script>
 	//$(document).ready(function() {

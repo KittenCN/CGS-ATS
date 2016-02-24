@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using RM.Busines.DAL;
+using RM.Busines.IDAO;
 using RM.Common.DotNetBean;
-using System.Web.UI;
-using System.Collections;
+using RM.Common.DotNetCode;
 using RM.Common.DotNetUI;
+using System;
 using System.Data;
 using System.Text;
-using RM.Common.DotNetCode;
-using RM.Busines.IDAO;
-using RM.Busines.DAL;
+using System.Web;
 
 namespace RM.Web.App_Code
 {
