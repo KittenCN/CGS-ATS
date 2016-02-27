@@ -77,6 +77,14 @@ namespace RM.Web.RMBase.SysATS
                     {
                         NJfrm.Visible = false;
                     }
+                    if(_key=="8")
+                    {
+                        DH.Visible = true;
+                    }
+                    else
+                    {
+                        DH.Visible = false;
+                    }
                     InitData();
                 }
             }

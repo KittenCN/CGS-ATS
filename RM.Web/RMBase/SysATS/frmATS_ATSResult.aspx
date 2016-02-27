@@ -171,7 +171,7 @@
                                  <asp:Label ID="Flag" runat="server" Text='<%#Eval("Flag")%>'></asp:Label>
                             </td>
                             <td style=" text-align: center;">
-                                <%#Eval("ATS_Date", "{0:d}")%></a>
+                                <%#Eval("ATS_Date", "{0:d}")%>
                             </td>
                             <td style=" text-align: center;">
                                 <asp:Label ID="ATS_DateStatus" runat="server" Text='<%#Eval("ATS_DateStatus")%>'></asp:Label>

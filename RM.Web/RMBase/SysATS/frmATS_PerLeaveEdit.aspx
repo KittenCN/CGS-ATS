@@ -29,6 +29,14 @@
                 <td><asp:label id="EmpID" runat="server"></asp:label></td>
             </tr>
             <tr>
+               <th>可用年假总天数:</th>
+               <td><asp:Label ID="njDays" runat="server"></asp:Label></td>
+           </tr>
+           <tr>
+               <th>可用调休假总天数:</th>
+               <td><asp:Label ID="txDays" runat="server"></asp:Label></td>
+           </tr>
+            <tr>
                 <th>填写日期:</th>
                 <td><asp:label id="CreateDate" runat="server" /></td>
             </tr>

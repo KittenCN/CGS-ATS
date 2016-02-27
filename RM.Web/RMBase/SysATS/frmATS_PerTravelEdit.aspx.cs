@@ -23,6 +23,7 @@ namespace RM.Web.RMBase.SysATS
         public static string txt_FilesAdd;
         public static string txt_downFilesAdd;
         public static int int_AppFlag;
+        public static int inttxDays;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,7 +44,7 @@ namespace RM.Web.RMBase.SysATS
                         InitData();
                         if (int_AppFlag != 0 && int_AppFlag != 3)
                         {
-                            Save.Enabled = false;
+                            Save.Visible = false;
                             ShowMsgHelper.Alert_Error("申请已在审批中或已审批完成,不得被修改!");
                         }
                         if (dt.Rows[0].ItemArray[1] == null || dt.Rows[0].ItemArray[1].ToString().Length == 0)
@@ -187,6 +188,16 @@ namespace RM.Web.RMBase.SysATS
             float fResult = 0;
             TimeSpan ts;
             //int differenceInDays = ts.Days;
+
+            for (DateTime dtT = dtBeginDate; dtT < dtEndDate; dtT = dtT.AddDays(1))
+            {
+                int intdtT = (int)dtT.DayOfWeek;
+                if (intdtT == 6 || intdtT == 0)
+                {
+                    inttxDays = inttxDays + 1;
+                }
+            }
+            txDays.Text = inttxDays.ToString();
 
             if (intBeginFlag == 1 && intEndFlag == 1)
             {

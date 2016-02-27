@@ -17,14 +17,14 @@
         //添加
         function add() {
             var url = "/RMBase/SysATS/frmATS_PerLeaveCreate.aspx";
-            top.openDialog(url, 'PerLeaveCreate', '新建休假申请', 700, 500, 50, 50);
+            top.openDialog(url, 'PerLeaveCreate', '新建休假申请', 700, 550, 50, 50);
         }
         //修改
         function edit() {
             var key = CheckboxValue();
             if (IsEditdata(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerLeaveEdit.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveEdit', '修改休假申请', 700, 500, 50, 50);
+                top.openDialog(url, 'PerLeaveEdit', '修改休假申请', 700, 550, 50, 50);
             }
         }
         //双击修改

@@ -63,10 +63,15 @@
                 </td>
             </tr>
             <tr>
-                <th>休假天数</th>
+                <th>公出天数</th>
                 <td>
-                    <asp:Label ID="TravelDays" runat="server"></asp:Label>
-                    <asp:Button ID="btnTravelDays" runat="server" OnClick="btnTravelDays_Click" />
+                    <asp:Label ID="TravelDays" Text="0.0" runat="server" Width="50px"></asp:Label>
+                    &nbsp;&nbsp;&nbsp;
+                    <asp:Label Text="可生成调休天数:" runat="server"></asp:Label>
+                    &nbsp;
+                    <asp:Label ID="txDays" Text="0.0" runat="server" Width="50px"></asp:Label>
+                    &nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="btnTravelDays" runat="server" Text="计算" OnClick="btnTravelDays_Click" />
                 </td>
             </tr>
             <tr>

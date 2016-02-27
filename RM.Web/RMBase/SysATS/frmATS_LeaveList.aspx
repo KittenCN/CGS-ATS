@@ -93,7 +93,7 @@
                 </select>
             </td>
         </tr>
-        <tr>
+        <tr id="DH" runat="server">
             <th>每次折算小时数:</th>
             <td><input id="DisHour" type="text" class="txt" runat="server" /></td>
         </tr>

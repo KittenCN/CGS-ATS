@@ -24,6 +24,7 @@ namespace RM.Web.RMBase.SysATS
         public static string txt_FilesAdd;
         public static string txt_downFilesAdd;
         public static string txt_NextApprover;
+        public static int inttxDays;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -88,6 +89,53 @@ namespace RM.Web.RMBase.SysATS
                 EndDate.Text = Convert.ToDateTime(EndDate.Text).ToString("yyyy-MM-dd");
 
             }
+            CallDays();
+        }
+
+        private void CallDays()
+        {
+            DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
+            dtFormat.ShortDatePattern = "yyyy/MM/dd";
+            DateTime dtBeginDate = Convert.ToDateTime(BeginDate.Text, dtFormat);
+            DateTime dtEndDate = Convert.ToDateTime(EndDate.Text, dtFormat);
+            int intBeginFlag = int.Parse(BeginFlag.Value);
+            int intEndFlag = int.Parse(EndFlag.Value);
+            float fResult = 0;
+            TimeSpan ts;
+            //int differenceInDays = ts.Days;
+
+            for (DateTime dtT = dtBeginDate; dtT < dtEndDate; dtT = dtT.AddDays(1))
+            {
+                int intdtT = (int)dtT.DayOfWeek;
+                if (intdtT == 6 || intdtT == 0)
+                {
+                    inttxDays = inttxDays + 1;
+                }
+            }
+            txDays.Text = inttxDays.ToString();
+
+            if (intBeginFlag == 1 && intEndFlag == 1)
+            {
+                ts = dtEndDate - dtBeginDate;
+                fResult = ts.Days + float.Parse("1");
+            }
+            if (intBeginFlag == 0 && intEndFlag == 1)
+            {
+                ts = dtEndDate - dtBeginDate.AddDays(1);
+                fResult = ts.Days + float.Parse("0.5") + float.Parse("1");
+            }
+            if (intBeginFlag == 1 && intEndFlag == 0)
+            {
+                ts = dtEndDate - dtBeginDate;
+                fResult = ts.Days - float.Parse("0.5") + float.Parse("1");
+            }
+            if (intBeginFlag == 0 && intEndFlag == 0)
+            {
+                ts = dtEndDate - dtBeginDate;
+                fResult = ts.Days;
+            }
+
+            TravelDays.Text = fResult.ToString();
         }
 
         private string GetNameFromID(string EmpID)
@@ -133,6 +181,9 @@ namespace RM.Web.RMBase.SysATS
                 if (i2 > 0)
                 {
                     ShowMsgHelper.AlertMsg("审批成功");
+                    string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + inttxDays + " where EmpID='" + txt_EmpID + "' ";
+                    StringBuilder sb_sql3 = new StringBuilder(sql3);
+                    int i3 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql3);
                 }
                 else
                 {

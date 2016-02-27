@@ -21,6 +21,8 @@ namespace RM.Web.RMBase.SysATS
         public string txt_EmpID;
         public string txt_EmpName;
         public static string txt_FilesAdd;
+        public static float flo_njDays;
+        public static float flo_txDays;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,6 +31,19 @@ namespace RM.Web.RMBase.SysATS
          
             if (!IsPostBack)
             {
+                string sql = "select * from uvw_doLeaveDays where EmpID='" + txt_EmpID + "' ";
+                StringBuilder sb_sql = new StringBuilder(sql);
+                DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+                if(dt!=null || dt.Rows.Count>0)
+                {
+                    flo_njDays = float.Parse(dt.Rows[0].ItemArray[1].ToString());
+                    flo_txDays = float.Parse(dt.Rows[0].ItemArray[2].ToString());
+                }
+                else
+                {
+                    flo_njDays = 0;
+                    flo_txDays = 0;
+                }
                 DataBindGrid();
             }
         }
@@ -53,11 +68,53 @@ namespace RM.Web.RMBase.SysATS
             LeaveID.DataTextField = "LeaveName";
             LeaveID.DataValueField = "id";
             LeaveID.DataBind();
+            njDays.Text = flo_njDays.ToString();
+            txDays.Text = flo_txDays.ToString();
         }
 
         protected void Save_Click(object sender, EventArgs e)
         {
             btnLeaveDays_Click(null,null);
+            int intMaxPerTime = 9999;
+            int intMaxPerYear = 9999;
+            int intMustFile = 0;
+
+            String yy = DateTime.Now.Year.ToString();
+            String mm = DateTime.Now.Month.ToString();
+            String days = DateTime.DaysInMonth(int.Parse(yy), int.Parse(mm)).ToString();
+            DateTime FirstDay = DateTime.Parse(yy + "/" + mm + "/1");
+            DateTime LastDay = FirstDay.AddYears(1);
+            float floAllLeaveDays = 0;
+            string sqlii = "select isnull(SUM(leavedays),0) as leavedays from Base_PerLeaveApply where EmpID='" + txt_EmpID + "' and LeaveID=" + LeaveID.SelectedValue + " and BeginDate>='" + FirstDay + "' and EndDate<'" + LastDay + "' and ApprovalFlag=2";
+            StringBuilder sb_sqlii = new StringBuilder(sqlii);
+            DataTable dtii = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sqlii);
+            if (dtii != null && dtii.Rows.Count > 0)
+            {
+                floAllLeaveDays = float.Parse(dtii.Rows[0].ItemArray[0].ToString());
+            }
+
+            string sqli = "select * from Base_ATS_LeaveSetting where id=" + LeaveID.SelectedValue;
+            StringBuilder sb_sqli = new StringBuilder(sqli);
+            DataTable dti = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sqli);
+            if(dti!=null && dti.Rows.Count>0)
+            {
+                if(int.Parse(dti.Rows[0].ItemArray[2].ToString()) > 0)
+                {
+                    intMaxPerTime = int.Parse(dti.Rows[0].ItemArray[2].ToString());
+                }
+                if (int.Parse(dti.Rows[0].ItemArray[3].ToString()) > 0)
+                {
+                    intMaxPerYear = int.Parse(dti.Rows[0].ItemArray[2].ToString());
+                }
+                if (int.Parse(dti.Rows[0].ItemArray[4].ToString()) > 0)
+                {
+                    intMustFile = int.Parse(dti.Rows[0].ItemArray[2].ToString());
+                }
+            }
+            else
+            {
+                ShowMsgHelper.Alert_Error("System Error,Call Admin");
+            }
 
             DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
             dtFormat.ShortDatePattern = "yyyy/MM/dd";
@@ -67,38 +124,52 @@ namespace RM.Web.RMBase.SysATS
             }
             else
             {
-                if (LeaveID.SelectedValue == "6" && (txt_FilesAdd == null || txt_FilesAdd == ""))
+                if (intMustFile==1 && (txt_FilesAdd == null || txt_FilesAdd == ""))
                 {
-                    ShowMsgHelper.Alert_Wern("病假必须上传证明附件!");
+                    ShowMsgHelper.Alert_Wern("必须上传证明附件!");
                 }
                 else
                 {
-                    string txt_NextApprover = "";
-                    string sql = "select Boss_id from Base_UserInfo where user_id='" + txt_EmpID + "'";
-                    StringBuilder sb_sql = new StringBuilder(sql);
-                    DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
-                    if (dt.Rows[0].ItemArray[0] != null)
+                    if(float.Parse(LeaveDays.Text)> intMaxPerTime || floAllLeaveDays>intMaxPerYear)
                     {
-                        txt_NextApprover = dt.Rows[0].ItemArray[0].ToString();
-                    }
-                    Hashtable ht = new Hashtable();
-                    ht = ControlBindHelper.GetWebControls(this.Page);
-                    ht["EmpID"] = txt_EmpID;
-                    ht["CreateDate"] = CreateDate.Text;
-                    ht["ApprovalFlag"] = 0;
-                    ht["NextApprover"] = txt_NextApprover;
-                    ht["LeaveID"] = LeaveID.SelectedValue;
-                    ht["FilesAdd"] = txt_FilesAdd;
-                    ht["LeaveDays"] = LeaveDays.Text;
-                    int IsOk = DataFactory.SqlDataBase().InsertByHashtableReturnPkVal("Base_PerLeaveApply", ht);
-                    if (IsOk > 0)
-                    {
-                        ShowMsgHelper.AlertMsg("操作成功！");
+                        ShowMsgHelper.Alert_Wern("申请天数超限!");
                     }
                     else
                     {
-                        ShowMsgHelper.Alert_Error("操作失败！");
-                    }
+                        if (LeaveID.SelectedValue == "7" && float.Parse(LeaveDays.Text) > float.Parse(njDays.Text))
+                        {
+                            ShowMsgHelper.Alert_Wern("年假申请天数超过年假可用天数!");
+                        }
+                        else
+                        {
+                            string txt_NextApprover = "";
+                            string sql = "select Boss_id from Base_UserInfo where user_id='" + txt_EmpID + "'";
+                            StringBuilder sb_sql = new StringBuilder(sql);
+                            DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+                            if (dt.Rows[0].ItemArray[0] != null)
+                            {
+                                txt_NextApprover = dt.Rows[0].ItemArray[0].ToString();
+                            }
+                            Hashtable ht = new Hashtable();
+                            ht = ControlBindHelper.GetWebControls(this.Page);
+                            ht["EmpID"] = txt_EmpID;
+                            ht["CreateDate"] = CreateDate.Text;
+                            ht["ApprovalFlag"] = 0;
+                            ht["NextApprover"] = txt_NextApprover;
+                            ht["LeaveID"] = LeaveID.SelectedValue;
+                            ht["FilesAdd"] = txt_FilesAdd;
+                            ht["LeaveDays"] = LeaveDays.Text;
+                            int IsOk = DataFactory.SqlDataBase().InsertByHashtableReturnPkVal("Base_PerLeaveApply", ht);
+                            if (IsOk > 0)
+                            {
+                                ShowMsgHelper.AlertMsg("操作成功！");
+                            }
+                            else
+                            {
+                                ShowMsgHelper.Alert_Error("操作失败！");
+                            }
+                        }
+                    }                   
                 }
             }
         }
