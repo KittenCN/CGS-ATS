@@ -85,6 +85,8 @@
     <Content Include="Config.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="DB\RM_DB.mdf" />
+    <Content Include="DB\RM_DB_1.LDF" />
     <Content Include="Error\ErrorPage.aspx" />
     <Content Include="Frame\HomeIndex.aspx" />
     <Content Include="Frame\Login.htm" />
