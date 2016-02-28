@@ -134,13 +134,13 @@
                         开始日期
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始半天标志
+                        开始时间
                     </td>
                     <td style="width: 80px; text-align: center;">
                         结束日期
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        结束半天标志
+                        结束时间
                     </td>
                     <td>
                         备注

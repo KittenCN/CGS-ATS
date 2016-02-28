@@ -86,7 +86,7 @@ namespace RM.Web.RMBase.SysATS
 
             DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
             dtFormat.ShortDatePattern = "yyyy/MM/dd";
-            if ((Convert.ToDateTime(BeginDate.Text, dtFormat) > Convert.ToDateTime(EndDate.Text, dtFormat)) || (Convert.ToDateTime(BeginDate.Text, dtFormat) == Convert.ToDateTime(EndDate.Text, dtFormat) && BeginFlag.Value == "0" && EndFlag.Value == "1"))
+            if ((Convert.ToDateTime(BeginDate.Text, dtFormat) > Convert.ToDateTime(EndDate.Text, dtFormat)) || (Convert.ToDateTime(BeginDate.Text, dtFormat) == Convert.ToDateTime(EndDate.Text, dtFormat) && BeginFlag.Value == "0" && EndFlag.Value == "0"))
             {
                 ShowMsgHelper.Alert_Error("日期设置错误");
             }

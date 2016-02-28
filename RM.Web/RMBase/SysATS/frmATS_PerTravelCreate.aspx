@@ -44,8 +44,8 @@
                 <th>开始日状态:</th>
                 <td>
                     <select id="BeginFlag" runat="server">
-                        <option value="0">半天</option>
-                        <option value="1" selected="selected">全天</option>
+                        <option value="0">下午开始时间</option>
+                        <option value="1" selected="selected">上午开始时间</option>
                     </select>
                 </td>
             </tr>
@@ -57,8 +57,8 @@
                 <th>结束日状态:</th>
                 <td>
                     <select id="EndFlag" runat="server">
-                        <option value="0">半天</option>
-                        <option value="1" selected="selected">全天</option>
+                        <option value="0">上午结束时间</option>
+                        <option value="1" selected="selected">下午结束时间</option>
                     </select>
                 </td>
             </tr>

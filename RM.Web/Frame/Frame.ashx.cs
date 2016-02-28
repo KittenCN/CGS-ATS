@@ -53,7 +53,7 @@ namespace RM.Web.Frame
                         if (dtlogin.Rows.Count != 0)
                         {
                             user_idao.SysLoginLog(user_Account, "1", OWNER_address);
-                            if (dtlogin.Rows[0]["DeleteMark"].ToString() == "1")
+                            if (dtlogin.Rows[0]["DeleteMark"].ToString() == "1" && dtlogin.Rows[0]["work_flag"].ToString() == "1")
                             {
                                 if (Islogin(context, user_Account))
                                 {

@@ -42,15 +42,15 @@ namespace RM.Web.RMBase.SysATS
                 if (lab_BeginFlag != null)
                 {
                     string text = lab_BeginFlag.Text;
-                    text = text.Replace("0", "半天");
-                    text = text.Replace("1", "全天");
+                    text = text.Replace("0", "下午开始时间");
+                    text = text.Replace("1", "上午开始时间");
                     lab_BeginFlag.Text = text;
                 }
                 if (lab_EndFlag != null)
                 {
                     string text = lab_EndFlag.Text;
-                    text = text.Replace("0", "半天");
-                    text = text.Replace("1", "全天");
+                    text = text.Replace("0", "上午结束时间");
+                    text = text.Replace("1", "下午结束时间");
                     lab_EndFlag.Text = text;
                 }
             }

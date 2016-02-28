@@ -213,7 +213,7 @@
                     离职日期:
                 </th>
                 <td>
-                    <asp:TextBox id="out_date" runat="server" type="date" err="入职日期" checkexpession="NotNull" style="width: 200px" />
+                    <asp:TextBox id="out_date" runat="server" type="date" err="入职日期" checkexpession="NotNull" style="width: 200px"  OnTextChanged="out_date_TextChanged" AutoPostBack="true"/>
                 </td>
             </tr>
           <tr>

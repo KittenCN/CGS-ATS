@@ -420,6 +420,14 @@ namespace RM.Web.RMBase.SysUser
             ht["work_flag"] = work_flag.Value;
             ht["Boss_id"] = GetIDFromName(Boss_id.Value);
             ht["Boss_Flag"] = Boss_Flag.Value;
+            if (work_flag.Value == "0")
+            {
+                ht["DeleteMark"] = 2;
+            }
+            else
+            {
+                ht["DeleteMark"] = 1;
+            }
             if (!string.IsNullOrEmpty(_key))
             {
                 guid = _key;
@@ -575,5 +583,9 @@ namespace RM.Web.RMBase.SysUser
         }
         #endregion
 
+        protected void out_date_TextChanged(object sender, EventArgs e)
+        {
+            work_flag.SelectedIndex = 0;
+        }
     }
 }

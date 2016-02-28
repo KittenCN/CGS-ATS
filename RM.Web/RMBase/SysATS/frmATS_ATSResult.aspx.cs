@@ -64,14 +64,14 @@ namespace RM.Web.RMBase.SysATS
             string txtBeginDate = tb_BeginDate.Text;
             string txtEndDate = tb_EndDate.Text;
             DateTime dtBeginDate = DateTime.Parse(txtBeginDate);
-            DateTime dtEndDate = DateTime.Parse(txtEndDate);            
+            DateTime dtEndDate = DateTime.Parse(txtEndDate);
 
             //删除时间段内的记录
             string sql = "delete from Base_ATSResult where ATS_Date>='" + txtBeginDate + "' and ATS_Date<='" + txtEndDate + "' ";
             StringBuilder sb_sql = new StringBuilder(sql);
             int int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(sb_sql);
 
-            for (DateTime dt_ATS_Date = dtBeginDate; dt_ATS_Date <= dtEndDate; dt_ATS_Date=dt_ATS_Date.AddDays(1))
+            for (DateTime dt_ATS_Date = dtBeginDate; dt_ATS_Date <= dtEndDate; dt_ATS_Date = dt_ATS_Date.AddDays(1))
             {
                 string txt_ATS_Date = dt_ATS_Date.ToShortDateString();
                 int int_ATS_DateStatus = (int)DateTime.Parse(txt_ATS_Date).DayOfWeek;
@@ -79,7 +79,7 @@ namespace RM.Web.RMBase.SysATS
                 string insql = "select * from Base_UserInfo where (out_date='1900-1-1' or isnull(out_date,'')='') ";
                 StringBuilder insb_sql = new StringBuilder(insql);
                 DataTable indt = DataFactory.SqlDataBase().GetDataTableBySQL(insb_sql);
-                if(indt.Rows.Count>0)
+                if (indt.Rows.Count > 0)
                 {
                     int indt_count = indt.Rows.Count;
                     for (int i = 0; i < indt_count; i++)
@@ -94,7 +94,7 @@ namespace RM.Web.RMBase.SysATS
                         {
                             //按人,日期插入基础数据
                             int intATS_Result = 0;
-                            if(int_ATS_DateStatus==0 || int_ATS_DateStatus==6)
+                            if (int_ATS_DateStatus == 0 || int_ATS_DateStatus == 6)
                             {
                                 intATS_Result = 1;
                             }
@@ -163,7 +163,7 @@ namespace RM.Web.RMBase.SysATS
                         intPMWorkHour = int.Parse(dtLunch.Rows[0].ItemArray[10].ToString());
 
                         dtBeginTime = DateTime.Parse(txt_ATS_Date + " " + strBeginTime).AddMinutes(intExWorkMin);
-                        dtEndTime = DateTime.Parse(txt_ATS_Date + " " + strEndTime).AddMinutes((-1)*intExWorkMin);
+                        dtEndTime = DateTime.Parse(txt_ATS_Date + " " + strEndTime).AddMinutes((-1) * intExWorkMin);
                         dtLunchBeginTime = DateTime.Parse(txt_ATS_Date + " " + strLunchBeginTime);
                         dtLunchEndTime = DateTime.Parse(txt_ATS_Date + " " + strLunchEndTime);
                         dtAMEndTime = DateTime.Parse(txt_ATS_Date + " " + strAMEndTime);
@@ -213,7 +213,7 @@ namespace RM.Web.RMBase.SysATS
                     indt = DataFactory.SqlDataBase().GetDataTableBySQL(insb_sql);
                     if (indt.Rows.Count != 0 && indt.Rows[0].ItemArray[0].ToString().Length != 0)
                     {
-                        txt_PunchOutTime = indt.Rows[0].ItemArray[0].ToString();                        
+                        txt_PunchOutTime = indt.Rows[0].ItemArray[0].ToString();
                     }
                     else
                     {
@@ -228,11 +228,11 @@ namespace RM.Web.RMBase.SysATS
                     TimeSpan tsPunchOutTime = new TimeSpan(dtPunchOutTime.Ticks);
                     int intResult = tsPunchOutTime.Subtract(tsPunchInTime).Hours;
 
-                    if(txt_PunchInTime==null || txt_PunchInTime=="" || txt_PunchInTime=="00:00:00" || txt_PunchOutTime==null || txt_PunchOutTime=="" || txt_PunchOutTime=="00:00:00")
+                    if (txt_PunchInTime == null || txt_PunchInTime == "" || txt_PunchInTime == "00:00:00" || txt_PunchOutTime == null || txt_PunchOutTime == "" || txt_PunchOutTime == "00:00:00")
                     {
                         intATSResult = 0; //打卡异常
                     }
-                    if(dtPunchInTime>dtBeginTime || dtPunchOutTime<dtEndTime || intResult<intNorWorkHour)
+                    if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
                     {
                         intATSResult = 2; //迟到早退
                     }
@@ -283,21 +283,107 @@ namespace RM.Web.RMBase.SysATS
 
                         int_ATS_Holiday = int.Parse(indt.Rows[0].ItemArray[0].ToString());
 
-                        if (dt_ATS_Date == dt_HBeginDate && int_HBeginDateFlag == 0)
+                        //if (dt_ATS_Date == dt_HBeginDate && int_HBeginDateFlag == 0)
+                        //{
+                        //    int_ATS_HolidayStatus = 2;
+                        //    if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                        //    {
+                        //        intATSResult = 2; //迟到早退
+                        //    }
+                        //    else
+                        //    {
+                        //        intATSResult = 1;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    if (dt_ATS_Date == dt_HEndDate && int_HEndDateFlag == 0)
+                        //    {
+                        //        int_ATS_HolidayStatus = 1;
+                        //        if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
+                        //        {
+                        //            intATSResult = 2; //迟到早退
+                        //        }
+                        //        else
+                        //        {
+                        //            intATSResult = 1;
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        int_ATS_HolidayStatus = 0;
+                        //    }
+                        //}
+
+                        if (dt_ATS_Date == dt_HBeginDate && dt_HBeginDate != dt_HEndDate)
                         {
-                            int_ATS_HolidayStatus = 2;                            
-                            if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                            switch (int_HBeginDateFlag)
                             {
-                                intATSResult = 2; //迟到早退
+                                case 0:
+                                    {
+                                        int_ATS_HolidayStatus = 1;
+                                        if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        int_ATS_HolidayStatus = 0;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
                             }
-                            else
+
+
+                        }
+                        if (dt_ATS_Date == dt_HEndDate && dt_HBeginDate != dt_HEndDate)
+                        {
+                            switch (int_HEndDateFlag)
                             {
-                                intATSResult = 1;
+                                case 0:
+                                    {
+                                        int_ATS_HolidayStatus = 1;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        int_ATS_HolidayStatus = 0;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
                             }
                         }
-                        else
+                        if (dt_ATS_Date == dt_HEndDate && dt_HBeginDate == dt_HEndDate)
                         {
-                            if (dt_ATS_Date == dt_HEndDate && int_HEndDateFlag == 0)
+                            if (int_HBeginDateFlag == 0 && int_HEndDateFlag == 1)
                             {
                                 int_ATS_HolidayStatus = 1;
                                 if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
@@ -309,15 +395,35 @@ namespace RM.Web.RMBase.SysATS
                                     intATSResult = 1;
                                 }
                             }
-                            else
+                            if (int_HBeginDateFlag == 1 && int_HEndDateFlag == 0)
+                            {
+                                int_ATS_HolidayStatus = 1;
+                                if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                                {
+                                    intATSResult = 2; //迟到早退
+                                }
+                                else
+                                {
+                                    intATSResult = 1;
+                                }
+                            }
+                            if (int_HBeginDateFlag == 1 && int_HEndDateFlag == 1)
                             {
                                 int_ATS_HolidayStatus = 0;
+                                if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                {
+                                    intATSResult = 2; //迟到早退
+                                }
+                                else
+                                {
+                                    intATSResult = 1;
+                                }
                             }
                         }
                     }
 
                     //更新所有人节日记录
-                    if(int_ATS_Holiday==0)
+                    if (int_ATS_Holiday == 0)
                     {
                         insql = "update Base_ATSResult ";
                         insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
@@ -343,7 +449,7 @@ namespace RM.Web.RMBase.SysATS
                             ShowMsgHelper.Alert_Wern("审查失败");
                         }
                     }
-                    
+
 
                     //获取休假记录
                     int int_ATS_Leave = 0;
@@ -363,21 +469,75 @@ namespace RM.Web.RMBase.SysATS
                         int_ATS_Leave = int.Parse(indt.Rows[0].ItemArray[2].ToString());
                         int_ATS_LeaveID = int.Parse(indt.Rows[0].ItemArray[0].ToString());
 
-                        if (dt_ATS_Date == dt_LBeginDate && int_LBeginDateFlag == 0)
+                        if (dt_ATS_Date == dt_LBeginDate && dt_LBeginDate != dt_LEndDate)
                         {
-                            int_ATS_LeaveStatus = 2;
-                            if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                            switch (int_LBeginDateFlag)
                             {
-                                intATSResult = 2; //迟到早退
+                                case 0:
+                                    {
+                                        int_ATS_LeaveStatus = 1;
+                                        if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        int_ATS_LeaveStatus = 0;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
                             }
-                            else
+
+
+                        }
+                        if (dt_ATS_Date == dt_LEndDate && dt_LBeginDate != dt_LEndDate)
+                        {
+                            switch (int_LEndDateFlag)
                             {
-                                intATSResult = 1;
+                                case 0:
+                                    {
+                                        int_ATS_LeaveStatus = 1;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        int_ATS_LeaveStatus = 0;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
                             }
                         }
-                        else
+                        if (dt_ATS_Date == dt_LEndDate && dt_LBeginDate == dt_LEndDate)
                         {
-                            if (dt_ATS_Date == dt_LEndDate && int_LEndDateFlag == 0)
+                            if(int_LBeginDateFlag==0 && int_LEndDateFlag==1)
                             {
                                 int_ATS_LeaveStatus = 1;
                                 if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
@@ -389,9 +549,29 @@ namespace RM.Web.RMBase.SysATS
                                     intATSResult = 1;
                                 }
                             }
-                            else
+                            if(int_LBeginDateFlag==1 && int_LEndDateFlag==0)
+                            {
+                                int_ATS_LeaveStatus = 1;
+                                if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                                {
+                                    intATSResult = 2; //迟到早退
+                                }
+                                else
+                                {
+                                    intATSResult = 1;
+                                }
+                            }
+                            if(int_LBeginDateFlag==1 && int_LEndDateFlag==1)
                             {
                                 int_ATS_LeaveStatus = 0;
+                                if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                {
+                                    intATSResult = 2; //迟到早退
+                                }
+                                else
+                                {
+                                    intATSResult = 1;
+                                }
                             }
                         }
                     }
@@ -414,21 +594,103 @@ namespace RM.Web.RMBase.SysATS
                         int_ATS_Travel = int.Parse(indt.Rows[0].ItemArray[0].ToString());
                         int_ATS_TravelID = int.Parse(indt.Rows[0].ItemArray[0].ToString());
 
-                        if (dt_ATS_Date == dt_TBeginDate && int_TBeginDateFlag == 0)
+                        //if (dt_ATS_Date == dt_TBeginDate && int_TBeginDateFlag == 0)
+                        //{
+                        //    int_ATS_TravelStatus = 2;
+                        //    if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                        //    {
+                        //        intATSResult = 2; //迟到早退
+                        //    }
+                        //    else
+                        //    {
+                        //        intATSResult = 1;
+                        //    }
+                        //}
+                        //if (dt_ATS_Date == dt_TEndDate && int_TEndDateFlag == 0)
+                        //{
+                        //    int_ATS_TravelStatus = 1;
+                        //    if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
+                        //    {
+                        //        intATSResult = 2; //迟到早退
+                        //    }
+                        //    else
+                        //    {
+                        //        intATSResult = 1;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    int_ATS_TravelStatus = 0;
+                        //}
+                        if (dt_ATS_Date == dt_TBeginDate && dt_TBeginDate != dt_TEndDate)
                         {
-                            int_ATS_TravelStatus = 2;
-                            if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                            switch (int_TBeginDateFlag)
                             {
-                                intATSResult = 2; //迟到早退
+                                case 0:
+                                    {
+                                        int_ATS_TravelStatus = 1;
+                                        if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        int_ATS_TravelStatus = 0;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
                             }
-                            else
+
+
+                        }
+                        if (dt_ATS_Date == dt_TEndDate && dt_TBeginDate != dt_TEndDate)
+                        {
+                            switch (int_TEndDateFlag)
                             {
-                                intATSResult = 1;
+                                case 0:
+                                    {
+                                        int_ATS_TravelStatus = 1;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        int_ATS_TravelStatus = 0;
+                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                        {
+                                            intATSResult = 2; //迟到早退
+                                        }
+                                        else
+                                        {
+                                            intATSResult = 1;
+                                        }
+                                        break;
+                                    }
                             }
                         }
-                        else
+                        if (dt_ATS_Date == dt_TEndDate && dt_TBeginDate == dt_TEndDate)
                         {
-                            if (dt_ATS_Date == dt_TEndDate && int_TEndDateFlag == 0)
+                            if (int_TBeginDateFlag == 0 && int_TEndDateFlag == 1)
                             {
                                 int_ATS_TravelStatus = 1;
                                 if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
@@ -440,9 +702,29 @@ namespace RM.Web.RMBase.SysATS
                                     intATSResult = 1;
                                 }
                             }
-                            else
+                            if (int_TBeginDateFlag == 1 && int_TEndDateFlag == 0)
+                            {
+                                int_ATS_TravelStatus = 1;
+                                if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
+                                {
+                                    intATSResult = 2; //迟到早退
+                                }
+                                else
+                                {
+                                    intATSResult = 1;
+                                }
+                            }
+                            if (int_TBeginDateFlag == 1 && int_TEndDateFlag == 1)
                             {
                                 int_ATS_TravelStatus = 0;
+                                if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
+                                {
+                                    intATSResult = 2; //迟到早退
+                                }
+                                else
+                                {
+                                    intATSResult = 1;
+                                }
                             }
                         }
                     }
@@ -496,13 +778,13 @@ namespace RM.Web.RMBase.SysATS
                 Label lab_ATS_Travel = e.Item.FindControl("ATS_Travel") as Label;
                 Label lab_ATS_Result = e.Item.FindControl("ATS_Result") as Label;
 
-                if(lab_ATS_Result!=null)
+                if (lab_ATS_Result != null)
                 {
                     string text = lab_ATS_Result.Text;
                     text = text.Replace("0", "打卡异常");
                     text = text.Replace("1", "考勤正常");
                     text = text.Replace("2", "迟到/早退");
-                    lab_ATS_Result.Text = text;  
+                    lab_ATS_Result.Text = text;
                 }
 
                 if (lab_EmpID != null)
@@ -510,7 +792,7 @@ namespace RM.Web.RMBase.SysATS
                     lab_EmpID.Text = GetNameFromID(lab_EmpID.Text);
                 }
 
-                if(lab_Flag != null)
+                if (lab_Flag != null)
                 {
                     string text = lab_Flag.Text;
                     text = text.Replace("0", "未审查");
@@ -532,7 +814,7 @@ namespace RM.Web.RMBase.SysATS
                     lab_ATS_DateStatus.Text = text;
                 }
 
-                if (lab_ATS_Holiday != null && int.Parse(lab_ATS_Holiday.Text)>0)
+                if (lab_ATS_Holiday != null && int.Parse(lab_ATS_Holiday.Text) > 0)
                 {
                     lab_ATS_Holiday.Text = GetHNFromID(lab_ATS_Holiday.Text);
                     if (lab_ATS_HolidayStatus != null)
@@ -559,7 +841,7 @@ namespace RM.Web.RMBase.SysATS
                     lab_ATS_Leave.Text = GetLNFromID(lab_ATS_Leave.Text);
                 }
 
-                if (lab_ATS_Travel != null && int.Parse(lab_ATS_Travel.Text)>0)
+                if (lab_ATS_Travel != null && int.Parse(lab_ATS_Travel.Text) > 0)
                 {
                     lab_ATS_Travel.Text = "公出";
                 }

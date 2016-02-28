@@ -29,8 +29,8 @@
         <tr>
             <th>开始日类型:</th>
             <td><select id="BeginFlag" name="BeginFlag" runat="server" style="width: 200px" >
-                <option value="1" selected="selected">全天</option>
-                <option value="0">半天</option>
+                <option value="0">下午开始时间</option>
+                <option value="1" selected="selected">上午开始时间</option>
                 </select>
             </td>
         </tr>
@@ -41,8 +41,8 @@
         <tr>
             <th>结束日类型:</th>
             <td><select id="EndFlag" name="EndFlag" runat="server" style="width: 200px" >
-                <option value="1" selected="selected">全天</option>
-                <option value="0">半天</option>
+                <option value="0">上午结束时间</option>
+                <option value="1" selected="selected">下午结束时间</option>
                 </select>
             </td>
         </tr>
