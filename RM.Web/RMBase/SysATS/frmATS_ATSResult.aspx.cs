@@ -103,7 +103,178 @@ namespace RM.Web.RMBase.SysATS
                             sb_sql = new StringBuilder(sql);
                             int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(sb_sql);
                         }
+
+                        //获取休假记录
+                        int intATSResult = 0;
+                        int int_ATS_Leave = 0;
+                        int int_ATS_LeaveID = 0;
+                        int int_ATS_LeaveStatus = 0;
+                        //txt_EmpID = "80cc9090-885f-4bec-a96e-93df654a8d53";
+                        string insqli = "select * from dbo.Base_PerLeaveApply where ApprovalFlag=2 and '" + txt_ATS_Date + "' between BeginDate and EndDate and EmpID='" + txt_EmpID + "' ";
+                        StringBuilder insb_sqli = new StringBuilder(insqli);
+                        DataTable indti = DataFactory.SqlDataBase().GetDataTableBySQL(insb_sqli);
+                        if (indti.Rows.Count != 0 && indti.Rows[0].ItemArray[0].ToString().Length != 0)
+                        {
+                            DateTime dt_LBeginDate = DateTime.Parse(indti.Rows[0].ItemArray[3].ToString());
+                            DateTime dt_LEndDate = DateTime.Parse(indti.Rows[0].ItemArray[5].ToString());
+                            int int_LBeginDateFlag = int.Parse(indti.Rows[0].ItemArray[4].ToString());
+                            int int_LEndDateFlag = int.Parse(indti.Rows[0].ItemArray[6].ToString());
+                            dt_ATS_Date = DateTime.Parse(txt_ATS_Date);
+
+                            int_ATS_Leave = int.Parse(indti.Rows[0].ItemArray[2].ToString());
+                            int_ATS_LeaveID = int.Parse(indti.Rows[0].ItemArray[0].ToString());
+
+                            if (dt_ATS_Date == dt_LBeginDate && dt_LBeginDate != dt_LEndDate)
+                            {
+                                switch (int_LBeginDateFlag)
+                                {
+                                    case 0:
+                                        {
+                                            int_ATS_LeaveStatus = 1;
+                                            intATSResult = 0;
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            int_ATS_LeaveStatus = 0;
+                                            intATSResult = 1;
+                                            break;
+                                        }
+                                }
+
+
+                            }
+                            if (dt_ATS_Date == dt_LEndDate && dt_LBeginDate != dt_LEndDate)
+                            {
+                                switch (int_LEndDateFlag)
+                                {
+                                    case 0:
+                                        {
+                                            int_ATS_LeaveStatus = 1;
+                                            intATSResult = 0;
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            int_ATS_LeaveStatus = 0;
+                                            intATSResult = 1;
+                                            break;
+                                        }
+                                }
+                            }
+                            if (dt_ATS_Date == dt_LEndDate && dt_LBeginDate == dt_LEndDate)
+                            {
+                                if (int_LBeginDateFlag == 0 && int_LEndDateFlag == 1)
+                                {
+                                    int_ATS_LeaveStatus = 1;
+                                    intATSResult = 0;
+                                }
+                                if (int_LBeginDateFlag == 1 && int_LEndDateFlag == 0)
+                                {
+                                    int_ATS_LeaveStatus = 1;
+                                    intATSResult = 0;
+                                }
+                                if (int_LBeginDateFlag == 1 && int_LEndDateFlag == 1)
+                                {
+                                    int_ATS_LeaveStatus = 0;
+                                    intATSResult = 1;
+                                }
+                            }
+                        }
+
+                        //获取公出记录
+                        int int_ATS_Travel = 0;
+                        int int_ATS_TravelID = 0;
+                        int int_ATS_TravelStatus = 0;
+                        insqli = "select * from dbo.Base_PerTravelApply where ApprovalFlag=2 and '" + txt_ATS_Date + "' between BeginDate and EndDate and EmpID='" + txt_EmpID + "' ";
+                        insb_sqli = new StringBuilder(insqli);
+                        indti = DataFactory.SqlDataBase().GetDataTableBySQL(insb_sqli);
+                        if (indti.Rows.Count != 0 && indti.Rows[0].ItemArray[0].ToString().Length != 0)
+                        {
+                            DateTime dt_TBeginDate = DateTime.Parse(indti.Rows[0].ItemArray[2].ToString());
+                            DateTime dt_TEndDate = DateTime.Parse(indti.Rows[0].ItemArray[4].ToString());
+                            int int_TBeginDateFlag = int.Parse(indti.Rows[0].ItemArray[3].ToString());
+                            int int_TEndDateFlag = int.Parse(indti.Rows[0].ItemArray[5].ToString());
+                            dt_ATS_Date = DateTime.Parse(txt_ATS_Date);
+
+                            int_ATS_Travel = int.Parse(indti.Rows[0].ItemArray[0].ToString());
+                            int_ATS_TravelID = int.Parse(indti.Rows[0].ItemArray[0].ToString());
+
+                            if (dt_ATS_Date == dt_TBeginDate && dt_TBeginDate != dt_TEndDate)
+                            {
+                                switch (int_TBeginDateFlag)
+                                {
+                                    case 0:
+                                        {
+                                            int_ATS_TravelStatus = 1;
+                                            intATSResult = 0;
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            int_ATS_TravelStatus = 0;
+                                            intATSResult = 1;
+                                            break;
+                                        }
+                                }
+
+
+                            }
+                            if (dt_ATS_Date == dt_TEndDate && dt_TBeginDate != dt_TEndDate)
+                            {
+                                switch (int_TEndDateFlag)
+                                {
+                                    case 0:
+                                        {
+                                            int_ATS_TravelStatus = 1;
+                                            intATSResult = 0;
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            int_ATS_TravelStatus = 0;
+                                            intATSResult = 1;
+                                            break;
+                                        }
+                                }
+                            }
+                            if (dt_ATS_Date == dt_TEndDate && dt_TBeginDate == dt_TEndDate)
+                            {
+                                if (int_TBeginDateFlag == 0 && int_TEndDateFlag == 1)
+                                {
+                                    int_ATS_TravelStatus = 1;
+                                    intATSResult = 0;
+                                }
+                                if (int_TBeginDateFlag == 1 && int_TEndDateFlag == 0)
+                                {
+                                    int_ATS_TravelStatus = 1;
+                                    intATSResult = 0;
+                                }
+                                if (int_TBeginDateFlag == 1 && int_TEndDateFlag == 1)
+                                {
+                                    int_ATS_TravelStatus = 0;
+                                    intATSResult = 1;
+                                }
+                            }
+                        }
+
+                        //更新节日,休假,公出记录及三组打卡记录
+                        string insqlii = "update Base_ATSResult ";
+                        //insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
+                        insqlii = insqlii + "set ATS_Leave='" + int_ATS_Leave + "',ATS_LeaveID='" + int_ATS_LeaveID + "',ATS_LeaveStatus='" + int_ATS_LeaveStatus + "' ";
+                        insqlii = insqlii + ", ATS_Travel='" + int_ATS_Travel + "',ATS_TravelID='" + int_ATS_TravelID + "',ATS_TravelStatus='" + int_ATS_TravelStatus + "' ";
+                        //insqlii = insqlii + ", PunchINTime = '" + txt_PunchInTime + "',PunchOutTime = '" + txt_PunchOutTime + "',LunchTime = '" + txt_LunchTime + "' ";
+                        insqlii = insqlii + ", ATS_Result=" + intATSResult + " ";
+                        insqlii = insqlii + " where EmpID='" + txt_EmpID + "' and EmpCode='" + txt_EmpCode + "' and ATS_Date='" + txt_ATS_Date + "' ";
+                        StringBuilder insb_sqlii = new StringBuilder(insqlii);
+                        int int_sqlresultii = DataFactory.SqlDataBase().ExecuteBySql(insb_sqlii);
+                        if (int_sqlresultii <= 0)
+                        {
+                            ShowMsgHelper.Alert_Wern("审查失败");
+                        }
+
                     }
+
                 }
             }
 
@@ -175,20 +346,6 @@ namespace RM.Web.RMBase.SysATS
                         break;
                     }
 
-                    ////判断是否重复
-                    //sql = "select * from Base_ATSResult where EmpID='" + txt_EmpID + "' and ATS_Date='" + txt_ATS_Date + "' ";
-                    //sb_sql = new StringBuilder(sql);
-                    //DataTable dt2 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
-                    //if (dt2.Rows.Count == 0)
-                    //{
-                    //    //按人,日期插入基础数据
-                    //    sql = "insert into Base_ATSResult(EmpID,EmpCode,Flag,ATS_Date,ATS_DateStatus) ";
-                    //    sql = sql + "select '" + txt_EmpID + "','" + txt_EmpCode + "',1,'" + txt_ATS_Date + "'," + int_ATS_DateStatus;
-                    //    sb_sql = new StringBuilder(sql);
-                    //    int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(sb_sql);
-
-                    //    if (int_sqlresult > 0)
-                    //    {
                     string txt_PunchInTime = "";
                     string txt_PunchOutTime = "";
                     string txt_LunchTime = "";
@@ -259,15 +416,6 @@ namespace RM.Web.RMBase.SysATS
                         txt_LunchTime = "";
                     }
 
-                    ////合并到节假日更新
-                    ////更新三组打卡时间
-                    //insql = "update Base_ATSResult ";
-                    //insql = insql + "set PunchINTime='" + txt_PunchInTime + "',PunchOutTime='" + txt_PunchOutTime + "',LunchTime='" + txt_LunchTime + "' ";
-                    //insql = insql + " where EmpID='" + txt_EmpID + "' and EmpCode='" + txt_EmpCode + "' and ATS_Date='" + txt_ATS_Date + "'";
-                    //insb_sql = new StringBuilder(insql);
-                    //int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
-                    //if (int_sqlresult > 0)
-                    //{
                     //获取节日记录
                     int int_ATS_Holiday = 0;
                     int int_ATS_HolidayStatus = 0;
@@ -282,38 +430,6 @@ namespace RM.Web.RMBase.SysATS
                         int int_HEndDateFlag = int.Parse(indt.Rows[0].ItemArray[5].ToString());
 
                         int_ATS_Holiday = int.Parse(indt.Rows[0].ItemArray[0].ToString());
-
-                        //if (dt_ATS_Date == dt_HBeginDate && int_HBeginDateFlag == 0)
-                        //{
-                        //    int_ATS_HolidayStatus = 2;
-                        //    if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
-                        //    {
-                        //        intATSResult = 2; //迟到早退
-                        //    }
-                        //    else
-                        //    {
-                        //        intATSResult = 1;
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    if (dt_ATS_Date == dt_HEndDate && int_HEndDateFlag == 0)
-                        //    {
-                        //        int_ATS_HolidayStatus = 1;
-                        //        if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
-                        //        {
-                        //            intATSResult = 2; //迟到早退
-                        //        }
-                        //        else
-                        //        {
-                        //            intATSResult = 1;
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        int_ATS_HolidayStatus = 0;
-                        //    }
-                        //}
 
                         if (dt_ATS_Date == dt_HBeginDate && dt_HBeginDate != dt_HEndDate)
                         {
@@ -335,14 +451,7 @@ namespace RM.Web.RMBase.SysATS
                                 case 1:
                                     {
                                         int_ATS_HolidayStatus = 0;
-                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
-                                        {
-                                            intATSResult = 2; //迟到早退
-                                        }
-                                        else
-                                        {
-                                            intATSResult = 1;
-                                        }
+                                        intATSResult = 1;
                                         break;
                                     }
                             }
@@ -369,14 +478,7 @@ namespace RM.Web.RMBase.SysATS
                                 case 1:
                                     {
                                         int_ATS_HolidayStatus = 0;
-                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
-                                        {
-                                            intATSResult = 2; //迟到早退
-                                        }
-                                        else
-                                        {
-                                            intATSResult = 1;
-                                        }
+                                        intATSResult = 1;
                                         break;
                                     }
                             }
@@ -455,7 +557,8 @@ namespace RM.Web.RMBase.SysATS
                     int int_ATS_Leave = 0;
                     int int_ATS_LeaveID = 0;
                     int int_ATS_LeaveStatus = 0;
-                    insql = "select * from dbo.Base_PerLeaveApply where ApprovalFlag=1 and '" + txt_ATS_Date + "' between BeginDate and EndDate and EmpID='" + txt_EmpID + "' ";
+                    //txt_EmpID = "80cc9090-885f-4bec-a96e-93df654a8d53";
+                    insql = "select * from dbo.Base_PerLeaveApply where ApprovalFlag=2 and '" + txt_ATS_Date + "' between BeginDate and EndDate and EmpID='" + txt_EmpID + "' ";
                     insb_sql = new StringBuilder(insql);
                     indt = DataFactory.SqlDataBase().GetDataTableBySQL(insb_sql);
                     if (indt.Rows.Count != 0 && indt.Rows[0].ItemArray[0].ToString().Length != 0)
@@ -489,14 +592,7 @@ namespace RM.Web.RMBase.SysATS
                                 case 1:
                                     {
                                         int_ATS_LeaveStatus = 0;
-                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
-                                        {
-                                            intATSResult = 2; //迟到早退
-                                        }
-                                        else
-                                        {
-                                            intATSResult = 1;
-                                        }
+                                        intATSResult = 1;
                                         break;
                                     }
                             }
@@ -523,14 +619,7 @@ namespace RM.Web.RMBase.SysATS
                                 case 1:
                                     {
                                         int_ATS_LeaveStatus = 0;
-                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
-                                        {
-                                            intATSResult = 2; //迟到早退
-                                        }
-                                        else
-                                        {
-                                            intATSResult = 1;
-                                        }
+                                        intATSResult = 1;
                                         break;
                                     }
                             }
@@ -580,7 +669,7 @@ namespace RM.Web.RMBase.SysATS
                     int int_ATS_Travel = 0;
                     int int_ATS_TravelID = 0;
                     int int_ATS_TravelStatus = 0;
-                    insql = "select * from dbo.Base_PerTravelApply where ApprovalFlag=1 and '" + txt_ATS_Date + "' between BeginDate and EndDate and EmpID='" + txt_EmpID + "' ";
+                    insql = "select * from dbo.Base_PerTravelApply where ApprovalFlag=2 and '" + txt_ATS_Date + "' between BeginDate and EndDate and EmpID='" + txt_EmpID + "' ";
                     insb_sql = new StringBuilder(insql);
                     indt = DataFactory.SqlDataBase().GetDataTableBySQL(insb_sql);
                     if (indt.Rows.Count != 0 && indt.Rows[0].ItemArray[0].ToString().Length != 0)
@@ -594,34 +683,6 @@ namespace RM.Web.RMBase.SysATS
                         int_ATS_Travel = int.Parse(indt.Rows[0].ItemArray[0].ToString());
                         int_ATS_TravelID = int.Parse(indt.Rows[0].ItemArray[0].ToString());
 
-                        //if (dt_ATS_Date == dt_TBeginDate && int_TBeginDateFlag == 0)
-                        //{
-                        //    int_ATS_TravelStatus = 2;
-                        //    if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
-                        //    {
-                        //        intATSResult = 2; //迟到早退
-                        //    }
-                        //    else
-                        //    {
-                        //        intATSResult = 1;
-                        //    }
-                        //}
-                        //if (dt_ATS_Date == dt_TEndDate && int_TEndDateFlag == 0)
-                        //{
-                        //    int_ATS_TravelStatus = 1;
-                        //    if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
-                        //    {
-                        //        intATSResult = 2; //迟到早退
-                        //    }
-                        //    else
-                        //    {
-                        //        intATSResult = 1;
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    int_ATS_TravelStatus = 0;
-                        //}
                         if (dt_ATS_Date == dt_TBeginDate && dt_TBeginDate != dt_TEndDate)
                         {
                             switch (int_TBeginDateFlag)
@@ -642,14 +703,7 @@ namespace RM.Web.RMBase.SysATS
                                 case 1:
                                     {
                                         int_ATS_TravelStatus = 0;
-                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
-                                        {
-                                            intATSResult = 2; //迟到早退
-                                        }
-                                        else
-                                        {
-                                            intATSResult = 1;
-                                        }
+                                        intATSResult = 1;
                                         break;
                                     }
                             }
@@ -676,14 +730,7 @@ namespace RM.Web.RMBase.SysATS
                                 case 1:
                                     {
                                         int_ATS_TravelStatus = 0;
-                                        if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
-                                        {
-                                            intATSResult = 2; //迟到早退
-                                        }
-                                        else
-                                        {
-                                            intATSResult = 1;
-                                        }
+                                        intATSResult = 1;
                                         break;
                                     }
                             }

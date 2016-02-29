@@ -54,6 +54,11 @@ namespace RM.Web.RMBase.SysATS
             {
                 Label lab_EmpID = e.Item.FindControl("EmpID") as Label;
                 Label lab_JZDate = e.Item.FindControl("JZDate") as Label;
+                Label lab_UseAL = e.Item.FindControl("UseAL") as Label;
+                Label lab_JZAL = e.Item.FindControl("JZAL") as Label;
+                Label lab_CYAL = e.Item.FindControl("CYAL") as Label;
+                Label lab_ALEdit = e.Item.FindControl("ALEdit") as Label;
+                Label lab_UsedAL = e.Item.FindControl("UsedAL") as Label;
 
                 if (lab_EmpID != null)
                 {
@@ -64,6 +69,8 @@ namespace RM.Web.RMBase.SysATS
                 {
                     lab_JZDate.Text = "-";
                 }
+
+                lab_UseAL.Text = (float.Parse(lab_JZAL.Text) + float.Parse(lab_CYAL.Text) + float.Parse(lab_ALEdit.Text) - float.Parse(lab_UsedAL.Text)).ToString();
             }
 
         }
