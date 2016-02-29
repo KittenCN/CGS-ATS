@@ -59,7 +59,8 @@
                     <select id="ATS_Result" runat="server">
                         <option value="0">打卡异常</option>
                         <option value="1" selected="selected">打卡正常</option>
-                        <option value="2">迟到/早退</option>
+                        <option value="2">小迟到/早退</option>
+                        <option value="3">大迟到/早退</option>
                     </select>
                 </td>
             </tr>

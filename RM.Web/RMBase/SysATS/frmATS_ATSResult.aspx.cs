@@ -392,6 +392,8 @@ namespace RM.Web.RMBase.SysATS
                     if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
                     {
                         intATSResult = 2; //迟到早退
+                        if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                        { intATSResult = 3; }
                     }
 
                     //获取期间打卡时间
@@ -439,8 +441,11 @@ namespace RM.Web.RMBase.SysATS
                                     {
                                         int_ATS_HolidayStatus = 1;
                                         if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
-                                        {
+                                        {                                           
                                             intATSResult = 2; //迟到早退
+                                            if (DateDiff(dtPunchInTime, dtPMBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                            { intATSResult = 3; }
+
                                         }
                                         else
                                         {
@@ -468,6 +473,8 @@ namespace RM.Web.RMBase.SysATS
                                         if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
                                         {
                                             intATSResult = 2; //迟到早退
+                                            if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtAMEndTime) > 4)
+                                            { intATSResult = 3; }
                                         }
                                         else
                                         {
@@ -491,6 +498,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtPMBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -503,6 +512,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtAMEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -515,6 +526,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -582,6 +595,8 @@ namespace RM.Web.RMBase.SysATS
                                         if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
                                         {
                                             intATSResult = 2; //迟到早退
+                                            if (DateDiff(dtPunchInTime, dtPMBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                            { intATSResult = 3; }
                                         }
                                         else
                                         {
@@ -609,6 +624,8 @@ namespace RM.Web.RMBase.SysATS
                                         if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
                                         {
                                             intATSResult = 2; //迟到早退
+                                            if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtAMEndTime) > 4)
+                                            { intATSResult = 3; }
                                         }
                                         else
                                         {
@@ -632,6 +649,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtPMBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -644,6 +663,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtAMEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -656,6 +677,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -693,6 +716,8 @@ namespace RM.Web.RMBase.SysATS
                                         if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
                                         {
                                             intATSResult = 2; //迟到早退
+                                            if (DateDiff(dtPunchInTime, dtPMBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                            { intATSResult = 3; }
                                         }
                                         else
                                         {
@@ -720,6 +745,8 @@ namespace RM.Web.RMBase.SysATS
                                         if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
                                         {
                                             intATSResult = 2; //迟到早退
+                                            if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtAMEndTime) > 4)
+                                            { intATSResult = 3; }
                                         }
                                         else
                                         {
@@ -743,6 +770,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtPMBeginTime || dtPunchOutTime < dtEndTime || intResult < intPMWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtPMBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -755,6 +784,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtAMEndTime || intResult < intAMWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtAMEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -767,6 +798,8 @@ namespace RM.Web.RMBase.SysATS
                                 if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
                                 {
                                     intATSResult = 2; //迟到早退
+                                    if (DateDiff(dtPunchInTime, dtBeginTime) > 4 || DateDiff(dtPunchOutTime, dtEndTime) > 4)
+                                    { intATSResult = 3; }
                                 }
                                 else
                                 {
@@ -830,7 +863,8 @@ namespace RM.Web.RMBase.SysATS
                     string text = lab_ATS_Result.Text;
                     text = text.Replace("0", "打卡异常");
                     text = text.Replace("1", "考勤正常");
-                    text = text.Replace("2", "迟到/早退");
+                    text = text.Replace("2", "小迟到/早退");
+                    text = text.Replace("3", "大迟到/早退");
                     lab_ATS_Result.Text = text;
                 }
 
@@ -964,6 +998,37 @@ namespace RM.Web.RMBase.SysATS
         protected void btn_Search_Click(object sender, EventArgs e)
         {
             DataBindGrid();
+        }
+
+        public static int DateDiff(DateTime DateTime1, DateTime DateTime2)
+        {
+            int dateDiff = 0;
+            try
+            {
+                TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
+                TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
+                TimeSpan ts = ts1.Subtract(ts2).Duration();
+                string hours = ts.Hours.ToString(), minutes = ts.Minutes.ToString(), seconds = ts.Seconds.ToString();
+                //if (ts.Hours < 10)
+                //{
+                //    hours = "0" + ts.Hours.ToString();
+                //}
+                //if (ts.Minutes < 10)
+                //{
+                //    minutes = "0" + ts.Minutes.ToString();
+                //}
+                //if (ts.Seconds < 10)
+                //{
+                //    seconds = "0" + ts.Seconds.ToString();
+                //}
+                //dateDiff = hours + ":" + minutes + ":" + seconds;     
+                dateDiff = ts.Hours;          
+            }
+            catch
+            {
+
+            }
+            return dateDiff;
         }
     }
 }
