@@ -272,9 +272,14 @@ namespace RM.Web.RMBase.SysATS
                         {
                             ShowMsgHelper.Alert_Wern("审查失败");
                         }
-
                     }
-
+                }
+                sql = "update Base_ATSResult set ATS_Result=1 where ATS_DateStatus=0 or ATS_DateStatus=6";
+                sb_sql = new StringBuilder(sql);
+                int intsql = DataFactory.SqlDataBase().ExecuteBySql(sb_sql);
+                if (intsql <= 0)
+                {
+                    ShowMsgHelper.Alert_Wern("审查失败");
                 }
             }
 

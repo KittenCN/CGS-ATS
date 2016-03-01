@@ -104,11 +104,11 @@ namespace RM.Web.RMBase.SysATS
                 }
                 if (int.Parse(dti.Rows[0].ItemArray[3].ToString()) > 0)
                 {
-                    intMaxPerYear = int.Parse(dti.Rows[0].ItemArray[2].ToString());
+                    intMaxPerYear = int.Parse(dti.Rows[0].ItemArray[3].ToString());
                 }
                 if (int.Parse(dti.Rows[0].ItemArray[4].ToString()) > 0)
                 {
-                    intMustFile = int.Parse(dti.Rows[0].ItemArray[2].ToString());
+                    intMustFile = int.Parse(dti.Rows[0].ItemArray[4].ToString());
                 }
             }
             else
@@ -201,7 +201,7 @@ namespace RM.Web.RMBase.SysATS
                     FilesAdd.PostedFile.SaveAs(SaveLocation);
                     txt_FilesAdd = SaveLocation;
                     //Response.Write("The file has been uploaded.");
-                    ShowMsgHelper.Alert_Wern("The file has been uploaded.");
+                    ShowMsgHelper.Alert("The file has been uploaded.");
 
                 }
                 catch (Exception ex)
