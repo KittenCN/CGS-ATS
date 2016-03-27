@@ -38,6 +38,7 @@ namespace RM.Web.RMBase.SysATS
                 string sql = "select * from uvw_doLeaveDays where EmpID='" + txt_EmpID + "' ";
                 StringBuilder sb_sql = new StringBuilder(sql);
                 DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+                CJform.Visible = false;
                 if (dt != null || dt.Rows.Count > 0)
                 {
                     flo_njDays = float.Parse(dt.Rows[0].ItemArray[1].ToString());
@@ -95,11 +96,37 @@ namespace RM.Web.RMBase.SysATS
             Hashtable ht = DataFactory.SqlDataBase().GetHashtableById("Base_PerLeaveApply", "id", _key);
             if (ht.Count > 0 && ht != null)
             {
+                if(ht["LeaveID"].ToString()=="3")
+                {
+                    CJform.Visible = true;
+                }
+                else
+                {
+                    CJform.Visible = false;
+                }
                 ControlBindHelper.SetWebControls(this.Page, ht);
                 EmpID.Text = GetNameFromID(EmpID.Text);
                 //lab_CreateDate.Text = "";
                 BeginDate.Text = Convert.ToDateTime(BeginDate.Text).ToString("yyyy-MM-dd");
-                EndDate.Text = Convert.ToDateTime(EndDate.Text).ToString("yyyy-MM-dd");                              
+                EndDate.Text = Convert.ToDateTime(EndDate.Text).ToString("yyyy-MM-dd");
+                if(ht["NCJ"].ToString()=="1")
+                {
+                    cbNC.Checked = true;
+                }                       
+                else
+                {
+                    cbNC.Checked = false;
+                }   
+                if(ht["DBT"].ToString()=="1")
+                {
+                    cbDBT.Checked = true;
+                    DBT.Text = ht["DBTnum"].ToString();
+                }
+                else
+                {
+                    cbDBT.Checked = false;
+                    DBT.Text = "0";
+                }
             }
 
             njDays.Text = flo_njDays.ToString();
@@ -186,6 +213,24 @@ namespace RM.Web.RMBase.SysATS
                             ht["LeaveID"] = LeaveID.SelectedValue;
                             ht["FilesAdd"] = txt_FilesAdd;
                             ht["LeaveDays"] = LeaveDays.Text;
+                            if (cbNC.Checked == true)
+                            {
+                                ht["NCJ"] = 1;
+                            }
+                            else
+                            {
+                                ht["NCJ"] = 0;
+                            }
+                            if (cbDBT.Checked == true)
+                            {
+                                ht["DBT"] = 1;
+                                ht["DBTnum"] = DBT.Text;
+                            }
+                            else
+                            {
+                                ht["DBT"] = 0;
+                                ht["DBTnum"] = 0;
+                            }
                             int IsOk = DataFactory.SqlDataBase().UpdateByHashtable("Base_PerLeaveApply", "id", _key, ht);
                             if (IsOk > 0)
                             {
@@ -277,28 +322,112 @@ namespace RM.Web.RMBase.SysATS
             TimeSpan ts;
             //int differenceInDays = ts.Days;
 
-            if (intBeginFlag == 1 && intEndFlag == 1)
+            if (LeaveID.SelectedValue == "3")
             {
-                ts = dtEndDate - dtBeginDate;
-                fResult = ts.Days + float.Parse("1");
+                int intCJ = 98;
+                DateTime dtCJed = dtBeginDate.AddDays(intCJ + 30);
+                int intCJT = CallCJDays(dtBeginDate, dtCJed);
+                int intNC = 0;
+                int intDBT = 0;
+                int intTotalCJ = 0;
+                if (cbNC.Checked == true)
+                {
+                    intNC = 15;
+                }
+                if (cbDBT.Checked == true)
+                {
+                    intDBT = int.Parse(DBT.Text) * 15;
+                }
+                intTotalCJ = intCJ + 30 + intCJT + intNC + intDBT;
+                EndDate.Text = dtBeginDate.AddDays(intTotalCJ).ToString("yyyy-MM-dd");
+                fResult = float.Parse(intTotalCJ.ToString());
+                LeaveDays.Text = fResult.ToString();
             }
-            if (intBeginFlag == 0 && intEndFlag == 1)
+            else
             {
-                ts = dtEndDate - dtBeginDate.AddDays(1);
-                fResult = ts.Days + float.Parse("0.5") + float.Parse("1");
+                if (intBeginFlag == 1 && intEndFlag == 1)
+                {
+                    ts = dtEndDate - dtBeginDate;
+                    fResult = ts.Days + float.Parse("1");
+                }
+                if (intBeginFlag == 0 && intEndFlag == 1)
+                {
+                    ts = dtEndDate - dtBeginDate.AddDays(1);
+                    fResult = ts.Days + float.Parse("0.5") + float.Parse("1");
+                }
+                if (intBeginFlag == 1 && intEndFlag == 0)
+                {
+                    ts = dtEndDate - dtBeginDate;
+                    fResult = ts.Days - float.Parse("0.5") + float.Parse("1");
+                }
+                if (intBeginFlag == 0 && intEndFlag == 0)
+                {
+                    ts = dtEndDate - dtBeginDate;
+                    fResult = ts.Days;
+                }
+
+                LeaveDays.Text = fResult.ToString();
             }
-            if (intBeginFlag == 1 && intEndFlag == 0)
+        }
+
+        private int CallCJDays(DateTime dtBeginDate, DateTime dtEndDate)
+        {
+            int intResult = 0;
+            int intJR = 0;
+            int intZM = 0;
+
+            string sql = "select * from Base_ATS_HolidaySetting where (BeginDate>='" + dtBeginDate + "' and BeginDate<='" + dtEndDate + "') or (EndDate>='" + dtBeginDate + "' and EndDate<='" + dtEndDate + "')";
+            StringBuilder sb_sql = new StringBuilder(sql);
+            DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+            if (dt.Rows.Count > 0)
             {
-                ts = dtEndDate - dtBeginDate;
-                fResult = ts.Days - float.Parse("0.5") + float.Parse("1");
-            }
-            if (intBeginFlag == 0 && intEndFlag == 0)
-            {
-                ts = dtEndDate - dtBeginDate;
-                fResult = ts.Days;
+                float fResult = 0;
+                TimeSpan ts;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
+                    dtFormat.ShortDatePattern = "yyyy/MM/dd";
+                    DateTime dtBDate = Convert.ToDateTime(dt.Rows[0]["BeginDate"].ToString(), dtFormat);
+                    DateTime dtEDate = Convert.ToDateTime(dt.Rows[0]["EndDate"].ToString(), dtFormat);
+                    ts = dtEDate - dtBDate;
+                    fResult = ts.Days;
+                    intJR = intJR + (int)fResult;
+                }
             }
 
-            LeaveDays.Text = fResult.ToString();
+            for (DateTime dtCurr = dtBeginDate; dtCurr <= dtEndDate; dtCurr = dtCurr.AddDays(1))
+            {
+                if ((int)dtCurr.DayOfWeek == 0 || (int)dtCurr.DayOfWeek == 6)
+                {
+                    intZM = intZM + 1;
+                }
+            }
+            intResult = intZM + intJR;
+            return intResult;
+        }
+
+        protected void LeaveID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LeaveID.SelectedValue == "3")
+            {
+                CJform.Visible = true;
+            }
+            else
+            {
+                CJform.Visible = false;
+            }
+        }
+
+        protected void DBT_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDBT.Checked == true)
+            {
+                DBT.Enabled = true;
+            }
+            else
+            {
+                DBT.Enabled = false;
+            }
         }
     }
 }

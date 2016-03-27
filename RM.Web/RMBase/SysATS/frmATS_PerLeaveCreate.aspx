@@ -36,7 +36,7 @@
             <tr>
                 <th>假期类别:</th>
                 <td>
-                    <asp:DropDownList ID="LeaveID" runat="server">
+                    <asp:DropDownList ID="LeaveID" runat="server" OnSelectedIndexChanged="LeaveID_SelectedIndexChanged" AutoPostBack="true">
 
                     </asp:DropDownList>
                 </td>
@@ -85,6 +85,25 @@
                      <asp:Button ID="btn_submit" Text="Upload" runat="server" onclick="btn_submit_Click" />
                 </td>
             </tr>
+        </table>
+        <table id="CJform" runat="server" class="frm">
+            <tr>
+                <th>难产假:</th>
+                <td>
+                    <asp:CheckBox ID="cbNC" Text="难产假" runat="server" />
+                </td>
+            </tr>
+            <tr>
+                <th>多胞胎:</th>
+                <td>
+
+                    <asp:CheckBox ID="cbDBT" Text="多胞胎假:" runat="server" OnCheckedChanged="DBT_CheckedChanged" AutoPostBack="true" />
+&nbsp;
+                    <asp:TextBox ID="DBT" runat="server" Width="16px" Enabled="false">0</asp:TextBox>
+                    <asp:Label ID="lbDBT" runat="server" Text="胞胎"></asp:Label>
+
+                </td>
+            </tr>           
         </table>
     </div>
     <div class="frmbottom">
