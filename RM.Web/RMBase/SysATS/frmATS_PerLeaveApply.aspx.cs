@@ -121,5 +121,11 @@ namespace RM.Web.RMBase.SysATS
             return txt_Result;
         }
 
+        protected void btn_MailTest_Click(object sender, EventArgs e)
+        {
+            GenModel gm = new GenModel();
+            string strMailResult = gm.SendMail2("hrtest@coopgs.com", "test", "test");
+
+        }
     }
 }

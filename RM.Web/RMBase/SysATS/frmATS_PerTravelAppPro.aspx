@@ -101,6 +101,10 @@
                      <asp:Button ID="btn_down" Text="Download" runat="server" onclick="btn_down_Click" />
                 </td>
             </tr>
+            <tr>
+                <th>审批人备注:</th>
+                <td><textarea id="ApprovalRemark" runat="server" maxlength="500" rows="10" class="auto-style1"></textarea></td>
+            </tr>
         </table>
     </div>
     <div class="frmbottom">

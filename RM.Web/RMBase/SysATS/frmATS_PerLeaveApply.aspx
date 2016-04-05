@@ -123,6 +123,7 @@
             <asp:Button ID="btn_CreateLeave" Text="新建休假申请" runat="server"  OnClientClick="add()" />
             <asp:Button ID="btn_EditLeave" Text="修改休假申请" runat="server"  OnClientClick="edit()" />
             <asp:Button ID="btn_DelLeave" Text="取消休假申请" runat="server" />
+            <asp:Button ID="btn_MailTest" Text="邮箱测试" runat="server" OnClick="btn_MailTest_Click" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>

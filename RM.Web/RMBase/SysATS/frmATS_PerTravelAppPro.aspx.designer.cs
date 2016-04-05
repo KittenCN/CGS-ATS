@@ -157,6 +157,15 @@ namespace RM.Web.RMBase.SysATS {
         protected global::System.Web.UI.WebControls.Button btn_down;
         
         /// <summary>
+        /// ApprovalRemark 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea ApprovalRemark;
+        
+        /// <summary>
         /// Save 控件。
         /// </summary>
         /// <remarks>

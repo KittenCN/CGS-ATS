@@ -181,6 +181,12 @@ namespace RM.Web.RMBase.SysATS
                             int IsOk = DataFactory.SqlDataBase().InsertByHashtableReturnPkVal("Base_PerLeaveApply", ht);
                             if (IsOk > 0)
                             {
+                                //GenModel gm = new GenModel();
+                                //string strMailResult = gm.SendMail("hrtest@coopgs.com", "candy.lv@longint.net", "MailTest", "MailTest");
+                                //if (strMailResult != "发送成功！")
+                                //{
+                                //    ShowMsgHelper.AlertMsg(strMailResult);
+                                //}
                                 ShowMsgHelper.AlertMsg("操作成功！");
                             }
                             else

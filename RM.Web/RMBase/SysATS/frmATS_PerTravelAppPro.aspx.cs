@@ -168,6 +168,8 @@ namespace RM.Web.RMBase.SysATS
                 int_AppStatus = 1;
             }
 
+            txt_Remark = ApprovalRemark.InnerText;
+
             string sql1 = "update Base_PerTravelApply set ApprovalFlag=" + int_AppStatus + ",NextApprover='" + txt_NextApprover + "' where id='" + _key + "' ";
             StringBuilder sb_sql1 = new StringBuilder(sql1);
             int i1 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql1);

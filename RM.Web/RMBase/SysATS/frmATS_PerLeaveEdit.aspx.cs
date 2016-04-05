@@ -96,7 +96,7 @@ namespace RM.Web.RMBase.SysATS
             Hashtable ht = DataFactory.SqlDataBase().GetHashtableById("Base_PerLeaveApply", "id", _key);
             if (ht.Count > 0 && ht != null)
             {
-                if(ht["LeaveID"].ToString()=="3")
+                if(ht["LEAVEID"].ToString()=="3")
                 {
                     CJform.Visible = true;
                 }
@@ -120,7 +120,7 @@ namespace RM.Web.RMBase.SysATS
                 if(ht["DBT"].ToString()=="1")
                 {
                     cbDBT.Checked = true;
-                    DBT.Text = ht["DBTnum"].ToString();
+                    DBT.Text = ht["DBTNUM"].ToString();
                 }
                 else
                 {
