@@ -122,14 +122,14 @@
         <div style="text-align: left;">
             <asp:Button ID="btn_CreateTravel" Text="新建公出申请" runat="server"  OnClientClick="add()" />
             <asp:Button ID="btn_EditTravel" Text="修改公出申请" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_DelTravel" Text="取消公出申请" runat="server" />
+            <asp:Button ID="btn_DelTravel" Text="取消公出申请" runat="server" OnClick="btn_DelTravel_Click" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
         </div>
     </div>
     <div>
-        <table id="table1" class="grid" singleselect="true" >
+        <table id="table1" class="grid">
             <thead>
                 <tr>
                     <td style="width: 20px; text-align: left;">
@@ -176,7 +176,7 @@
                     <ItemTemplate>
                         <tr id="tbtr">
                             <td id="tbtrtd" style="width: 20px; text-align: left;">
-                                <input id="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" name="checkbox" />
+                                <input id="tbtrtdin" name="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" />
                             </td>
                             <td style="width: 100px; text-align: center;">
                                  <asp:Label ID="EmpID" runat="server" Text='<%#Eval("EmpID")%>'></asp:Label>

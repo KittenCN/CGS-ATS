@@ -2999,6 +2999,7 @@
     <Compile Include="Ajax\Verify_code.ashx.cs">
       <DependentUpon>Verify_code.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ConHelper.cs" />
     <Compile Include="Error\ErrorPage.aspx.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3666,6 +3667,7 @@
     <Content Include="RMBase\SysUser\UserInfo.ashx" />
     <Content Include="RMBase\SysMenu\Menu_List.ashx" />
     <None Include="bin\RM.Web.dll.config" />
+    <Content Include="MailSetting.config" />
     <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
     <Content Include="RMBase\SysATS\hanATS_WorkRecord.ashx" />
     <Content Include="Themes\fullcalendar\demos\json\events.json" />

@@ -122,7 +122,7 @@
         <div style="text-align: left;">
             <asp:Button ID="btn_CreateLeave" Text="新建休假申请" runat="server"  OnClientClick="add()" />
             <asp:Button ID="btn_EditLeave" Text="修改休假申请" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_DelLeave" Text="取消休假申请" runat="server" />
+            <asp:Button ID="btn_DelLeave" Text="取消休假申请" runat="server" OnClick="btn_DelLeave_Click" />
             <asp:Button ID="btn_MailTest" Text="邮箱测试" runat="server" OnClick="btn_MailTest_Click" />
         </div>
          <div style="text-align: right">
@@ -130,7 +130,7 @@
         </div>
     </div>
     <div>
-        <table id="table1" class="grid" singleselect="true" >
+        <table id="table1" class="grid" >
             <thead>
                 <tr>
                     <td style="width: 20px; text-align: left;">
@@ -174,7 +174,7 @@
                     <ItemTemplate>
                         <tr id="tbtr">
                             <td id="tbtrtd" style="width: 20px; text-align: left;">
-                                <input id="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" name="checkbox" />
+                                <input id="tbtrtdin" name="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" name="checkbox"/>
                             </td>
                             <td style="width: 100px; text-align: center;">
                                  <asp:Label ID="EmpID" runat="server" Text='<%#Eval("EmpID")%>'></asp:Label>

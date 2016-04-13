@@ -81,6 +81,7 @@ namespace RM.Web.RMBase.SysATS
                     text = text.Replace("1", "审批中");
                     text = text.Replace("2", "审批通过");
                     text = text.Replace("3", "审批不通过");
+                    text = text.Replace("4", "取消");
                     lab_ApprovalFlag.Text = text;
                 }
                 if(lab_LeaveID!=null)
@@ -126,6 +127,11 @@ namespace RM.Web.RMBase.SysATS
             GenModel gm = new GenModel();
             string strMailResult = gm.SendMail2("hrtest@coopgs.com", "test", "test");
 
+        }
+
+        protected void btn_DelLeave_Click(object sender, EventArgs e)
+        {
+            string strSelect = Page.Request.Form["tbtrtdin"];
         }
     }
 }

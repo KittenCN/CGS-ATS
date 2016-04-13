@@ -18,10 +18,13 @@ namespace RM.Web
         //SendMail(发件者, 收件者, 主旨, 内容, 主机,发件者昵称, 密码 ,附件) 
         public string SendMail(string send, string recieve, string subject, string mailbody)
         {
-            string host = "mail.intercoop.com";
-            string uname = "hrtest";
-            string pwd = "qq@1234";
+            ConHelper ch =new ConHelper();
+            ch.GetMailSetting();
+            string host = ch.strHost;
+            string uname = ch.strUname;
+            string pwd = ch.strPWD;
             string strFileName = "";
+
             //生成一个   使用SMTP发送邮件的客户端对象  
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
             //生成一个主机IP  
@@ -75,16 +78,23 @@ namespace RM.Web
 
         public string SendMail2(string Recieve, string MailSubject, string MailBody)
         {
+            ConHelper ch = new ConHelper();
+            ch.GetMailSetting();
+            string host = ch.strHost;
+            string uname = ch.strUname;
+            string pwd = ch.strPWD;
+            string sender = ch.strSender;
+
             try
             {
                 System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
-                client.Host = "mail.intercoop.com";//使用163的SMTP服务器发送邮件
+                client.Host = host;//使用163的SMTP服务器发送邮件
                 client.UseDefaultCredentials = true;
                 client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
-                client.Credentials = new System.Net.NetworkCredential("hrtest", "qq@1234");//163的SMTP服务器需要用163邮箱的用户名和密码作认证，如果没有需要去163申请个,
+                client.Credentials = new System.Net.NetworkCredential(uname, pwd);//163的SMTP服务器需要用163邮箱的用户名和密码作认证，如果没有需要去163申请个,
                                                                                            //这里假定你已经拥有了一个163邮箱的账户，用户名为abc，密码为*******
                 System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
-                Message.From = new System.Net.Mail.MailAddress("hrtest@coopgs.com");//这里需要注意，163似乎有规定发信人的邮箱地址必须是163的，而且发信人的邮箱用户名必须和上面SMTP服务器认证时的用户名相同
+                Message.From = new System.Net.Mail.MailAddress(sender);//这里需要注意，163似乎有规定发信人的邮箱地址必须是163的，而且发信人的邮箱用户名必须和上面SMTP服务器认证时的用户名相同
                                                                                     //因为上面用的用户名abc作SMTP服务器认证，所以这里发信人的邮箱地址也应该写为abc@163.com
                 Message.To.Add(Recieve);//将邮件发送给Gmail
                 Message.Subject = MailSubject;

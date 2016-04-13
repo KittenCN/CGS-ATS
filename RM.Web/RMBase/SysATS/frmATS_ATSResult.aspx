@@ -106,13 +106,14 @@
             <asp:Button ID="btn_ATSCheck" Text="考勤审查" runat="server"  OnClick="btn_ATSCheck_Click"/>
             <asp:Button ID="btn_Search" Text="查询" runat="server" OnClick="btn_Search_Click" />
             <asp:Button ID="btn_EditTravel" Text="修改考勤结果" runat="server"  OnClientClick="edit()" />
+            <asp:Button ID="btn_SetNor" Text="批量设置正常" runat="server" OnClick="btn_SetNor_Click" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
         </div>
     </div>
     <div class="div-body" >
-        <table id="table1" class="grid" singleselect="true">
+        <table id="table1" class="grid">
             <thead>
                 <tr>
                     <td style="text-align: left;" class="auto-style1">
@@ -162,7 +163,7 @@
                     <ItemTemplate>
                         <tr id="tbtr">
                             <td id="tbtrtd" style=" text-align: left;" class="auto-style1">
-                                <input id="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" name="checkbox" class="auto-style1" />
+                                <input id="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" name="tbtrtdin" class="auto-style1" />
                             </td>
                             <td style=" text-align: center;">
                                  <asp:Label ID="EmpID" runat="server" Text='<%#Eval("EmpID")%>'></asp:Label>

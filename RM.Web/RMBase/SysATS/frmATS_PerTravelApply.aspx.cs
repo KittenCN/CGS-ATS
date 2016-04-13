@@ -79,6 +79,7 @@ namespace RM.Web.RMBase.SysATS
                     text = text.Replace("1", "审批中");
                     text = text.Replace("2", "审批通过");
                     text = text.Replace("3", "审批不通过");
+                    text = text.Replace("4", "取消");
                     lab_ApprovalFlag.Text = text;
                 }
                 if (lab_EmpID != null)
@@ -106,6 +107,11 @@ namespace RM.Web.RMBase.SysATS
             }
 
             return txt_Result;
+        }
+
+        protected void btn_DelTravel_Click(object sender, EventArgs e)
+        {
+            string strSelect = Page.Request.Form["tbtrtdin"];
         }
     }
 }

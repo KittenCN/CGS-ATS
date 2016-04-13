@@ -1035,5 +1035,10 @@ namespace RM.Web.RMBase.SysATS
             }
             return dateDiff;
         }
+
+        protected void btn_SetNor_Click(object sender, EventArgs e)
+        {
+            string strSelect = Page.Request.Form["tbtrtdin"];
+        }
     }
 }
