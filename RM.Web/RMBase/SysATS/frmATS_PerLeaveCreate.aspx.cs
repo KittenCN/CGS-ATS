@@ -187,11 +187,21 @@ namespace RM.Web.RMBase.SysATS
                                 //{
                                 //    ShowMsgHelper.AlertMsg(strMailResult);
                                 //}
-                                ShowMsgHelper.AlertMsg("操作成功！");
+                                GenModel gm = new GenModel();                               
+                                if (txt_NextApprover!=null && txt_NextApprover!="" && gm.GetEMailFromID(txt_NextApprover)!="" && gm.GetEMailFromID(txt_NextApprover)!=null)
+                                {                                  
+                                    gm.SendMail2(gm.GetEMailFromID(txt_NextApprover), "You have a new Task!", "You have a new Task!");
+                                }
+                                if (gm.GetEMailFromID(txt_EmpID) != null)
+                                {
+                                    gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your LeaveList has been updated!", "Your LeaveList has been updated!");
+                                }
+
+                                ShowMsgHelper.AlertMsg("Success!");
                             }
                             else
                             {
-                                ShowMsgHelper.Alert_Error("操作失败！");
+                                ShowMsgHelper.Alert_Error("Error!");
                             }
                         }
                     }                   

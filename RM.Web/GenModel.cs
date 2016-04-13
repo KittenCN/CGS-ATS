@@ -10,6 +10,8 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
+using RM.Busines;
 
 namespace RM.Web
 {
@@ -110,6 +112,21 @@ namespace RM.Web
             {
                 return "发送失败：" + ex.Message;
             }
+        }
+
+        public string GetEMailFromID(string EmpID)
+        {
+            string txt_Result = "";
+
+            string sql = "select EMail from Base_UserInfo where User_ID='" + EmpID + "' ";
+            StringBuilder sb_sql = new StringBuilder(sql);
+            DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+            if (dt.Rows.Count != 0 && dt.Rows[0].ItemArray[0].ToString() != "")
+            {
+                txt_Result = dt.Rows[0].ItemArray[0].ToString();
+            }
+
+            return txt_Result;
         }
     }
 }

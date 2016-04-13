@@ -71,6 +71,15 @@ namespace RM.Web.RMBase.SysATS
                 int IsOk = DataFactory.SqlDataBase().InsertByHashtableReturnPkVal("Base_PerTravelApply", ht);
                 if (IsOk > 0)
                 {
+                    GenModel gm = new GenModel();
+                    if (txt_NextApprover != null && txt_NextApprover != "" && gm.GetEMailFromID(txt_NextApprover) != "" && gm.GetEMailFromID(txt_NextApprover) != null)
+                    {
+                        gm.SendMail2(gm.GetEMailFromID(txt_NextApprover), "You have a new Task!", "You have a new Task!");
+                    }
+                    if (gm.GetEMailFromID(txt_EmpID) != null)
+                    {
+                        gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your TraveList has been updated!", "Your TraveList has been updated!");
+                    }
                     ShowMsgHelper.AlertMsg("操作成功！");
                 }
                 else

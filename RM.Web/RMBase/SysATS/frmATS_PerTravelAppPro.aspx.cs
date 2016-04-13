@@ -25,6 +25,7 @@ namespace RM.Web.RMBase.SysATS
         public static string txt_downFilesAdd;
         public static string txt_NextApprover;
         public static int inttxDays;
+        public static string strUserID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -83,6 +84,7 @@ namespace RM.Web.RMBase.SysATS
             if (ht.Count > 0 && ht != null)
             {
                 ControlBindHelper.SetWebControls(this.Page, ht);
+                strUserID = EmpID.Text;
                 EmpID.Text = GetNameFromID(EmpID.Text);
                 //lab_CreateDate.Text = "";
                 BeginDate.Text = Convert.ToDateTime(BeginDate.Text).ToString("yyyy-MM-dd");
@@ -182,6 +184,11 @@ namespace RM.Web.RMBase.SysATS
                 int i2 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql2);
                 if (i2 > 0)
                 {
+                    GenModel gm = new GenModel();
+                    if (gm.GetEMailFromID(strUserID) != null)
+                    {
+                        gm.SendMail2(gm.GetEMailFromID(strUserID), "Your TraveList has been updated!", "Your TraveList has been updated!");
+                    }
                     ShowMsgHelper.AlertMsg("审批成功");
                     string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + inttxDays + " where EmpID='" + txt_EmpID + "' ";
                     StringBuilder sb_sql3 = new StringBuilder(sql3);
