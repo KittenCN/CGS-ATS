@@ -174,7 +174,7 @@
                     <ItemTemplate>
                         <tr id="tbtr">
                             <td id="tbtrtd" style="width: 20px; text-align: left;">
-                                <input id="tbtrtdin" name="tbtrtdin" type="checkbox" value="<%#Eval("id")%>" name="checkbox"/>
+                                <input id="tbtrtdin" name="tbtrtdin" type="checkbox" value="<%#Eval("id")%>"/>
                             </td>
                             <td style="width: 100px; text-align: center;">
                                  <asp:Label ID="EmpID" runat="server" Text='<%#Eval("EmpID")%>'></asp:Label>

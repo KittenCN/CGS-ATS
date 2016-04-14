@@ -1039,6 +1039,10 @@ namespace RM.Web.RMBase.SysATS
         protected void btn_SetNor_Click(object sender, EventArgs e)
         {
             string strSelect = Page.Request.Form["tbtrtdin"];
+            string strSQL = "update Base_ATSResult set ATS_Result=1,Flag=2 where id in (" + strSelect + ") ";
+            StringBuilder sbSQL = new StringBuilder(strSQL);
+            int intResult = DataFactory.SqlDataBase().ExecuteBySql(sbSQL);
+            DataBindGrid();
         }
     }
 }

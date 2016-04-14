@@ -132,6 +132,10 @@ namespace RM.Web.RMBase.SysATS
         protected void btn_DelLeave_Click(object sender, EventArgs e)
         {
             string strSelect = Page.Request.Form["tbtrtdin"];
+            string strSQL = "update Base_PerLeaveApply set ApprovalFlag=4 where id in (" + strSelect + ") ";
+            StringBuilder sbSQL = new StringBuilder(strSQL);
+            int intResult = DataFactory.SqlDataBase().ExecuteBySql(sbSQL);
+            DataBindGrid();
         }
     }
 }
