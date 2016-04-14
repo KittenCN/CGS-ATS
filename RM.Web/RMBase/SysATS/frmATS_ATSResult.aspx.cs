@@ -39,11 +39,30 @@ namespace RM.Web.RMBase.SysATS
             int count = 0;
             string txtBeginDate = tb_BeginDate.Text;
             string txtEndDate = tb_EndDate.Text;
+            string strEXSQL = " 1=1 ";
+
+            //初始化下拉框
+            string dlsql = "select user_name from Base_UserInfo";
+            StringBuilder sb_dlsql = new StringBuilder(dlsql);
+            DataTable dldt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_dlsql);
+            var builder = new System.Text.StringBuilder();
+            for (int i = 0; i < dldt.Rows.Count; i++)
+                builder.Append(String.Format("<option value='{0}'>", dldt.Rows[i][0]));
+            Emplist.InnerHtml = builder.ToString();
+
+            if(EmpID.Value!=null && EmpID.Value!="")
+            {
+                strEXSQL = " and  EmpID='" + GetIDFromName(EmpID.Value) + "' ";
+            }
+            else
+            {
+                strEXSQL = " and 1=1 ";
+            }
 
             StringBuilder SqlWhere = new StringBuilder();
             IList<SqlParam> IList_param = new List<SqlParam>();
             //DataTable dt = DataFactory.SqlDataBase().GetDataTable("Base_ATS_OriDataIn");
-            string sql = "select * from Base_ATSResult where ATS_Date>='" + txtBeginDate + "' and ATS_Date<='" + txtEndDate + "' ";
+            string sql = "select * from Base_ATSResult where ATS_Date>='" + txtBeginDate + "' and ATS_Date<='" + txtEndDate + "' " + strEXSQL;
             StringBuilder sb_sql = new StringBuilder(sql);
             // DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
             DataTable dt = DataFactory.SqlDataBase().GetPageList(sql, null, "ATS_Date", "asc", PageControl1.PageIndex, PageControl1.PageSize, ref count);
@@ -51,6 +70,21 @@ namespace RM.Web.RMBase.SysATS
             this.PageControl1.RecordCount = Convert.ToInt32(count);
 
 
+        }
+
+        private string GetIDFromName(string EmpName)
+        {
+            string txt_Result = "";
+
+            string sql = "select User_ID from Base_UserInfo where User_name='" + EmpName + "' ";
+            StringBuilder sb_sql = new StringBuilder(sql);
+            DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+            if (dt.Rows.Count != 0 && dt.Rows[0].ItemArray[0].ToString() != "")
+            {
+                txt_Result = dt.Rows[0].ItemArray[0].ToString();
+            }
+
+            return txt_Result;
         }
 
         protected void pager_PageChanged(object sender, EventArgs e)

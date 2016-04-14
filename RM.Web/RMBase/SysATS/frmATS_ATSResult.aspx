@@ -99,6 +99,8 @@
 <%--            <asp:Button ID="btn_CreateTravel" Text="新建公出申请" runat="server"  OnClientClick="add()" />
             <asp:Button ID="btn_EditTravel" Text="修改公出申请" runat="server"  OnClientClick="edit()" />
             <asp:Button ID="btn_DelTravel" Text="取消公出申请" runat="server" />--%>
+            <input id="EmpID" name="EmpID" runat="server"  type="text" list="Emplist" style="width: 200px"/>
+            <datalist id="Emplist" runat="server"></datalist>
             <asp:label Text="审查开始日期:" runat="server" ></asp:label>
             <asp:TextBox id="tb_BeginDate" type="date" runat="server" />
             <asp:label Text="审查结束日期:" runat="server" ></asp:label>            
