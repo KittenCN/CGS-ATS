@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>用户信息表单</title>
+    <title>User Info Form</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/Validator/JValidator.js" type="text/javascript"></script>
@@ -105,7 +105,7 @@
                 return false;
             }
             if (!IsNullOrEmpty(ChekOrgVale)) {
-                showWarningMsg("点击面板所属部门，选择部门！");
+                showWarningMsg("Select The Dept.！");
                 return false;
             }
             var item_value = '';
@@ -120,7 +120,7 @@
             });
             $("#AppendProperty_value").val(item_value);
             $("#checkbox_value").val(CheckboxValue())
-            if (!confirm('您确认要保存此操作吗？')) {
+            if (!confirm('Save？')) {
                 return false;
             }
         }
@@ -153,17 +153,17 @@
             <tr>
                 <td id="menutab" style="vertical-align: bottom;">
                     <div id="tab0" class="Tabsel" onclick="GetTabClick(this);panel(1)">
-                        基本信息</div>
+                        Base Info</div>
                     <div id="tab1" class="Tabremovesel" onclick="GetTabClick(this);panel(2);">
-                        附加信息</div>
+                        Other Info</div>
                     <div id="tab2" class="Tabremovesel" onclick="GetTabClick(this);panel(3);">
-                        所属部门</div>
+                        Dept.</div>
 <%--                    <div id="tab3" class="Tabremovesel" onclick="GetTabClick(this);panel(4);">
                         所属角色</div>
                     <div id="tab4" class="Tabremovesel" onclick="GetTabClick(this);panel(5);">
                         所属工作组</div>--%>
                     <div id="tab5" class="Tabremovesel" onclick="GetTabClick(this);panel(6);">
-                        用户权限</div>
+                        Permissions</div>
                 </td>
             </tr>
         </table>
@@ -173,14 +173,14 @@
         <table id="table1" border="0" cellpadding="0" cellspacing="0" class="frm">
             <tr>
                 <th>
-                    职工工号:
+                    User Code:
                 </th>
                 <td>
                     <input id="User_Code" runat="server" type="text" class="txt" datacol="yes" err="职工工号"
                         checkexpession="NotNull" style="width: 200px" />
                 </td>
                 <th>
-                    职工姓名:
+                    User Name:
                 </th>
                 <td>
                     <input id="User_Name" runat="server" type="text" class="txt" datacol="yes" err="职工姓名"
@@ -189,7 +189,7 @@
             </tr>
             <tr>
                 <th>
-                    员工生日:
+                    Birthday:
                 </th>
                 <td>
                     <asp:TextBox id="birthday" runat="server" type="date" err="员工生日" checkexpession="NotNull" style="width: 200px" />
@@ -204,13 +204,13 @@
             </tr>
             <tr>
                 <th>
-                    入职日期:
+                    Join Date:
                 </th>
                 <td>
                     <asp:TextBox id="join_date" runat="server" type="date" err="入职日期" checkexpession="NotNull" style="width: 200px" />
                 </td>
                 <th>
-                    离职日期:
+                    Dimission Date:
                 </th>
                 <td>
                     <asp:TextBox id="out_date" runat="server" type="date" err="入职日期" checkexpession="NotNull" style="width: 200px"  OnTextChanged="out_date_TextChanged" AutoPostBack="true"/>
@@ -218,16 +218,16 @@
             </tr>
           <tr>
             <th>
-                工作状态:
+                Status:
             </th>
             <td>
                 <select id="work_flag" name="work_flag" runat="server" style="width:200px">
-                  <option value ="0">离职</option>
-                  <option value ="1" selected="selected">在职</option>
+                  <option value ="0">Dimission</option>
+                  <option value ="1" selected="selected">In Service</option>
                </select>
             </td>
             <th>
-                直属上级:
+                Boss ID:
             </th>
             <td>
                 <input id="Boss_id" name="country_name" runat="server"  type="text" list="Boss_list" style="width: 200px"/>
@@ -237,14 +237,14 @@
         </tr>
             <tr>
                 <th>
-                    登录账户:
+                    Login Account:
                 </th>
                 <td>
                     <input id="User_Account" runat="server" type="text" class="txt" datacol="yes" err="登录账户"
                         checkexpession="NotNull" style="width: 200px" />
                 </td>
                 <th>
-                    登录密码:
+                    Login Password:
                 </th>
                 <td>
                     <input id="User_Pwd" runat="server" type="text" class="txt" datacol="yes" err="登录密码"
@@ -253,16 +253,16 @@
             </tr>
             <tr>
                 <th>
-                    职工性别:
+                    Gender:
                 </th>
                 <td>
                     <select id="User_Sex" class="select" runat="server" style="width: 206px">
-                        <option value="1">1 - 男</option>
-                        <option value="0">0 - 女</option>
+                        <option value="1">1 - Male</option>
+                        <option value="0">0 - Female</option>
                     </select>
                 </td>
                 <th>
-                    电子邮件:
+                    EMail:
                 </th>
                 <td>
                     <input id="Email" runat="server" type="text" class="txt" datacol="yes" err="电子邮箱"
@@ -271,13 +271,13 @@
             </tr>
             <tr>
                 <th>
-                    创建用户:
+                    Create User:
                 </th>
                 <td>
                     <input id="CreateUserName" disabled runat="server" type="text" class="txt" style="width: 200px" />
                 </td>
                 <th>
-                    创建时间:
+                    Create Date:
                 </th>
                 <td>
                     <input id="CreateDate" disabled runat="server" type="text" class="txt" style="width: 200px" />
@@ -285,13 +285,13 @@
             </tr>
             <tr>
                 <th>
-                    修改用户:
+                    Edit User:
                 </th>
                 <td>
                     <input id="ModifyUserName" disabled runat="server" type="text" class="txt" style="width: 200px" />
                 </td>
                 <th>
-                    修改时间:
+                    Edit Date:
                 </th>
                 <td>
                     <input id="ModifyDate" disabled runat="server" type="text" class="txt" style="width: 200px" />
@@ -299,18 +299,24 @@
             </tr>
             <tr>
             <th>
-                员工等级
+                User Level:
             </th>
              <td>
                  <select id="Boss_Flag" runat="server">
-                     <option value="0" selected="selected">普通员工</option>
-                     <option value="1">经理及以上</option>
+                     <option value="0" selected="selected">Ordinary Employee</option>
+                     <option value="1">Manager and Above</option>
                  </select>
+             </td>
+             <th>
+                 ATS_Code:
+             </th>
+             <td>
+                 <input id="ATS_Code" disabled runat="server" type="text" class="txt" style="width: 200px" />
              </td>
             </tr>
             <tr>
                 <th>
-                    备注描述:
+                    Remark:
                 </th>
                 <td colspan="3">
                     <textarea id="User_Remark" class="txtRemark" runat="server" style="width: 552px;
@@ -326,7 +332,7 @@
         <div id="table3">
             <div class="btnbartitle">
                 <div>
-                    组织机构
+                    Dept.
                 </div>
             </div>
             <div class="div-body" style="height: 245px;">
@@ -339,7 +345,7 @@
         <div id="table4">
             <div class="btnbartitle">
                 <div>
-                    所属角色
+                    Role
                 </div>
             </div>
             <div class="div-body" style="height: 245px;">
@@ -352,7 +358,7 @@
         <div id="table5">
             <div class="btnbartitle">
                 <div>
-                    用户工作组
+                    Work Group
                 </div>
             </div>
             <div class="div-body" style="height: 245px;">
@@ -368,17 +374,17 @@
                     <thead>
                         <tr>
                             <td style="width: 200px; padding-left: 20px;">
-                                URL权限
+                                URL Right
                             </td>
                             <td style="width: 30px; text-align: center;">
-                                图标
+                                Icon
                             </td>
                             <td style="width: 20px; text-align: center;">
                                 <label id="checkAllOff" onclick="CheckAllLine()" title="全选">
                                     &nbsp;</label>
                             </td>
                             <td>
-                                操作按钮权限
+                                Button Rights
                             </td>
                         </tr>
                     </thead>
@@ -392,9 +398,9 @@
     <div class="frmbottom">
         <asp:LinkButton ID="Save" runat="server" class="l-btn" OnClientClick="return CheckValid();"
             OnClick="Save_Click"><span class="l-btn-left">
-            <img src="/Themes/Images/disk.png" alt="" />保 存</span></asp:LinkButton>
+            <img src="/Themes/Images/disk.png" alt="" />Save</span></asp:LinkButton>
         <a class="l-btn" href="javascript:void(0)" onclick="OpenClose();"><span class="l-btn-left">
-            <img src="/Themes/Images/cancel.png" alt="" />关 闭</span></a>
+            <img src="/Themes/Images/cancel.png" alt="" />Close</span></a>
     </div>
     </form>
 </body>

@@ -292,7 +292,7 @@ namespace RM.Web.RMBase.SysATS
                             }
                         }
 
-                        //更新节日,休假,公出记录及三组打卡记录
+                        //更新节日,休假,公出记录
                         string insqlii = "update Base_ATSResult ";
                         //insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
                         insqlii = insqlii + "set ATS_Leave='" + int_ATS_Leave + "',ATS_LeaveID='" + int_ATS_LeaveID + "',ATS_LeaveStatus='" + int_ATS_LeaveStatus + "' ";
@@ -304,7 +304,7 @@ namespace RM.Web.RMBase.SysATS
                         int int_sqlresultii = DataFactory.SqlDataBase().ExecuteBySql(insb_sqlii);
                         if (int_sqlresultii <= 0)
                         {
-                            ShowMsgHelper.Alert_Wern("审查失败");
+                            ShowMsgHelper.Alert_Wern("Exam Error!");
                         }
                     }
                 }
@@ -313,7 +313,7 @@ namespace RM.Web.RMBase.SysATS
                 int intsql = DataFactory.SqlDataBase().ExecuteBySql(sb_sql);
                 if (intsql <= 0)
                 {
-                    ShowMsgHelper.Alert_Wern("审查失败");
+                    ShowMsgHelper.Alert_Wern("Exam Error!");
                 }
             }
 
@@ -332,8 +332,9 @@ namespace RM.Web.RMBase.SysATS
                     string txt_ATS_Date = dt.Rows[i].ItemArray[7].ToString();
                     txt_ATS_Date = txt_ATS_Date.Substring(0, txt_ATS_Date.IndexOf(' '));
                     int int_ATS_DateStatus = (int)DateTime.Parse(txt_ATS_Date).DayOfWeek;
-                    string txt_EmpCode = dt.Rows[i].ItemArray[2].ToString();
-                    string txt_EmpID = GetIDfromCode(txt_EmpCode);
+                    string txt_EmpCode = dt.Rows[i].ItemArray[2].ToString();   //修改为base_userinfo的ats_code
+                    //string txt_EmpID = GetIDfromCode(txt_EmpCode);
+                    string txt_EmpID = GetIDfromATSCode(txt_EmpCode);
                     DateTime dt_ATS_Date = DateTime.Parse(txt_ATS_Date);
 
                     string strLunchBeginTime = "00:00:00";
@@ -381,7 +382,7 @@ namespace RM.Web.RMBase.SysATS
                     }
                     else
                     {
-                        ShowMsgHelper.Alert_Error("参数设置错误");
+                        ShowMsgHelper.Alert_Error("Parameter Error!");
                         break;
                     }
 
@@ -587,7 +588,7 @@ namespace RM.Web.RMBase.SysATS
                         int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
                         if (int_sqlresult <= 0)
                         {
-                            ShowMsgHelper.Alert_Wern("审查失败");
+                            ShowMsgHelper.Alert_Wern("Exam Error!");
                         }
                     }
                     else
@@ -600,7 +601,7 @@ namespace RM.Web.RMBase.SysATS
                         int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
                         if (int_sqlresult <= 0)
                         {
-                            ShowMsgHelper.Alert_Wern("审查失败");
+                            ShowMsgHelper.Alert_Wern("Exam Error!");
                         }
                     }
 
@@ -862,12 +863,12 @@ namespace RM.Web.RMBase.SysATS
                     int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
                     if (int_sqlresult <= 0)
                     {
-                        ShowMsgHelper.Alert_Wern("审查失败");
+                        ShowMsgHelper.Alert_Wern("Exam Error!");
                     }
                     //}
                     //else
                     //{
-                    //    ShowMsgHelper.Alert_Wern("审查失败");
+                    //    ShowMsgHelper.Alert_Wern("Exam Error!");
                     //}
                     //    }
                     //    else
@@ -876,11 +877,11 @@ namespace RM.Web.RMBase.SysATS
                     //    }
                     //}
                 }
-                ShowMsgHelper.AlertMsg("审查成功");
+                ShowMsgHelper.AlertMsg("Succecc!");
             }
             else
             {
-                ShowMsgHelper.Alert_Wern("审查失败");
+                ShowMsgHelper.Alert_Wern("Exam Error!");
             }
         }
 
@@ -900,10 +901,10 @@ namespace RM.Web.RMBase.SysATS
                 if (lab_ATS_Result != null)
                 {
                     string text = lab_ATS_Result.Text;
-                    text = text.Replace("0", "打卡异常");
-                    text = text.Replace("1", "考勤正常");
-                    text = text.Replace("2", "小迟到/早退");
-                    text = text.Replace("3", "大迟到/早退");
+                    text = text.Replace("0", "ATS Error");
+                    text = text.Replace("1", "Normal");
+                    text = text.Replace("2", "Late/Leave early(Short)");
+                    text = text.Replace("3", "Late/Leave early(Long)");
                     lab_ATS_Result.Text = text;
                 }
 
@@ -915,9 +916,9 @@ namespace RM.Web.RMBase.SysATS
                 if (lab_Flag != null)
                 {
                     string text = lab_Flag.Text;
-                    text = text.Replace("0", "未审查");
-                    text = text.Replace("1", "已审查");
-                    text = text.Replace("2", "已修改");
+                    text = text.Replace("0", "Waitting");
+                    text = text.Replace("1", "Be Examined");
+                    text = text.Replace("2", "Be Edited");
                     lab_Flag.Text = text;
                 }
 
@@ -940,9 +941,9 @@ namespace RM.Web.RMBase.SysATS
                     if (lab_ATS_HolidayStatus != null)
                     {
                         string text = lab_ATS_HolidayStatus.Text;
-                        text = text.Replace("0", "全天");
-                        text = text.Replace("1", "上半天");
-                        text = text.Replace("2", "下半天");
+                        text = text.Replace("0", "All Day");
+                        text = text.Replace("1", "Morning");
+                        text = text.Replace("2", "Afternoon");
                         lab_ATS_HolidayStatus.Text = text;
                     }
                     else
@@ -963,7 +964,7 @@ namespace RM.Web.RMBase.SysATS
 
                 if (lab_ATS_Travel != null && int.Parse(lab_ATS_Travel.Text) > 0)
                 {
-                    lab_ATS_Travel.Text = "公出";
+                    lab_ATS_Travel.Text = "Biz Travel";
                 }
                 else
                 {
@@ -1024,6 +1025,21 @@ namespace RM.Web.RMBase.SysATS
             string txt_Result = "";
 
             string sql = "select User_ID from Base_UserInfo where User_Code='" + EmpCode + "' ";
+            StringBuilder sb_sql = new StringBuilder(sql);
+            DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+            if (dt.Rows.Count != 0 && dt.Rows[0].ItemArray[0].ToString() != "")
+            {
+                txt_Result = dt.Rows[0].ItemArray[0].ToString();
+            }
+
+            return txt_Result;
+        }
+
+        private string GetIDfromATSCode(string ATSCode)
+        {
+            string txt_Result = "";
+
+            string sql = "select User_ID from Base_UserInfo where ATS_Code='" + ATSCode + "' ";
             StringBuilder sb_sql = new StringBuilder(sql);
             DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
             if (dt.Rows.Count != 0 && dt.Rows[0].ItemArray[0].ToString() != "")

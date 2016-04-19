@@ -420,6 +420,7 @@ namespace RM.Web.RMBase.SysUser
             ht["work_flag"] = work_flag.Value;
             ht["Boss_id"] = GetIDFromName(Boss_id.Value);
             ht["Boss_Flag"] = Boss_Flag.Value;
+            ht["ATS_Code"] = ATS_Code.Value;
             if (work_flag.Value == "0")
             {
                 ht["DeleteMark"] = 2;

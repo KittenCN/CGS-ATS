@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>考勤原始数据导入</title>
+    <title>Inupt Ori ATS Data</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
@@ -36,34 +36,34 @@
                             &nbsp;</label>
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        部门
+                        Dept.
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        编号
+                        Code
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        姓名
+                        Name
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        登记号码
+                        Num.
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        设备号
+                        Device ID
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        位置
+                        Position
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        日期
+                        Date
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        时间
+                        Time
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        考勤类型
+                        ATS Type
                     </td>
                     <td style="width: auto!important; text-align: center;">
-                        备注
+                        Remark
                     </td>
                 </tr>
             </thead>
@@ -111,7 +111,7 @@
                            {
                                if (rp_Item.Items.Count == 0)
                                {
-                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>没有数据！</td></tr>");
+                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>None Data！</td></tr>");
                                }
                            } %>
                     </FooterTemplate>

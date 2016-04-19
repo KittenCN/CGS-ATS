@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>考勤审查</title>
+    <title>ATS Check</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
@@ -19,14 +19,14 @@
         //添加
         function add() {
             var url = "/RMBase/SysATS/frmATS_PerLeaveCreate.aspx";
-            top.openDialog(url, 'PerLeaveCreate', '新建休假申请', 700, 350, 50, 50);
+            top.openDialog(url, 'PerLeaveCreate', 'New Leave', 700, 350, 50, 50);
         }
         //修改
         function edit() {
             var key = CheckboxValue();
             if (IsEditdata(key)) {
                 var url = "/RMBase/SysATS/frmATS_ATSResultEdit.aspx?key=" + key;
-                top.openDialog(url, 'ATSResultEdit', '修改考勤结果', 700, 400, 50, 50);
+                top.openDialog(url, 'ATSResultEdit', 'Edit Leave Result', 700, 400, 50, 50);
             }
         }
         //删除
@@ -42,7 +42,7 @@
             var key = CheckboxValue();
             if (IsDelData(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerTravelAppPro.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveAppPro', '审批休假申请', 700, 500, 50, 50);
+                top.openDialog(url, 'PerLeaveAppPro', 'Examine Leave', 700, 500, 50, 50);
             }
         }
         //授 权
@@ -101,14 +101,14 @@
             <asp:Button ID="btn_DelTravel" Text="取消公出申请" runat="server" />--%>
             <input id="EmpID" name="EmpID" runat="server"  type="text" list="Emplist" style="width: 200px"/>
             <datalist id="Emplist" runat="server"></datalist>
-            <asp:label Text="审查开始日期:" runat="server" ></asp:label>
+            <asp:label Text="Begin Date:" runat="server" ></asp:label>
             <asp:TextBox id="tb_BeginDate" type="date" runat="server" />
-            <asp:label Text="审查结束日期:" runat="server" ></asp:label>            
+            <asp:label Text="End Date:" runat="server" ></asp:label>            
             <asp:TextBox id="tb_EndDate" type="date" runat="server" />
-            <asp:Button ID="btn_ATSCheck" Text="考勤审查" runat="server"  OnClick="btn_ATSCheck_Click"/>
-            <asp:Button ID="btn_Search" Text="查询" runat="server" OnClick="btn_Search_Click" />
-            <asp:Button ID="btn_EditTravel" Text="修改考勤结果" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_SetNor" Text="批量设置正常" runat="server" OnClick="btn_SetNor_Click" />
+            <asp:Button ID="btn_ATSCheck" Text="Begin Exmaine" runat="server"  OnClick="btn_ATSCheck_Click"/>
+            <asp:Button ID="btn_Search" Text="Search" runat="server" OnClick="btn_Search_Click" />
+            <asp:Button ID="btn_EditTravel" Text="Edit ATS Result" runat="server"  OnClientClick="edit()" />
+            <asp:Button ID="btn_SetNor" Text="Set Normal Status" runat="server" OnClick="btn_SetNor_Click" Width="135px" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
@@ -123,40 +123,40 @@
                             &nbsp;</label>
                     </td>
                     <td style=" text-align: center;">
-                        员工姓名
+                        EmpName
                     </td>
                     <td style=" text-align: center;">
-                        审查状态
+                        ExamStatus
                     </td>
                     <td style=" text-align: center;">
-                        考勤日期
+                        ATS Date
                     </td>
                     <td style=" text-align: center;">
-                        日期状态
+                        ATS Status
                     </td>
                     <td style=" text-align: center;">
-                        节日名称
+                        Holiday
                     </td>
                     <td style=" text-align: center;">
-                        节日状态
+                        Hol Status
                     </td>
                     <td style=" text-align: center;">
-                        休    假
+                        Leave
                     </td>
                     <td style=" text-align: center;">
-                        公    出
+                        Biz Travel
                     </td>
                     <td style=" text-align: center;">
-                        上班打卡
+                        Work Time
                     </td>
                     <td style=" text-align: center;">
-                        午餐打卡
+                        Lunch Time
                     </td>
                     <td style=" text-align: center;">
-                        下班打卡
+                        Off Time
                     </td>
                     <td style=" text-align: center;">
-                        考勤结果
+                        ATS Result
                     </td>
                 </tr>
             </thead>
@@ -210,7 +210,7 @@
                            {
                                if (rp_Item.Items.Count == 0)
                                {
-                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>没有数据！</td></tr>");
+                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>None Data！</td></tr>");
                                }
                            } %>
                     </FooterTemplate>
