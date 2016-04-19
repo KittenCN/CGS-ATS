@@ -50,6 +50,10 @@ namespace RM.Web.RMBase.SysUser
                 SqlWhere.Append(" and U." + Searchwhere.Value + " like @obj ");
                 IList_param.Add(new SqlParam("@obj", '%' + txt_Search.Value.Trim() + '%'));
             }
+            if(_Organization_ID==null || _Organization_ID.Length>40)
+            {
+                _Organization_ID = null;
+            }
             if (!string.IsNullOrEmpty(_Organization_ID))
             {
                 SqlWhere.Append(" AND S.Organization_ID IN(" + _Organization_ID + ")");

@@ -311,7 +311,7 @@
                  ATS_Code:
              </th>
              <td>
-                 <input id="ATS_Code" disabled runat="server" type="text" class="txt" style="width: 200px" />
+                 <input id="ATS_Code" runat="server" type="text" class="txt" style="width: 200px" />
              </td>
             </tr>
             <tr>

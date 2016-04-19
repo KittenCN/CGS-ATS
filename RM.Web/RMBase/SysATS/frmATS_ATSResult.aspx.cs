@@ -858,7 +858,7 @@ namespace RM.Web.RMBase.SysATS
                     insql = insql + ", ATS_Travel='" + int_ATS_Travel + "',ATS_TravelID='" + int_ATS_TravelID + "',ATS_TravelStatus='" + int_ATS_TravelStatus + "' ";
                     insql = insql + ", PunchINTime = '" + txt_PunchInTime + "',PunchOutTime = '" + txt_PunchOutTime + "',LunchTime = '" + txt_LunchTime + "' ";
                     insql = insql + ", ATS_Result=" + intATSResult + " ";
-                    insql = insql + " where EmpID='" + txt_EmpID + "' and EmpCode='" + txt_EmpCode + "' and ATS_Date='" + txt_ATS_Date + "' ";
+                    insql = insql + " where EmpID='" + txt_EmpID + "' and ATS_Date='" + txt_ATS_Date + "' ";
                     insb_sql = new StringBuilder(insql);
                     int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
                     if (int_sqlresult <= 0)
