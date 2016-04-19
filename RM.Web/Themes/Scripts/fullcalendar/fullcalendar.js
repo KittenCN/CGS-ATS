@@ -64,6 +64,7 @@ jQuery(document).ready(function () {
                 $.each(resultCollection, function (index, term) {
                     $("#calendar").fullCalendar('renderEvent', term, true);
                 });
+                //$.post("#calendar").fullCalendar('backgroundColor', 'green');
 
             }); //把从后台取出的数据进行封装以后在页面上以fullCalendar的方式进行显示
         },
@@ -84,8 +85,18 @@ jQuery(document).ready(function () {
             var fend = $.fullCalendar.formatDate(event.end, "yyyy-MM-dd HH:mm");
             var confbg = '<span class="fc-event-bg"></span>';
             if (view.name == "month") {//按月份                
-                var evtcontent = '<div class="fc-event-vert"><a>';
-                evtcontent = evtcontent + confbg;
+                var evtcontent = '<div class="fc-event-vert">';
+                var confred = '<div class="fc-event-red">'
+                var confend = '<a>';
+                //evtcontent = evtcontent + confbg;
+                if (event.task == "公出")
+                {
+                    evtcontent = evtcontent + confbg + confend;
+                }
+                else
+                {
+                    evtcontent = confred + confbg + confend;
+                }
                 //evtcontent = evtcontent + '<span class="fc-event-titlebg">' + fstart + " - " + fend  + event.fullname + '</span>';   
                 evtcontent = evtcontent + '<span class="fc-event-titlebg">' + event.title + '</span>';
                 element.html(evtcontent);
@@ -112,7 +123,7 @@ jQuery(document).ready(function () {
             //var fstart = $.fullCalendar.formatDate(calEvent.start, "yyyy/MM/dd HH:mm");
             //var fend = $.fullCalendar.formatDate(calEvent.end, "yyyy/MM/dd HH:mm");
             //$(this).attr('title', fstart + " - " + fend + " " + calEvent.fullname);
-            $(this).attr('title', calEvent.fullname);
+            $(this).attr('title', fstart + "-" + fend + calEvent.fullname);
             $(this).css('font-weight', 'normal');
             //            $(this).tooltip({
             //                effect: 'toggle',

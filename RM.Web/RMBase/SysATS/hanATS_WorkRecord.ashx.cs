@@ -123,12 +123,23 @@ namespace RM.Web.RMBase.SysATS
             {
                 Dictionary<string, object> drow = new Dictionary<string, object>();
                 drow.Add("id", entity.ID);
-                drow.Add("title", string.Format("状态：{0}", entity.Name));
+                drow.Add("title", string.Format("状态：{0}", entity.Content + "::" + entity.Name));
                 drow.Add("start", ReturnDate(entity.StartDate));
                 drow.Add("end", ReturnDate(entity.EndDate));
                 //鼠标悬浮上展现的是这个属性信息，可以自己设置
-                drow.Add("fullname", string.Format("状态：{0}", entity.Name + "@" + entity.Content));
+                drow.Add("fullname", string.Format("状态：{0}", entity.Content + "::" + entity.Name + "@" + entity.StartDate + "TO" + entity.EndDate));
                 drow.Add("allDay", false);
+                drow.Add("task", entity.Name);
+                //设置颜色
+                //drow.Add("backgroundColor", "red");
+                //switch (entity.Name)
+                //{
+                //    case "公出":
+                //        {
+                //            //drow.Add("backgroundColor", "#378006");
+                //            break;
+                //        }
+                //}
                 gas.Add(drow);
             }
             context.Response.Write(jss.Serialize(gas));

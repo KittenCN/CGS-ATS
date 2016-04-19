@@ -138,7 +138,7 @@ html .fc,
 	}
 	
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
-	background: #9cf;
+	background: #ffc;
 	opacity: .2;
 	filter: alpha(opacity=20); /* for IE */
 	}
@@ -208,7 +208,6 @@ html .fc,
 	background: #FB9337 !important; 
 	color: #333;
 	}
-
 	
 a.fc-event,
 .fc-event-draggable {
@@ -523,7 +522,12 @@ table.fc-border-separate {
 .fc-event-vert {
 	border-width: 0 1px;
 	}
-	
+
+.fc-event-red{
+    border-width: 0 1px;
+    background: #ff0000 !important;
+}
+
 .fc-event-vert .fc-event-head,
 .fc-event-vert .fc-event-content {
 	position: relative;
@@ -548,7 +552,7 @@ table.fc-border-separate {
 	opacity: .3;
 	filter: alpha(opacity=30);
 	}
-	
+
 .fc .ui-draggable-dragging .fc-event-bg, /* TODO: something nicer like .fc-opacity */
 .fc-select-helper .fc-event-bg {
 	display: none\9; /* for IE6/7/8. nested opacity filters while dragging don't work */
