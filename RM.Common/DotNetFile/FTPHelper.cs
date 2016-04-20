@@ -72,17 +72,17 @@ namespace RM.Common.DotNetFile
             return sRet;
         }
         /// <summary>
-        /// FTP下载文件
+        /// FTPDownload 文件
         /// </summary>
         /// <param name="userId">ftp用户名</param>
         /// <param name="pwd">ftp密码</param>
         /// <param name="ftpPath">ftp文件路径</param>
-        /// <param name="filePath">下载保存路径</param>
+        /// <param name="filePath">Download 保存路径</param>
         /// <param name="fileName">ftp文件名</param>
         /// <returns></returns>
         public string Download(string userId, string pwd, string ftpPath, string filePath, string fileName)
         {
-            string sRet = "下载成功！";
+            string sRet = "Download 成功！";
             FtpWebRequest reqFTP;
             try
             {
@@ -97,7 +97,7 @@ namespace RM.Common.DotNetFile
                 // ftp用户名和密码  
                 reqFTP.Credentials = new NetworkCredential(userId, pwd);
                 FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
-                // 把下载的文件写入流
+                // 把Download 的文件写入流
                 Stream ftpStream = response.GetResponseStream();
                 long cl = response.ContentLength;
                 // 缓冲大小设置为2kb  
@@ -121,7 +121,7 @@ namespace RM.Common.DotNetFile
             {
                 sRet = ex.Message;
             }
-            //返回下载结果（是否下载成功）
+            //返回Download 结果（是否Download 成功）
             return sRet;
         }
         /// <summary>

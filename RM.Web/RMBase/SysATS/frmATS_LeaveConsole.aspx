@@ -20,7 +20,7 @@
         //添加
         function add() {
             var url = "/RMBase/SysATS/frmATS_PerLeaveCreate.aspx";
-            top.openDialog(url, 'PerLeaveCreate', '新建休假申请', 700, 350, 50, 50);
+            top.openDialog(url, 'PerLeaveCreate', 'Create Leave', 700, 350, 50, 50);
         }
         //修改
         function edit() {
@@ -43,7 +43,7 @@
             var key = CheckboxValue();
             if (IsDelData(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerTravelAppPro.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveAppPro', '审批休假申请', 700, 500, 50, 50);
+                top.openDialog(url, 'PerLeaveAppPro', 'Approve Leave', 700, 500, 50, 50);
             }
         }
         //授 权
@@ -100,14 +100,14 @@
 <%--            <asp:Button ID="btn_CreateTravel" Text="新建公出申请" runat="server"  OnClientClick="add()" />
             <asp:Button ID="btn_EditTravel" Text="修改公出申请" runat="server"  OnClientClick="edit()" />
             <asp:Button ID="btn_DelTravel" Text="取消公出申请" runat="server" />
-            <asp:label Text="审查开始日期:" runat="server" ></asp:label>
+            <asp:label Text="审查Begin Date:" runat="server" ></asp:label>
             <asp:TextBox id="tb_BeginDate" type="date" runat="server" />
-            <asp:label Text="审查结束日期:" runat="server" ></asp:label>            
+            <asp:label Text="审查End Date:" runat="server" ></asp:label>            
             <asp:TextBox id="tb_EndDate" type="date" runat="server" />
             <asp:Button ID="btn_ATSCheck" Text="考勤审查" runat="server"  OnClick="btn_ATSCheck_Click"/>
             <asp:Button ID="btn_Search" Text="查询" runat="server" OnClick="btn_Search_Click" />--%>
             <asp:Button ID="btn_EditLeaveConsole" Text="修改休假结果" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_RunSQL" Text="计算所有年假" runat="server" OnClick="btn_RunSQL_Click" />
+            <asp:Button ID="btn_RunSQL" Text="Calculation所有年假" runat="server" OnClick="btn_RunSQL_Click" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
@@ -203,7 +203,7 @@
                            {
                                if (rp_Item.Items.Count == 0)
                                {
-                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>没有数据！</td></tr>");
+                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>None Data！</td></tr>");
                                }
                            } %>
                     </FooterTemplate>

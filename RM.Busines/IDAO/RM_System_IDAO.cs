@@ -223,7 +223,7 @@ namespace RM.Busines.IDAO
         /// <param name="Size">文件大小</param>
         /// <param name="CreateUserName">创建用户</param>
         /// <param name="DB">所属数据库</param>
-        /// <param name="Memo">备注</param>
+        /// <param name="Memo">Remark</param>
         /// <returns></returns>
         void Add_Backup_Restore_Log(string Type, string File, string Size, string CreateUserName, string DB, string Memo);
         /// <summary>

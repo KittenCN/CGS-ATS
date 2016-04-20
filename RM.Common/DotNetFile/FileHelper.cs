@@ -268,7 +268,7 @@ namespace RM.Common.DotNetFile
             }
         }
         /// <summary>
-        /// 计算文件大小函数(保留两位小数),Size为字节大小
+        /// Calculation文件大小函数(保留两位小数),Size为字节大小
         /// </summary>
         /// <param name="Size">初始文件大小</param>
         /// <returns></returns>
@@ -371,13 +371,13 @@ namespace RM.Common.DotNetFile
         /// <returns></returns>
         public byte[] DownloadFileByte(string filePath)
         {
-            //以字符流的形式下载文件
+            //以字符流的形式Download 文件
             FileStream fs = new FileStream(filePath, FileMode.Open);
             byte[] bytes = new byte[fs.Length];
             return bytes;
         }
         /// <summary>
-        /// 文件下载
+        /// 文件Download 
         /// </summary>
         /// <param name="filePath">文件路径</param>
         public static void GetDownload(string filePath)

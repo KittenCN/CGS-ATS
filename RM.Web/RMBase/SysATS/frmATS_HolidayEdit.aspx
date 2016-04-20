@@ -23,39 +23,39 @@
             <td> <input id="Holiday_name" type="text" class="txt" runat="server" style="width: 200px" /> </td>
         </tr>
         <tr>
-            <th>开始日期:</th>
+            <th>Begin Date:</th>
             <td> <asp:TextBox id="BeginDate" runat="server" type="date" style="width: 200px"  /> </td>
         </tr>
         <tr>
             <th>开始日类型:</th>
             <td><select id="BeginFlag" name="BeginFlag" runat="server" style="width: 200px" >
-                <option value="0">下午开始时间</option>
-                <option value="1" selected="selected">上午开始时间</option>
+                <option value="0">Afternoon</option>
+                <option value="1" selected="selected">Morning</option>
                 </select>
             </td>
         </tr>
         <tr>
-            <th>结束日期:</th>
+            <th>End Date:</th>
             <td> <asp:TextBox id="EndDate" runat="server" type="date"  style="width: 200px" /> </td>
         </tr>
         <tr>
             <th>结束日类型:</th>
             <td><select id="EndFlag" name="EndFlag" runat="server" style="width: 200px" >
-                <option value="0">上午结束时间</option>
-                <option value="1" selected="selected">下午结束时间</option>
+                <option value="0">Morning</option>
+                <option value="1" selected="selected">Aftermoon</option>
                 </select>
             </td>
         </tr>
         <tr>
-            <th>备注:</th>
+            <th>Remark:</th>
             <td><input id="Remark" type="text" class="txt" runat="server" style="width: 200px"  /></td>
         </tr>
      </table>
     <div class="frmbottom">
         <asp:LinkButton ID="Save" runat="server" class="l-btn" OnClick="Save_Click"><span class="l-btn-left">
-            <img src="/Themes/Images/disk.png" alt="" />保 存</span></asp:LinkButton>
+            <img src="/Themes/Images/disk.png" alt="" />Save</span></asp:LinkButton>
         <a class="l-btn" href="javascript:void(0)" onclick="OpenClose();"><span class="l-btn-left">
-            <img src="/Themes/Images/cancel.png" alt="" />关 闭</span></a>
+            <img src="/Themes/Images/cancel.png" alt="" />Close</span></a>
     </div>
     </form>
 </body>

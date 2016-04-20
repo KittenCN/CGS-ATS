@@ -9,7 +9,7 @@ using System.Threading;
 namespace RM.Common.DotNetFile
 {
     /// <summary>
-    /// 文件下载类
+    /// 文件Download 类
     /// </summary>
     public class FileDownHelper
     {
@@ -32,7 +32,7 @@ namespace RM.Common.DotNetFile
         }
 
         /// <summary>
-        /// 普通下载
+        /// 普通Download 
         /// </summary>
         /// <param name="FileName">文件虚拟路径</param>
         public static void DownLoadold(string FileName)
@@ -54,7 +54,7 @@ namespace RM.Common.DotNetFile
         }
 
         /// <summary>
-        /// 分块下载
+        /// 分块Download 
         /// </summary>
         /// <param name="FileName">文件虚拟路径</param>
         public static void DownLoad(string FileName)
@@ -103,13 +103,13 @@ namespace RM.Common.DotNetFile
         }
 
         /// <summary>
-        ///  输出硬盘文件，提供下载 支持大文件、续传、速度限制、资源占用小
+        ///  输出硬盘文件，提供Download  支持大文件、续传、速度限制、资源占用小
         /// </summary>
         /// <param name="_Request">Page.Request对象</param>
         /// <param name="_Response">Page.Response对象</param>
-        /// <param name="_fileName">下载文件名</param>
-        /// <param name="_fullPath">带文件名下载路径</param>
-        /// <param name="_speed">每秒允许下载的字节数</param>
+        /// <param name="_fileName">Download 文件名</param>
+        /// <param name="_fullPath">带文件名Download 路径</param>
+        /// <param name="_speed">每秒允许Download 的字节数</param>
         /// <returns>返回是否成功</returns>
         //---------------------------------------------------------------------
         //调用：

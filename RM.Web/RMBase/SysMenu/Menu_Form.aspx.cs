@@ -113,11 +113,11 @@ namespace RM.Web.RMBase.SysMenu
             if (IsOk)
             {
                 CacheHelper.RemoveAllCache();
-                ShowMsgHelper.AlertMsg("操作成功！");
+                ShowMsgHelper.AlertMsg("Success！");
             }
             else
             {
-                ShowMsgHelper.Alert_Error("操作失败！");
+                ShowMsgHelper.Alert_Error("Error！");
             }
         }
     }

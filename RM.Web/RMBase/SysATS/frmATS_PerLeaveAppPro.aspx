@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>审批休假申请</title>
+    <title>Approve Leave</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
@@ -20,6 +20,7 @@
         }
         .auto-style1 {
             width: 885px;
+            height: 50px;
         }
     </style>
 </head>
@@ -28,15 +29,15 @@
     <div>
         <table class="frm">
             <tr>
-                <th>申请人:</th>
+                <th>Emp:</th>
                 <td><asp:label id="EmpID" runat="server" ></asp:label></td>
             </tr>
             <tr>
-                <th>填写日期:</th>
+                <th>Create Date:</th>
                 <td><asp:label id="CreateDate" runat="server" /></td>
             </tr>
             <tr>
-                <th>假期类别:</th>
+                <th>Leave Type:</th>
                 <td>
                     <asp:DropDownList ID="LeaveID" runat="server" Enabled="false">
 
@@ -44,51 +45,51 @@
                 </td>
             </tr>
             <tr>
-                <th>开始日期:</th>
+                <th>Begin Date:</th>
                 <td><asp:TextBox id="BeginDate" type="date" runat="server"  Enabled="false"/></td>
             </tr>
             <tr>
-                <th>开始日状态:</th>
+                <th>Begin Status:</th>
                 <td>
                     <select id="BeginFlag" runat="server" aria-readonly="True" >
-                        <option value="0">下午开始时间</option>
-                        <option value="1" selected="selected">上午开始时间</option>
+                        <option value="0">Afternoon</option>
+                        <option value="1" selected="selected">Morning</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <th>结束日期:</th>
+                <th>End Date:</th>
                 <td><asp:TextBox id="EndDate" type="date" runat="server"  Enabled="false"/></td>
             </tr>
             <tr>
-                <th>结束日状态:</th>
+                <th>End Status:</th>
                 <td>
                     <select id="EndFlag" runat="server" aria-readonly="True">
-                        <option value="0">上午结束时间</option>
-                        <option value="1" selected="selected">下午结束时间</option>
+                        <option value="0">Morning</option>
+                        <option value="1" selected="selected">Aftermoon</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <th>备注:</th>
+                <th>Remark:</th>
                 <td><textarea id="Remark" runat="server" maxlength="500" rows="3" readonly="readonly"></textarea></td>
             </tr>
             <tr>
-                <th>附件:</th>
+                <th>Attachment:</th>
                 <td>
                      <input type="file" id="FilesAdd" name="FilesAdd" runat="server"  aria-readonly="true" />
                      <asp:Button ID="btn_submit" Text="Upload" runat="server" onclick="btn_submit_Click"  Enabled="false"/>                    
                 </td>
             </tr>
             <tr id="DownFiles" runat="server">
-                <th>下载附件:</th>
+                <th>Download Attachment:</th>
                 <td>
                      <asp:Button ID="btn_down" Text="Download" runat="server" onclick="btn_down_Click" />
                 </td>
             </tr>
             <tr>
-                <th>审批人备注:</th>
-                <td><textarea id="ApprovalRemark" runat="server" maxlength="500" rows="10" class="auto-style1"></textarea></td>
+                <th>Approver Remark:</th>
+                <td><textarea id="ApprovalRemark" runat="server" maxlength="500" class="auto-style1"></textarea></td>
             </tr>
         </table>
     </div>

@@ -138,9 +138,9 @@ namespace RM.Web.RMBase.SysRole
             string str = item_hidden.Value;
             bool IsAllto = system_idao.Add_RoleAllotAuthority(str.Split(','), _key);
             if (IsAllto)
-                ShowMsgHelper.ShowScript("back();showTipsMsg('操作成功！','2500','4');");
+                ShowMsgHelper.ShowScript("back();showTipsMsg('Success！','2500','4');");
             else
-                ShowMsgHelper.Alert_Error("操作失败！");
+                ShowMsgHelper.Alert_Error("Error！");
         }
     }
 }

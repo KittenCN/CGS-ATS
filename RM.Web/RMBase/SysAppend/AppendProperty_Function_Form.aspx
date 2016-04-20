@@ -36,9 +36,9 @@
     <div class="frmbottom">
         <asp:LinkButton ID="Save" runat="server" class="l-btn" OnClientClick="return CheckDataValid('#form1');"
             OnClick="Save_Click"><span class="l-btn-left">
-            <img src="/Themes/Images/disk.png" alt="" />保 存</span></asp:LinkButton>
+            <img src="/Themes/Images/disk.png" alt="" />Save</span></asp:LinkButton>
         <a class="l-btn" href="javascript:void(0)" onclick="OpenClose();"><span class="l-btn-left">
-            <img src="/Themes/Images/cancel.png" alt="" />关 闭</span></a>
+            <img src="/Themes/Images/cancel.png" alt="" />Close</span></a>
     </div>
     </form>
 </body>

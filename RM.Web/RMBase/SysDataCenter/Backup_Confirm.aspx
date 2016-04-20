@@ -60,9 +60,9 @@
     </table>
     <div class="frmbottom">
         <a class="l-btn" href="javascript:void(0)" onclick="SaveForm();"><span class="l-btn-left">
-            <img src="/Themes/Images/disk.png" alt="" />保 存</span></a> <a class="l-btn" href="javascript:void(0)"
+            <img src="/Themes/Images/disk.png" alt="" />Save</span></a> <a class="l-btn" href="javascript:void(0)"
                 onclick="OpenClose();"><span class="l-btn-left">
-                    <img src="/Themes/Images/cancel.png" alt="" />关 闭</span></a>
+                    <img src="/Themes/Images/cancel.png" alt="" />Close</span></a>
     </div>
     </form>
 </body>

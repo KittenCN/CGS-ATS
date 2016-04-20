@@ -454,11 +454,11 @@ namespace RM.Web.RMBase.SysUser
             }
             if (IsOk)
             {
-                ShowMsgHelper.ParmAlertMsg("操作成功！");
+                ShowMsgHelper.ParmAlertMsg("Success！");
             }
             else
             {
-                ShowMsgHelper.Alert_Error("操作失败！");
+                ShowMsgHelper.Alert_Error("Error！");
             }
         }
         /// <summary>

@@ -98,11 +98,11 @@ namespace RM.Web.RMBase.SysUserGroup
             bool IsOk = DataFactory.SqlDataBase().Submit_AddOrEdit("Base_UserGroup", "UserGroup_ID", _key, ht);
             if (IsOk)
             {
-                ShowMsgHelper.AlertMsg("操作成功！");
+                ShowMsgHelper.AlertMsg("Success！");
             }
             else
             {
-                ShowMsgHelper.Alert_Error("操作失败！");
+                ShowMsgHelper.Alert_Error("Error！");
             }
         }
     }

@@ -137,37 +137,37 @@
                             &nbsp;</label>
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        申请人
+                        Emp
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始日期
+                        Begin Date
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始半天标志
+                        Morning Flag
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        结束日期
+                        End Date
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        结束半天标志
+                        Afternoon Flag
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        公出地点
+                        Destination
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        公出事由
+                        Reason
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        申请状态
+                        Approve Status
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        创建日期
+                        Create Date
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        下一步审核人
+                        Next Approver
                     </td>
                     <td>
-                        备注
+                        Remark
                     </td>
                 </tr>
             </thead>
@@ -218,7 +218,7 @@
                            {
                                if (rp_Item.Items.Count == 0)
                                {
-                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>没有数据！</td></tr>");
+                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>None Data！</td></tr>");
                                }
                            } %>
                     </FooterTemplate>

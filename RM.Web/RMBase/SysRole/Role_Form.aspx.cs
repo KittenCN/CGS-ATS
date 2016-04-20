@@ -210,16 +210,16 @@ namespace RM.Web.RMBase.SysRole
                 bool IsAllto = system_idao.Add_RoleAllotMember(str.Split(','), guid);
                 if (IsAllto)
                 {
-                    ShowMsgHelper.AlertMsg("操作成功！");
+                    ShowMsgHelper.AlertMsg("Success！");
                 }
                 else
                 {
-                    ShowMsgHelper.Alert_Error("操作失败！");
+                    ShowMsgHelper.Alert_Error("Error！");
                 }
             }
             else
             {
-                ShowMsgHelper.Alert_Error("操作失败！");
+                ShowMsgHelper.Alert_Error("Error！");
             }
         }
     }

@@ -48,7 +48,7 @@ namespace RM.Web.RMBase.SysATS
             dtFormat.ShortDatePattern = "yyyy/MM/dd";
             if ((Convert.ToDateTime(BeginDate.Text, dtFormat) > Convert.ToDateTime(EndDate.Text, dtFormat)) || (Convert.ToDateTime(BeginDate.Text, dtFormat) == Convert.ToDateTime(EndDate.Text, dtFormat) && BeginFlag.Value == "0" && EndFlag.Value == "0"))
             {
-                ShowMsgHelper.Alert_Error("日期设置错误");
+                ShowMsgHelper.Alert_Error("Date Error");
             }
             else
             {
@@ -80,11 +80,11 @@ namespace RM.Web.RMBase.SysATS
                     {
                         gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your TraveList has been updated!", "Your TraveList has been updated!");
                     }
-                    ShowMsgHelper.AlertMsg("操作成功！");
+                    ShowMsgHelper.AlertMsg("Success！");
                 }
                 else
                 {
-                    ShowMsgHelper.Alert_Error("操作失败！");
+                    ShowMsgHelper.Alert_Error("Error！");
                 }             
             }
         }
@@ -143,8 +143,9 @@ namespace RM.Web.RMBase.SysATS
             float fResult = 0;
             TimeSpan ts;
             //int differenceInDays = ts.Days;
+            inttxDays = 0;  //初始化inttxDays
 
-            for(DateTime dtT=dtBeginDate;dtT<dtEndDate; dtT = dtT.AddDays(1))
+            for(DateTime dtT=dtBeginDate;dtT<dtEndDate.AddDays(1); dtT = dtT.AddDays(1))
             {
                 int intdtT = (int)dtT.DayOfWeek;
                 if(intdtT==6 || intdtT==0)

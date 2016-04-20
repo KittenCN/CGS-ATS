@@ -44,7 +44,7 @@ namespace RM.Common.DotNetCode
         /// <summary>
         /// 取得Int值,如果不成功则返回指定exceptionvalue值
         /// </summary>
-        /// <param name="obj">要计算的值</param>
+        /// <param name="obj">要Calculation的值</param>
         /// <param name="exceptionvalue">异常时的返回值</param>
         /// <returns></returns>
         public static int GetInt(object obj, int exceptionvalue)
@@ -88,7 +88,7 @@ namespace RM.Common.DotNetCode
         /// <summary>
         /// 取得Long值,如果不成功则返回指定exceptionvalue值
         /// </summary>
-        /// <param name="obj">要计算的值</param>
+        /// <param name="obj">要Calculation的值</param>
         /// <param name="exceptionvalue">异常时的返回值</param>
         /// <returns></returns>
         public static long GetLong(object obj, long exceptionvalue)

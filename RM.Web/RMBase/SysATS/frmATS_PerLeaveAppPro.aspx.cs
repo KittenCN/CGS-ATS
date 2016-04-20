@@ -204,7 +204,7 @@ namespace RM.Web.RMBase.SysATS
 
         protected void btn_down_Click(object sender, EventArgs e)
         {
-            //WriteFile实现下载
+            //WriteFile实现Download 
             string fileName = "ceshi.rar";//客户端保存的文件名
             string filePath = txt_downFilesAdd;//路径
 

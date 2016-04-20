@@ -17,7 +17,7 @@
         //添加
         function add() {
             var url = "/RMBase/SysATS/frmATS_PerLeaveCreate.aspx";
-            top.openDialog(url, 'PerLeaveCreate', '新建休假申请', 700, 350, 50, 50);
+            top.openDialog(url, 'PerLeaveCreate', 'Create Leave', 700, 350, 50, 50);
         }
         //修改
         function edit() {
@@ -40,7 +40,7 @@
             var key = CheckboxValue();
             if (IsDelData(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerTravelAppPro.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveAppPro', '审批休假申请', 700, 500, 50, 50);
+                top.openDialog(url, 'PerLeaveAppPro', 'Approve Leave', 700, 500, 50, 50);
             }
         }
         //授 权
@@ -135,37 +135,37 @@
                             &nbsp;</label>
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        申请人
+                        Emp
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始日期
+                        Begin Date
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始半天标志
-                    </td>
-                    <td style="width: 80px; text-align: center;">
-                        结束日期
-                    </td>
-                    <td style="width: 80px; text-align: center;">
-                        结束半天标志
+                        Morning Flag
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        公出地点
+                        End Date
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        公出事由
+                        Afternoon Flag
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        申请状态
+                        Destination
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        创建日期
+                        Reason
+                    </td>
+                    <td style="width: 100px; text-align: center;">
+                        Approve Status
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        下一步审核人
+                        Create Date
+                    </td>
+                    <td style="width: 100px; text-align: center;">
+                        Next Approver
                     </td>
                     <td>
-                        备注
+                        Remark
                     </td>
                 </tr>
             </thead>
@@ -185,25 +185,25 @@
                             <td style="width: 80px; text-align: center;">
                                 <asp:Label ID="BeginFlag" runat="server" Text='<%#Eval("BeginFlag")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <%#Eval("EndDate", "{0:d}")%></a>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="EndFlag" runat="server" Text='<%#Eval("EndFlag")%>'></asp:Label>
                             </td>
-                            <td style="width: 20px; text-align: left;">
+                            <td style="width: 80px; text-align: left;">
                                  <%#Eval("Place")%>
                             </td>
-                            <td style="width: 20px; text-align: left;">
+                            <td style="width: 80px; text-align: left;">
                                  <%#Eval("Reason")%>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="ApprovalFlag" runat="server" Text='<%#Eval("ApprovalFlag")%>'></asp:Label>
                             </td>
                             <td style="width: 80px; text-align: center;">
                                 <%#Eval("CreateDate", "{0:d}")%></a>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="NextApprover" runat="server" Text='<%#Eval("NextApprover")%>'></asp:Label>
                             </td>
                             <td>
@@ -216,7 +216,7 @@
                            {
                                if (rp_Item.Items.Count == 0)
                                {
-                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>没有数据！</td></tr>");
+                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>None Data！</td></tr>");
                                }
                            } %>
                     </FooterTemplate>

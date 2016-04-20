@@ -99,11 +99,11 @@ namespace RM.Web.RMBase.SysATS
             int IsOk = DataFactory.SqlDataBase().UpdateByHashtable("Base_ATSResult", "id", _key, ht);
             if (IsOk > 0)
             {
-                ShowMsgHelper.AlertMsg("操作成功！");
+                ShowMsgHelper.AlertMsg("Success！");
             }
             else
             {
-                ShowMsgHelper.Alert_Error("操作失败！");
+                ShowMsgHelper.Alert_Error("Error！");
             }
         }
 

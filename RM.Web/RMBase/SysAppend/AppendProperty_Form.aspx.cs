@@ -64,11 +64,11 @@ namespace RM.Web.RMBase.SysAppend
             bool IsOk = DataFactory.SqlDataBase().Submit_AddOrEdit("Base_AppendProperty", "Property_ID", _key, ht);
             if (IsOk)
             {
-                ShowMsgHelper.ParmAlertMsg("操作成功！");
+                ShowMsgHelper.ParmAlertMsg("Success！");
             }
             else
             {
-                ShowMsgHelper.Alert_Error("操作失败！");
+                ShowMsgHelper.Alert_Error("Error！");
             }
         }
     }

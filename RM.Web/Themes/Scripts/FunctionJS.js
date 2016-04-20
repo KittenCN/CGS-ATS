@@ -478,7 +478,7 @@ function SubmitCheckForRC() {
 ///清空防止重复提交
 function SubmitCheckEmpty() {
     $("#Save").removeAttr("disabled")
-    $("#Save .l-btn-left").html('<img src="/Themes/Images/disk.png" alt="" />保 存');
+    $("#Save .l-btn-left").html('<img src="/Themes/Images/disk.png" alt="" />Save');
     $("#Close").show();
 }
 //树表格复选框，点击子，把父也打勾

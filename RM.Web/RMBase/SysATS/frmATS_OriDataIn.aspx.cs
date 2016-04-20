@@ -112,7 +112,7 @@ namespace RM.Web.RMBase.SysATS
             }
             catch (Exception err)
             {
-                ShowMsgHelper.Alert_Wern("操作失败！" + err.ToString());
+                ShowMsgHelper.Alert_Wern("Error！" + err.ToString());
             }
         }
 
@@ -130,7 +130,7 @@ namespace RM.Web.RMBase.SysATS
             }
             else
             {
-                ShowMsgHelper.Alert_Error("没有数据！");
+                ShowMsgHelper.Alert_Error("None Data！");
             }
         }
 

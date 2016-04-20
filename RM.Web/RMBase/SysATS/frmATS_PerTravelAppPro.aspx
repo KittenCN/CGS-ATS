@@ -31,78 +31,78 @@
     <div>
         <table class="frm">
             <tr>
-                <th>申请人:</th>
+                <th>Emp:</th>
                 <td><asp:label id="EmpID" runat="server"></asp:label></td>
             </tr>
             <tr>
-                <th>填写日期:</th>
+                <th>Create Date:</th>
                 <td><asp:label id="CreateDate" runat="server" /></td>
             </tr>
             <tr>
-                <th>开始日期:</th>
+                <th>Begin Date:</th>
                 <td><asp:TextBox id="BeginDate" type="date" runat="server"  Enabled="false"/></td>
             </tr>
             <tr>
-                <th>开始日状态:</th>
+                <th>Begin Status:</th>
                 <td>
                     <select id="BeginFlag" runat="server" aria-readonly="true">
-                        <option value="0">下午开始时间</option>
-                        <option value="1" selected="selected">上午开始时间</option>
+                        <option value="0">Afternoon</option>
+                        <option value="1" selected="selected">Morning</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <th>结束日期:</th>
+                <th>End Date:</th>
                 <td><asp:TextBox id="EndDate" type="date" runat="server"  Enabled="false"/></td>
             </tr>
             <tr>
-                <th>结束日状态:</th>
+                <th>End Status:</th>
                 <td>
                     <select id="EndFlag" runat="server" aria-readonly="true">
-                        <option value="0">上午结束时间</option>
-                        <option value="1" selected="selected">下午结束时间</option>
+                        <option value="0">Morning</option>
+                        <option value="1" selected="selected">Aftermoon</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <th>公出天数</th>
+                <th>Travel Days</th>
                 <td>
                     <asp:Label ID="TravelDays" Text="0.0" runat="server" Width="50px"></asp:Label>
                     &nbsp;&nbsp;&nbsp;
-                    <asp:Label Text="可生成调休天数:" runat="server"></asp:Label>
+                    <asp:Label Text="Bring Num of CL:" runat="server"></asp:Label>
                     &nbsp;
                     <asp:Label ID="txDays" Text="0.0" runat="server" Width="50px"></asp:Label>
                     <%--&nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="btnTravelDays" runat="server" Text="计算" OnClick="btnTravelDays_Click" />--%>
+                    <asp:Button ID="btnTravelDays" runat="server" Text="Calculation" OnClick="btnTravelDays_Click" />--%>
                 </td>
             </tr>
             <tr>
-                <th>公出地点:</th>
+                <th>Destination:</th>
                 <td><textarea id="Place" runat="server" maxlength="500" rows="3" readonly="readonly"></textarea></td>
             </tr>
             <tr>
-                <th>公出事由:</th>
+                <th>Reason:</th>
                 <td><textarea id="Reason" runat="server" maxlength="500" rows="3" readonly="readonly"></textarea></td>
             </tr>
             <tr>
-                <th>备注:</th>
+                <th>Remark:</th>
                 <td><textarea id="Remark" runat="server" maxlength="500" rows="3" readonly="readonly"></textarea></td>
             </tr>
             <tr>
-                <th>附件:</th>
+                <th>Attachment:</th>
                 <td>
                      <input type="file" id="FilesAdd" name="FilesAdd" runat="server"  aria-readonly="true"/>
                      <asp:Button ID="btn_submit" Text="Upload" runat="server" onclick="btn_submit_Click"  Enabled="false"/>
                 </td>
             </tr>
            <tr id="DownFiles" runat="server">
-                <th>下载附件:</th>
+                <th>Download Attachment:</th>
                 <td>
                      <asp:Button ID="btn_down" Text="Download" runat="server" onclick="btn_down_Click" />
                 </td>
             </tr>
             <tr>
-                <th>审批人备注:</th>
+                <th>Approver Remark:</th>
                 <td><textarea id="ApprovalRemark" runat="server" maxlength="500" rows="10" class="auto-style1"></textarea></td>
             </tr>
         </table>

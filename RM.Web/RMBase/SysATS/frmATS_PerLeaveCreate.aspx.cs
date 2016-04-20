@@ -263,7 +263,7 @@ namespace RM.Web.RMBase.SysATS
             float fResult = 0;
             TimeSpan ts;
             //int differenceInDays = ts.Days;
-            //产假计算
+            //产假Calculation
             if(LeaveID.SelectedValue=="3")
             {
                 int intCJ = 98;

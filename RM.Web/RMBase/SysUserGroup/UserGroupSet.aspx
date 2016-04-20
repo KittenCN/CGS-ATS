@@ -67,7 +67,7 @@
                         GetUserList();
                     }
                     else {
-                        showTipsMsg("操作失败，请稍后重试！", 4000, 5);
+                        showTipsMsg("Error，请稍后重试！", 4000, 5);
                     }
                 });
             } else {

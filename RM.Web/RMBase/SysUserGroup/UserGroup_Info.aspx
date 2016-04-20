@@ -106,7 +106,7 @@
                         状态
                     </td>
                     <td>
-                        备注
+                        Remark
                     </td>
                 </tr>
             </thead>

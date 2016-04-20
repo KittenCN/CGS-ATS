@@ -20,7 +20,7 @@
         //添加
         function add() {
             var url = "/RMBase/SysATS/frmATS_PerLeaveCreate.aspx";
-            top.openDialog(url, 'PerLeaveCreate', '新建休假申请', 700, 350, 50, 50);
+            top.openDialog(url, 'PerLeaveCreate', 'Create Leave', 700, 350, 50, 50);
         }
         //修改
         function edit() {
@@ -43,7 +43,7 @@
             var key = CheckboxValue();
             if (IsDelData(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerTravelAppPro.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveAppPro', '审批休假申请', 700, 500, 50, 50);
+                top.openDialog(url, 'PerLeaveAppPro', 'Approve Leave', 700, 500, 50, 50);
             }
         }
         //授 权
@@ -97,9 +97,9 @@
     <form id="form1" runat="server">
         <div>
             <div>
-                <asp:Label Text="审查开始日期:" runat="server"></asp:Label>
+                <asp:Label Text="审查Begin Date:" runat="server"></asp:Label>
                 <asp:TextBox ID="tb_BeginDate" type="date" runat="server" />
-                <asp:Label Text="审查结束日期:" runat="server"></asp:Label>
+                <asp:Label Text="审查End Date:" runat="server"></asp:Label>
                 <asp:TextBox ID="tb_EndDate" type="date" runat="server" />
                 <asp:Button ID="btn_LVsearch" Text="Search" runat="server" OnClick="btn_LVsearch_Click" />
             </div>
@@ -198,7 +198,7 @@
                                 {
                                     if (rp_Item.Items.Count == 0)
                                     {
-                                        Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>没有数据！</td></tr>");
+                                        Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>None Data！</td></tr>");
                                     }
                                 } %>
                         </FooterTemplate>

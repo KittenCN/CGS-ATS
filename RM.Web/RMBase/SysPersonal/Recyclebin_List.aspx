@@ -113,7 +113,7 @@
                         删除时间
                     </td>
                     <td>
-                        备注
+                        Remark
                     </td>
                 </tr>
             </thead>

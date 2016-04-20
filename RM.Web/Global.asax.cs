@@ -20,7 +20,7 @@ namespace RM.Web
         protected LogHelper Logger = new LogHelper("Global");
         void Application_Start(object sender, EventArgs e)
         {
-            // 计算人数
+            // Calculation人数
             Application.Lock();
             Application["CurrentUsers"] = 0;
             Application.UnLock();
@@ -47,7 +47,7 @@ namespace RM.Web
         }
         void Session_Start(object sender, EventArgs e)
         {
-            // 计算人数
+            // Calculation人数
             Application.Lock();
             Application["CurrentUsers"] = (int)Application["CurrentUsers"] + 1;
             Application.UnLock();

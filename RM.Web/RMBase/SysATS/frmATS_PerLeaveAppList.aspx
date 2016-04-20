@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>休假审批</title>
+    <title>Leave List</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
@@ -17,14 +17,14 @@
         //添加
         function add() {
             var url = "/RMBase/SysATS/frmATS_PerLeaveCreate.aspx";
-            top.openDialog(url, 'PerLeaveCreate', '新建休假申请', 700, 350, 50, 50);
+            top.openDialog(url, 'PerLeaveCreate', 'Create Leave', 700, 350, 50, 50);
         }
         //修改
         function edit() {
             var key = CheckboxValue();
             if (IsEditdata(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerLeaveEdit.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveEdit', '修改节日', 700, 350, 50, 50);
+                top.openDialog(url, 'PerLeaveEdit', 'Edit Leave', 700, 350, 50, 50);
             }
         }
         //删除
@@ -40,7 +40,7 @@
             var key = CheckboxValue();
             if (IsDelData(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerLeaveAppPro.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveAppPro', '审批休假申请', 700, 500, 50, 50);
+                top.openDialog(url, 'PerLeaveAppPro', 'Approve Leave', 700, 700, 50, 50);
             }
         }
         //授 权
@@ -118,9 +118,9 @@
     <form id="form1" runat="server">
      <div class="btnbarcontetn">
         <div style="text-align: left;">
-<%--            <asp:Button ID="btn_CreateHoliday" Text="新建休假申请" runat="server"  OnClientClick="add()" />
-            <asp:Button ID="btn_EditHoliday" Text="修改休假申请" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_DelHoliday" Text="取消休假申请" runat="server" />--%>
+<%--            <asp:Button ID="btn_CreateHoliday" Text="Create Leave" runat="server"  OnClientClick="add()" />
+            <asp:Button ID="btn_EditHoliday" Text="Edit Leave" runat="server"  OnClientClick="edit()" />
+            <asp:Button ID="btn_DelHoliday" Text="Cancel Leave" runat="server" />--%>
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
@@ -135,34 +135,34 @@
                             &nbsp;</label>
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        申请人
+                        Emp
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        休假类别
+                        Leave Type
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始日期
+                        Begin Date
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始半天标志
+                        Morning Flag
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        结束日期
+                        End Date
+                    </td>
+                    <td style="width: 100px; text-align: center;">
+                        Afternoon Flag
+                    </td>
+                    <td style="width: 100px; text-align: center;">
+                        Approve Status
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        结束半天标志
+                        Create Date
                     </td>
-                    <td style="width: 80px; text-align: center;">
-                        申请状态
-                    </td>
-                    <td style="width: 80px; text-align: center;">
-                        创建日期
-                    </td>
-                    <td style="width: 80px; text-align: center;">
-                        下一步审核人
+                    <td style="width: 100px; text-align: center;">
+                        Next Approver
                     </td>
                     <td>
-                        备注
+                        Remark
                     </td>
                 </tr>
             </thead>
@@ -188,16 +188,16 @@
                             <td style="width: 80px; text-align: center;">
                                 <%#Eval("EndDate", "{0:d}")%></a>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="EndFlag" runat="server" Text='<%#Eval("EndFlag")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="ApprovalFlag" runat="server" Text='<%#Eval("ApprovalFlag")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 800px; text-align: center;">
                                 <%#Eval("CreateDate", "{0:d}")%></a>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="NextApprover" runat="server" Text='<%#Eval("NextApprover")%>'></asp:Label>
                             </td>
                             <td>
@@ -210,7 +210,7 @@
                            {
                                if (rp_Item.Items.Count == 0)
                                {
-                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>没有数据！</td></tr>");
+                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>None Data！</td></tr>");
                                }
                            } %>
                     </FooterTemplate>

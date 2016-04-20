@@ -88,7 +88,7 @@ namespace RM.Web.RMBase.SysATS
             dtFormat.ShortDatePattern = "yyyy/MM/dd";
             if ((Convert.ToDateTime(BeginDate.Text, dtFormat) > Convert.ToDateTime(EndDate.Text, dtFormat)) || (Convert.ToDateTime(BeginDate.Text, dtFormat) == Convert.ToDateTime(EndDate.Text, dtFormat) && BeginFlag.Value == "0" && EndFlag.Value == "0"))
             {
-                ShowMsgHelper.Alert_Error("日期设置错误");
+                ShowMsgHelper.Alert_Error("Date Error");
             }
             else
             {
@@ -104,11 +104,11 @@ namespace RM.Web.RMBase.SysATS
                 int IsOk = DataFactory.SqlDataBase().UpdateByHashtable("Base_PerTravelApply", "id", _key, ht);
                 if (IsOk > 0)
                 {
-                    ShowMsgHelper.AlertMsg("操作成功！");
+                    ShowMsgHelper.AlertMsg("Success！");
                 }
                 else
                 {
-                    ShowMsgHelper.Alert_Error("操作失败！");
+                    ShowMsgHelper.Alert_Error("Error！");
                 }
             }
         }
@@ -158,7 +158,7 @@ namespace RM.Web.RMBase.SysATS
 
         protected void btn_down_Click(object sender, EventArgs e)
         {
-            //WriteFile实现下载
+            //WriteFile实现Download 
             string fileName = "ceshi.rar";//客户端保存的文件名
             string filePath = txt_downFilesAdd;//路径
 

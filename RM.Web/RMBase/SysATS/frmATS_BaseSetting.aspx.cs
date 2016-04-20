@@ -36,11 +36,11 @@ namespace RM.Web.RMBase.SysATS
             bool IsOk = DataFactory.SqlDataBase().Submit_AddOrEdit("Base_ATS_BaseSetting", "id", _key, ht);
             if (IsOk)
             {
-                ShowMsgHelper.AlertMsg("操作成功！");
+                ShowMsgHelper.AlertMsg("Success！");
             }
             else
             {
-                ShowMsgHelper.Alert_Error("操作失败！");
+                ShowMsgHelper.Alert_Error("Error！");
             }
         }
     }

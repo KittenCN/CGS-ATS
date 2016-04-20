@@ -313,14 +313,14 @@ namespace RM.Common.DotNetCode
             //当年的第一天是星期几
             int firstOfWeek = Convert.ToInt32(firstDay.DayOfWeek);
 
-            //计算当年第一周的起止日期，可能跨年
+            //Calculation当年第一周的起止日期，可能跨年
             int dayDiff = (-1) * firstOfWeek + 1;
             int dayAdd = 7 - firstOfWeek;
 
             firstDate = firstDay.AddDays(dayDiff).Date;
             lastDate = firstDay.AddDays(dayAdd).Date;
 
-            //如果不是要求计算第一周
+            //如果不是要求Calculation第一周
             if (weekOrder != 1)
             {
                 int addDays = (weekOrder - 1) * 7;

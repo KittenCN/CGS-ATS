@@ -17,7 +17,7 @@ namespace RM.Common.DotNetEamil
         /// <param name="Dep_Email">发送人、支持发送多个人每个地址用 ; 号隔开</param>
         /// <param name="Mis_Name">任务名称</param>
         /// <param name="Mis_Describe">内容</param>
-        /// <param name="File_Path">附件</param>
+        /// <param name="File_Path">Attachment</param>
         /// <returns></returns>
         public static string MailSending(string Dep_Email, string Mis_Name, string Mis_Describe, string File_Path)
         {
@@ -75,7 +75,7 @@ namespace RM.Common.DotNetEamil
             //设置邮件的发送级别
             mail.Priority = MailPriority.Normal;
 
-            //设置邮件的附件，将在客户端选择的附件先上传到服务器保存一个，然后加入到mail中
+            //设置邮件的Attachment，将在客户端选择的Attachment先上传到服务器保存一个，然后加入到mail中
             if (File_Path != "")
             {
                 mail.Attachments.Add(new Attachment(File_Path));

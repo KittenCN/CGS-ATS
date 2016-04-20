@@ -131,19 +131,19 @@
                         节日名称
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始日期
+                        Begin Date
                     </td>
                     <td style="width: 80px; text-align: center;">
                         开始时间
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        结束日期
+                        End Date
                     </td>
                     <td style="width: 80px; text-align: center;">
                         结束时间
                     </td>
                     <td>
-                        备注
+                        Remark
                     </td>
                 </tr>
             </thead>
@@ -179,7 +179,7 @@
                            {
                                if (rp_Item.Items.Count == 0)
                                {
-                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>没有数据！</td></tr>");
+                                   Response.Write("<tr><td colspan='8' style='color:red;text-align:center'>None Data！</td></tr>");
                                }
                            } %>
                     </FooterTemplate>

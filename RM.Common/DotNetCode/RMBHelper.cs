@@ -26,7 +26,7 @@ namespace RM.Common.DotNetCode
             int j;    //num的值乘以100的字符串长度 
             string ch1 = "";    //数字的汉语读法 
             string ch2 = "";    //数字位的汉字读法 
-            int nzero = 0;  //用来计算连续的零值是几个 
+            int nzero = 0;  //用来Calculation连续的零值是几个 
             int temp;            //从原num值中取出的值 
 
             num = Math.Round(Math.Abs(num), 2);    //将num取绝对值并四舍五入取2位小数 

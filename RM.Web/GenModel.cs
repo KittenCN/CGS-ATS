@@ -17,7 +17,7 @@ namespace RM.Web
 {
     public class GenModel
     {
-        //SendMail(发件者, 收件者, 主旨, 内容, 主机,发件者昵称, 密码 ,附件) 
+        //SendMail(发件者, 收件者, 主旨, 内容, 主机,发件者昵称, 密码 ,Attachment) 
         public string SendMail(string send, string recieve, string subject, string mailbody)
         {
             ConHelper ch =new ConHelper();
@@ -69,7 +69,7 @@ namespace RM.Web
             message.IsBodyHtml = false;
             //指定邮件优先级  
             message.Priority = System.Net.Mail.MailPriority.High;
-            //添加附件  
+            //添加Attachment  
             //System.Net.Mail.Attachment data = new Attachment(@"E:\9527\tubu\PA260445.JPG", System.Net.Mime.MediaTypeNames.Application.Octet);  
             if (strFileName != "" && strFileName != null)
             {

@@ -187,7 +187,7 @@
             </tr>
             <tr>
                 <th>
-                    备注描述
+                    Remark描述
                 </th>
                 <td colspan="">
                     <asp:Label ID="User_Remark" runat="server"></asp:Label>
