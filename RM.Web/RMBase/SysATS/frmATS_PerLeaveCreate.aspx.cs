@@ -35,7 +35,7 @@ namespace RM.Web.RMBase.SysATS
                 StringBuilder sb_sql = new StringBuilder(sql);
                 DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
                 CJform.Visible = false;
-                if(dt!=null || dt.Rows.Count>0)
+                if(dt!=null && dt.Rows.Count>0)
                 {
                     flo_njDays = float.Parse(dt.Rows[0].ItemArray[1].ToString());
                     flo_txDays = float.Parse(dt.Rows[0].ItemArray[2].ToString());
@@ -121,25 +121,25 @@ namespace RM.Web.RMBase.SysATS
             dtFormat.ShortDatePattern = "yyyy/MM/dd";
             if ((Convert.ToDateTime(BeginDate.Text, dtFormat) > Convert.ToDateTime(EndDate.Text, dtFormat)) || (Convert.ToDateTime(BeginDate.Text, dtFormat) == Convert.ToDateTime(EndDate.Text, dtFormat) && BeginFlag.Value == "0" && EndFlag.Value == "0"))
             {
-                ShowMsgHelper.Alert_Wern("日期设置错误");
+                ShowMsgHelper.Alert_Wern("Date Error");
             }
             else
             {
                 if (intMustFile==1 && (txt_FilesAdd == null || txt_FilesAdd == ""))
                 {
-                    ShowMsgHelper.Alert_Wern("必须上传证明附件!");
+                    ShowMsgHelper.Alert_Wern("Must Upload the Proof Files!");
                 }
                 else
                 {
                     if(float.Parse(LeaveDays.Text)> intMaxPerTime || floAllLeaveDays>intMaxPerYear)
                     {
-                        ShowMsgHelper.Alert_Wern("申请天数超限!");
+                        ShowMsgHelper.Alert_Wern("Over the Limit!");
                     }
                     else
                     {
                         if (LeaveID.SelectedValue == "7" && float.Parse(LeaveDays.Text) > float.Parse(njDays.Text))
                         {
-                            ShowMsgHelper.Alert_Wern("年假申请天数超过年假可用天数!");
+                            ShowMsgHelper.Alert_Wern("Over the number of AL!");
                         }
                         else
                         {

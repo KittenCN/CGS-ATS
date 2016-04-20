@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-     <title>创建休假申请</title>
+     <title>Create Leave</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
@@ -18,23 +18,23 @@
     <div>
         <table class="frm">
             <tr>
-                <th>申请人:</th>
+                <th>Emp:</th>
                 <td><asp:label id="EmpID" runat="server"></asp:label></td>
             </tr>
            <tr>
-               <th>可用年假总天数:</th>
+               <th>Effective AL:</th>
                <td><asp:Label ID="njDays" runat="server"></asp:Label></td>
            </tr>
            <tr>
-               <th>可用调休假总天数:</th>
+               <th>Effective CL:</th>
                <td><asp:Label ID="txDays" runat="server"></asp:Label></td>
            </tr>                                                                    
             <tr>
-                <th>填写日期:</th>
+                <th>Create Date:</th>
                 <td><asp:label id="CreateDate" runat="server" /></td>
             </tr>
             <tr>
-                <th>假期类别:</th>
+                <th>Type:</th>
                 <td>
                     <asp:DropDownList ID="LeaveID" runat="server" OnSelectedIndexChanged="LeaveID_SelectedIndexChanged" AutoPostBack="true">
 
@@ -42,44 +42,44 @@
                 </td>
             </tr>
             <tr>
-                <th>开始日期:</th>
+                <th>Begin Date:</th>
                 <td><asp:TextBox id="BeginDate" type="date" runat="server" /></td>
             </tr>
             <tr>
-                <th>开始日状态:</th>
+                <th>Begin Status:</th>
                 <td>
                     <select id="BeginFlag" runat="server">
-                        <option value="0">下午开始时间</option>
-                        <option value="1" selected="selected">上午开始时间</option>
+                        <option value="1" selected="selected">Morning</option>
+                        <option value="0">Afternoon</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <th>结束日期:</th>
+                <th>End Date:</th>
                 <td><asp:TextBox id="EndDate" type="date" runat="server" /></td>
             </tr>
             <tr>
-                <th>结束日状态:</th>
+                <th>End Status:</th>
                 <td>
                     <select id="EndFlag" runat="server">
-                        <option value="0">上午结束时间</option>
-                        <option value="1" selected="selected">下午结束时间</option>
+                        <option value="0">Morning</option>
+                        <option value="1" selected="selected">Afternoon</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <th>休假天数</th>
+                <th>Leave Days</th>
                 <td>
                     <asp:Label ID="LeaveDays" runat="server"></asp:Label>
                     <asp:Button ID="btnLeaveDays" runat="server" OnClick="btnLeaveDays_Click" />
                 </td>
             </tr>
             <tr>
-                <th>备注:</th>
+                <th>Remark:</th>
                 <td><textarea id="Remark" runat="server" maxlength="500" rows="3"></textarea></td>
             </tr>
             <tr>
-                <th>附件:</th>
+                <th>Attachment:</th>
                 <td>
                      <input type="file" id="FilesAdd" name="FilesAdd" runat="server" />
                      <asp:Button ID="btn_submit" Text="Upload" runat="server" onclick="btn_submit_Click" />
@@ -88,19 +88,19 @@
         </table>
         <table id="CJform" runat="server" class="frm">
             <tr>
-                <th>难产假:</th>
+                <th>Difficult labor:</th>
                 <td>
-                    <asp:CheckBox ID="cbNC" Text="难产假" runat="server" />
+                    <asp:CheckBox ID="cbNC" Text="Difficult labor" runat="server" />
                 </td>
             </tr>
             <tr>
-                <th>多胞胎:</th>
+                <th>Multiple births:</th>
                 <td>
 
-                    <asp:CheckBox ID="cbDBT" Text="多胞胎假:" runat="server" OnCheckedChanged="DBT_CheckedChanged" AutoPostBack="true" />
+                    <asp:CheckBox ID="cbDBT" Text="Multiple births:" runat="server" OnCheckedChanged="DBT_CheckedChanged" AutoPostBack="true" />
 &nbsp;
                     <asp:TextBox ID="DBT" runat="server" Width="16px" Enabled="false">0</asp:TextBox>
-                    <asp:Label ID="lbDBT" runat="server" Text="胞胎"></asp:Label>
+                    <asp:Label ID="lbDBT" runat="server" Text="Babies"></asp:Label>
 
                 </td>
             </tr>           
@@ -108,9 +108,9 @@
     </div>
     <div class="frmbottom">
         <asp:LinkButton ID="Save" runat="server" class="l-btn" OnClick="Save_Click"><span class="l-btn-left">
-            <img src="/Themes/Images/disk.png" alt="" />保 存</span></asp:LinkButton>
+            <img src="/Themes/Images/disk.png" alt="" />Save</span></asp:LinkButton>
         <a class="l-btn" href="javascript:void(0)" onclick="OpenClose();"><span class="l-btn-left">
-            <img src="/Themes/Images/cancel.png" alt="" />关 闭</span></a>
+            <img src="/Themes/Images/cancel.png" alt="" />Close</span></a>
     </div>
     </form>
 </body>

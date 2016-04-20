@@ -39,7 +39,7 @@ namespace RM.Web.RMBase.SysATS
                 StringBuilder sb_sql = new StringBuilder(sql);
                 DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
                 CJform.Visible = false;
-                if (dt != null || dt.Rows.Count > 0)
+                if (dt != null && dt.Rows.Count > 0)
                 {
                     flo_njDays = float.Parse(dt.Rows[0].ItemArray[1].ToString());
                     flo_txDays = float.Parse(dt.Rows[0].ItemArray[2].ToString());
@@ -62,7 +62,7 @@ namespace RM.Web.RMBase.SysATS
                         if (int_AppFlag != 0 && int_AppFlag != 3)
                         {
                             Save.Visible = false;
-                            ShowMsgHelper.Alert_Wern("申请已在审批中或已审批完成,不得被修改!");
+                            ShowMsgHelper.Alert_Wern("Read Only!");
                         }
                         if (dt.Rows[0].ItemArray[1] == null || dt.Rows[0].ItemArray[1].ToString().Length == 0)
                         {
@@ -76,7 +76,7 @@ namespace RM.Web.RMBase.SysATS
                     }
                     else
                     {
-                        ShowMsgHelper.Alert_Wern("数据错误,请联系管理员");
+                        ShowMsgHelper.Alert_Wern("Data Error!");
                     }
                     
                 }
@@ -181,25 +181,25 @@ namespace RM.Web.RMBase.SysATS
             dtFormat.ShortDatePattern = "yyyy/MM/dd";
             if ((Convert.ToDateTime(BeginDate.Text, dtFormat) > Convert.ToDateTime(EndDate.Text, dtFormat)) || (Convert.ToDateTime(BeginDate.Text, dtFormat) == Convert.ToDateTime(EndDate.Text, dtFormat) && BeginFlag.Value == "0" && EndFlag.Value == "0"))
             {
-                ShowMsgHelper.Alert_Wern("日期设置错误");
+                ShowMsgHelper.Alert_Wern("Date Error");
             }
             else
             {
                 if (intMustFile == 1 && (txt_FilesAdd == null || txt_FilesAdd == ""))
                 {
-                    ShowMsgHelper.Alert_Wern("必须上传证明附件!");
+                    ShowMsgHelper.Alert_Wern("Must Upload the Proof Files!");
                 }
                 else
                 {
                     if (float.Parse(LeaveDays.Text) > intMaxPerTime || floAllLeaveDays > intMaxPerYear)
                     {
-                        ShowMsgHelper.Alert_Wern("申请天数超限!");
+                        ShowMsgHelper.Alert_Wern("Over the Limit!!");
                     }
                     else
                     {
                         if (LeaveID.SelectedValue == "7" && float.Parse(LeaveDays.Text) > float.Parse(njDays.Text))
                         {
-                            ShowMsgHelper.Alert_Wern("年假申请天数超过年假可用天数!");
+                            ShowMsgHelper.Alert_Wern("Over the number of AL!");
                         }
                         else
                         {
@@ -234,11 +234,11 @@ namespace RM.Web.RMBase.SysATS
                             int IsOk = DataFactory.SqlDataBase().UpdateByHashtable("Base_PerLeaveApply", "id", _key, ht);
                             if (IsOk > 0)
                             {
-                                ShowMsgHelper.AlertMsg("操作成功！");
+                                ShowMsgHelper.AlertMsg("Success！");
                             }
                             else
                             {
-                                ShowMsgHelper.Alert_Error("操作失败！");
+                                ShowMsgHelper.Alert_Error("Error！");
                             }
                         }
                     }

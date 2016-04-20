@@ -27,6 +27,8 @@ namespace RM.Web
             string pwd = ch.strPWD;
             string strFileName = "";
 
+            int intRecFlag = 0;
+
             //生成一个   使用SMTP发送邮件的客户端对象  
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
             //生成一个主机IP  
@@ -47,7 +49,16 @@ namespace RM.Web
             //其实使用该项的话就可以随意设定“主机,发件者昵称, 密码”，因为你的IIS服务器已经设定好了。而且公司内部发邮件是不需要验证的。  
 
             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
-            message.To.Add(recieve);
+            if(recieve==null || recieve=="")
+            {
+                message.To.Add(send);
+                intRecFlag = 1;
+            }
+            else
+            {
+                message.To.Add(recieve);
+                intRecFlag = 0;
+            }
             message.From = new System.Net.Mail.MailAddress(send, uname, System.Text.Encoding.UTF8);
             message.Subject = subject;
             message.Body = mailbody;
@@ -70,11 +81,20 @@ namespace RM.Web
             {
                 //发送  
                 client.Send(message);
-                return "发送成功！";
+                string strSResult = "Send Mail Success!";
+                string strEResult = "Unknow Receiver Mail Add.,Mail sent to DEFAULT Add.!";
+                if(intRecFlag==1)
+                {
+                    return strEResult;
+                }
+                else
+                {
+                    return strSResult;
+                }
             }
             catch (System.Net.Mail.SmtpException ex)
             {
-                return "发送失败：" + ex.Message;
+                return "Mail Error：" + ex.Message;
             }
         }
 
@@ -86,6 +106,7 @@ namespace RM.Web
             string uname = ch.strUname;
             string pwd = ch.strPWD;
             string sender = ch.strSender;
+            int intRecFlag = 0;
 
             try
             {
@@ -97,8 +118,17 @@ namespace RM.Web
                                                                                            //这里假定你已经拥有了一个163邮箱的账户，用户名为abc，密码为*******
                 System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
                 Message.From = new System.Net.Mail.MailAddress(sender);//这里需要注意，163似乎有规定发信人的邮箱地址必须是163的，而且发信人的邮箱用户名必须和上面SMTP服务器认证时的用户名相同
-                                                                                    //因为上面用的用户名abc作SMTP服务器认证，所以这里发信人的邮箱地址也应该写为abc@163.com
-                Message.To.Add(Recieve);//将邮件发送给Gmail
+                                                                       //因为上面用的用户名abc作SMTP服务器认证，所以这里发信人的邮箱地址也应该写为abc@163.com
+                if (Recieve == null || Recieve == "")
+                {
+                    Message.To.Add(sender);
+                    intRecFlag = 1;
+                }
+                else
+                {
+                    Message.To.Add(Recieve);
+                    intRecFlag = 0;
+                }
                 Message.Subject = MailSubject;
                 Message.Body = MailBody;
                 Message.SubjectEncoding = System.Text.Encoding.UTF8;
@@ -106,11 +136,20 @@ namespace RM.Web
                 Message.Priority = System.Net.Mail.MailPriority.High;
                 Message.IsBodyHtml = true;
                 client.Send(Message);
-                return "发送成功！";
+                string strSResult = "Send Mail Success!";
+                string strEResult = "Unknow Receiver Mail Add.,Mail sent to DEFAULT Add.!";
+                if (intRecFlag == 1)
+                {
+                    return strEResult;
+                }
+                else
+                {
+                    return strSResult;
+                }
             }
             catch (System.Net.Mail.SmtpException ex)
             {
-                return "发送失败：" + ex.Message;
+                return "Mail Error：" + ex.Message;
             }
         }
 
