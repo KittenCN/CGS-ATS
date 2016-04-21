@@ -96,9 +96,9 @@
     <form id="form1" runat="server">
      <div class="btnbarcontetn">
         <div style="text-align: left;">           
-<%--            <asp:Button ID="btn_CreateTravel" Text="新建公出申请" runat="server"  OnClientClick="add()" />
-            <asp:Button ID="btn_EditTravel" Text="修改公出申请" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_DelTravel" Text="取消公出申请" runat="server" />--%>
+<%--            <asp:Button ID="btn_CreateTravel" Text="Create BizTravel" runat="server"  OnClientClick="add()" />
+            <asp:Button ID="btn_EditTravel" Text="Edit BizTravel" runat="server"  OnClientClick="edit()" />
+            <asp:Button ID="btn_DelTravel" Text="Cancel BizTravel" runat="server" />--%>
             <input id="EmpID" name="EmpID" runat="server"  type="text" list="Emplist" style="width: 200px"/>
             <datalist id="Emplist" runat="server"></datalist>
             <asp:label Text="Begin Date:" runat="server" ></asp:label>

@@ -95,9 +95,9 @@
     </div>
     <div class="frmbottom">
         <asp:LinkButton ID="Save" runat="server" class="l-btn" OnClick="Pass_Click"><span class="l-btn-left">
-            <img src="/Themes/Images/disk.png" alt="" />通  过</span></asp:LinkButton>
+            <img src="/Themes/Images/disk.png" alt="" />Adopt</span></asp:LinkButton>
         <asp:LinkButton ID="Reject" runat="server" class="l-btn" OnClick="Reject_Click"><span class="l-btn-left">
-            <img src="/Themes/Images/cancel.png" alt="" />否  决</span></asp:LinkButton>
+            <img src="/Themes/Images/cancel.png" alt="" />Veto</span></asp:LinkButton>
     </div>
     </form>
 </body>

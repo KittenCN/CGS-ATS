@@ -17,14 +17,14 @@
         //添加
         function add() {
             var url = "/RMBase/SysATS/frmATS_PerTravelCreate.aspx";
-            top.openDialog(url, 'PerLeaveCreate', '新建公出申请', 700, 500, 50, 50);
+            top.openDialog(url, 'PerLeaveCreate', 'Create BizTravel', 800, 550, 50, 50);
         }
         //修改
         function edit() {
             var key = CheckboxValue();
             if (IsEditdata(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerTravelEdit.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveEdit', '修改公出申请', 700, 500, 50, 50);
+                top.openDialog(url, 'PerLeaveEdit', 'Edit BizTravel', 800, 550, 50, 50);
             }
         }
         //双击修改
@@ -120,9 +120,9 @@
     <form id="form1" runat="server">
      <div class="btnbarcontetn">
         <div style="text-align: left;">
-            <asp:Button ID="btn_CreateTravel" Text="新建公出申请" runat="server"  OnClientClick="add()" />
-            <asp:Button ID="btn_EditTravel" Text="修改公出申请" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_DelTravel" Text="取消公出申请" runat="server" OnClick="btn_DelTravel_Click" />
+            <asp:Button ID="btn_CreateTravel" Text="Create BizTravel" runat="server"  OnClientClick="add()" />
+            <asp:Button ID="btn_EditTravel" Text="Edit BizTravel" runat="server"  OnClientClick="edit()" />
+            <asp:Button ID="btn_DelTravel" Text="Cancel BizTravel" runat="server" OnClick="btn_DelTravel_Click" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
@@ -145,25 +145,25 @@
                     <td style="width: 80px; text-align: center;">
                         Morning Flag
                     </td>
-                    <td style="width: 80px; text-align: center;">
+                    <td style="width: 100px; text-align: center;">
                         End Date
                     </td>
-                    <td style="width: 80px; text-align: center;">
+                    <td style="width: 100px; text-align: center;">
                         Afternoon Flag
                     </td>
-                    <td style="width: 100px; text-align: center;">
+                    <td style="width: 80px; text-align: center;">
                         Destination
                     </td>
-                    <td style="width: 100px; text-align: center;">
+                    <td style="width: 80px; text-align: center;">
                         Reason
                     </td>
-                    <td style="width: 80px; text-align: center;">
+                    <td style="width: 100px; text-align: center;">
                         Approve Status
                     </td>
                     <td style="width: 80px; text-align: center;">
                         Create Date
                     </td>
-                    <td style="width: 80px; text-align: center;">
+                    <td style="width: 100px; text-align: center;">
                         Next Approver
                     </td>
                     <td>
@@ -187,25 +187,25 @@
                             <td style="width: 80px; text-align: center;">
                                 <asp:Label ID="BeginFlag" runat="server" Text='<%#Eval("BeginFlag")%>'></asp:Label>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <%#Eval("EndDate", "{0:d}")%></a>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="EndFlag" runat="server" Text='<%#Eval("EndFlag")%>'></asp:Label>
                             </td>
-                            <td style="width: 20px; text-align: left;">
+                            <td style="width: 80px; text-align: left;">
                                  <%#Eval("Place")%>
                             </td>
-                            <td style="width: 20px; text-align: left;">
+                            <td style="width: 80px; text-align: left;">
                                  <%#Eval("Reason")%>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="ApprovalFlag" runat="server" Text='<%#Eval("ApprovalFlag")%>'></asp:Label>
                             </td>
                             <td style="width: 80px; text-align: center;">
                                 <%#Eval("CreateDate", "{0:d}")%></a>
                             </td>
-                            <td style="width: 80px; text-align: center;">
+                            <td style="width: 100px; text-align: center;">
                                 <asp:Label ID="NextApprover" runat="server" Text='<%#Eval("NextApprover")%>'></asp:Label>
                             </td>
                             <td>

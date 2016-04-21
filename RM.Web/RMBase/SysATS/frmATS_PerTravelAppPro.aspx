@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>审批公出申请</title>
+    <title>Approve BizTravel</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
@@ -23,6 +23,10 @@
         }
         #Remark {
             width: 250px;
+        }
+        .auto-style1 {
+            width: 704px;
+            height: 40px;
         }
     </style>
 </head>
@@ -103,15 +107,15 @@
             </tr>
             <tr>
                 <th>Approver Remark:</th>
-                <td><textarea id="ApprovalRemark" runat="server" maxlength="500" rows="10" class="auto-style1"></textarea></td>
+                <td><textarea id="ApprovalRemark" runat="server" maxlength="500" class="auto-style1"></textarea></td>
             </tr>
         </table>
     </div>
     <div class="frmbottom">
         <asp:LinkButton ID="Save" runat="server" class="l-btn" OnClick="Pass_Click"><span class="l-btn-left">
-            <img src="/Themes/Images/disk.png" alt="" />通  过</span></asp:LinkButton>
+            <img src="/Themes/Images/disk.png" alt="" />Adopt</span></asp:LinkButton>
         <asp:LinkButton ID="Reject" runat="server" class="l-btn" OnClick="Reject_Click"><span class="l-btn-left">
-            <img src="/Themes/Images/cancel.png" alt="" />否  决</span></asp:LinkButton>
+            <img src="/Themes/Images/cancel.png" alt="" />Veto</span></asp:LinkButton>
     </div>
     </form>
 </body>

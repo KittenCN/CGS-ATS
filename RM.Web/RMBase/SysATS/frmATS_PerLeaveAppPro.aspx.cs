@@ -148,16 +148,16 @@ namespace RM.Web.RMBase.SysATS
                     {
                         gm.SendMail2(gm.GetEMailFromID(strUserID), "Your LeaveList has been updated!", "Your LeaveList has been updated!");
                     }
-                    ShowMsgHelper.AlertMsg("审批成功");
+                    ShowMsgHelper.AlertMsg("Success");
                 }
                 else
                 {
-                    ShowMsgHelper.Alert_Wern("审批失败");
+                    ShowMsgHelper.Alert_Wern("Error");
                 }
             }
             else
             {
-                ShowMsgHelper.Alert_Wern("审批失败");
+                ShowMsgHelper.Alert_Wern("Error");
             }
 
         }
@@ -189,16 +189,16 @@ namespace RM.Web.RMBase.SysATS
                 int i2 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql2);
                 if (i2 > 0)
                 {
-                    ShowMsgHelper.AlertMsg("审批成功");
+                    ShowMsgHelper.AlertMsg("Success");
                 }
                 else
                 {
-                    ShowMsgHelper.Alert_Wern("审批失败");
+                    ShowMsgHelper.Alert_Wern("Error");
                 }
             }
             else
             {
-                ShowMsgHelper.Alert_Wern("审批失败");
+                ShowMsgHelper.Alert_Wern("Error");
             }
         }
 

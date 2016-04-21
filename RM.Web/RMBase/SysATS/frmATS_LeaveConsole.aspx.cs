@@ -32,6 +32,10 @@ namespace RM.Web.RMBase.SysATS
         {
             int count = 0;
 
+            string strsql = "insert into Base_LeaveConsole(EmpID) select USER_ID from Base_UserInfo where USER_ID not in (select empid from Base_LeaveConsole)";
+            StringBuilder sbsql = new StringBuilder(strsql);
+            DataFactory.SqlDataBase().ExecuteBySql(sbsql);
+
             //StringBuilder SqlWhere = new StringBuilder();
             //IList<SqlParam> IList_param = new List<SqlParam>();
             string sql = "select * from uvw_Base_LeaveConsole ";

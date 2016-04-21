@@ -40,7 +40,7 @@
             var key = CheckboxValue();
             if (IsDelData(key)) {
                 var url = "/RMBase/SysATS/frmATS_PerTravelAppPro.aspx?key=" + key;
-                top.openDialog(url, 'PerLeaveAppPro', 'Approve Leave', 700, 500, 50, 50);
+                top.openDialog(url, 'PerLeaveAppPro', 'Approve Leave', 700, 700, 50, 50);
             }
         }
         //授 权
@@ -118,9 +118,9 @@
     <form id="form1" runat="server">
      <div class="btnbarcontetn">
         <div style="text-align: left;">
-<%--            <asp:Button ID="btn_CreateTravel" Text="新建公出申请" runat="server"  OnClientClick="add()" />
-            <asp:Button ID="btn_EditTravel" Text="修改公出申请" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_DelTravel" Text="取消公出申请" runat="server" />--%>
+<%--            <asp:Button ID="btn_CreateTravel" Text="Create BizTravel" runat="server"  OnClientClick="add()" />
+            <asp:Button ID="btn_EditTravel" Text="Edit BizTravel" runat="server"  OnClientClick="edit()" />
+            <asp:Button ID="btn_DelTravel" Text="Cancel BizTravel" runat="server" />--%>
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>

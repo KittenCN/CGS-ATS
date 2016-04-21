@@ -24,7 +24,7 @@ namespace RM.Web.RMBase.SysATS
         public static string txt_FilesAdd;
         public static string txt_downFilesAdd;
         public static string txt_NextApprover;
-        public static int inttxDays;
+        public static float flotxDays;
         public static string strUserID;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -105,16 +105,16 @@ namespace RM.Web.RMBase.SysATS
             float fResult = 0;
             TimeSpan ts;
             //int differenceInDays = ts.Days;
-
-            for (DateTime dtT = dtBeginDate; dtT < dtEndDate; dtT = dtT.AddDays(1))
+            flotxDays = 0;
+            for (DateTime dtT = dtBeginDate; dtT < dtEndDate.AddDays(1); dtT = dtT.AddDays(1))
             {
                 int intdtT = (int)dtT.DayOfWeek;
                 if (intdtT == 6 || intdtT == 0)
                 {
-                    inttxDays = inttxDays + 1;
+                    flotxDays = flotxDays + 1;
                 }
             }
-            txDays.Text = inttxDays.ToString();
+            txDays.Text = flotxDays.ToString();
 
             if (intBeginFlag == 1 && intEndFlag == 1)
             {
@@ -157,6 +157,8 @@ namespace RM.Web.RMBase.SysATS
 
         protected void Pass_Click(object sender, EventArgs e)
         {
+            CallDays();
+
             string txt_Remark = "";
             int int_AppStatus = 99;
 
@@ -171,6 +173,7 @@ namespace RM.Web.RMBase.SysATS
             }
 
             txt_Remark = ApprovalRemark.InnerText;
+            flotxDays = float.Parse(txDays.Text);
 
             string sql1 = "update Base_PerTravelApply set ApprovalFlag=" + int_AppStatus + ",NextApprover='" + txt_NextApprover + "' where id='" + _key + "' ";
             StringBuilder sb_sql1 = new StringBuilder(sql1);
@@ -189,19 +192,19 @@ namespace RM.Web.RMBase.SysATS
                     {
                         gm.SendMail2(gm.GetEMailFromID(strUserID), "Your TraveList has been updated!", "Your TraveList has been updated!");
                     }
-                    ShowMsgHelper.AlertMsg("审批成功");
-                    string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + inttxDays + " where EmpID='" + txt_EmpID + "' ";
+                    ShowMsgHelper.AlertMsg("Success");
+                    string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + flotxDays + " where EmpID='" + txt_EmpID + "' ";
                     StringBuilder sb_sql3 = new StringBuilder(sql3);
                     int i3 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql3);
                 }
                 else
                 {
-                    ShowMsgHelper.Alert_Wern("审批失败");
+                    ShowMsgHelper.Alert_Wern("Error");
                 }
             }
             else
             {
-                ShowMsgHelper.Alert_Wern("审批失败");
+                ShowMsgHelper.Alert_Wern("Error");
             }
 
         }
@@ -233,16 +236,16 @@ namespace RM.Web.RMBase.SysATS
                 int i2 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql2);
                 if (i2 > 0)
                 {
-                    ShowMsgHelper.AlertMsg("审批成功");
+                    ShowMsgHelper.AlertMsg("Success");
                 }
                 else
                 {
-                    ShowMsgHelper.Alert_Wern("审批失败");
+                    ShowMsgHelper.Alert_Wern("Error");
                 }
             }
             else
             {
-                ShowMsgHelper.Alert_Wern("审批失败");
+                ShowMsgHelper.Alert_Wern("Error");
             }
         }
 

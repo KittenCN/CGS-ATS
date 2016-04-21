@@ -21,7 +21,7 @@ namespace RM.Web.RMBase.SysATS
         public string txt_EmpID;
         public string txt_EmpName;
         public static string txt_FilesAdd;
-        public static int inttxDays;
+        public static float flotxDays;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -143,17 +143,17 @@ namespace RM.Web.RMBase.SysATS
             float fResult = 0;
             TimeSpan ts;
             //int differenceInDays = ts.Days;
-            inttxDays = 0;  //初始化inttxDays
+            flotxDays = 0;  //初始化inttxDays
 
             for(DateTime dtT=dtBeginDate;dtT<dtEndDate.AddDays(1); dtT = dtT.AddDays(1))
             {
                 int intdtT = (int)dtT.DayOfWeek;
                 if(intdtT==6 || intdtT==0)
                 {
-                    inttxDays = inttxDays + 1;
+                    flotxDays = flotxDays + 1;
                 }
             }
-            txDays.Text = inttxDays.ToString();
+            txDays.Text = flotxDays.ToString();
 
             if (intBeginFlag == 1 && intEndFlag == 1)
             {
