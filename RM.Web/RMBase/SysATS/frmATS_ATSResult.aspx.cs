@@ -26,8 +26,8 @@ namespace RM.Web.RMBase.SysATS
                 DateTime FirstDay = DateTime.Now.AddDays(-DateTime.Now.Day + 1);
                 DateTime LastDay = DateTime.Now.AddMonths(1).AddDays(-DateTime.Now.AddMonths(1).Day);
 
-                FirstDay = DateTime.Parse("2015-11-1");
-                LastDay = DateTime.Parse("2015-11-30");
+                FirstDay = DateTime.Parse("2016-1-1");
+                LastDay = DateTime.Parse("2016-1-31");
 
                 tb_BeginDate.Text = FirstDay.ToString("yyyy-MM-dd");
                 tb_EndDate.Text = LastDay.ToString("yyyy-MM-dd");
@@ -99,6 +99,12 @@ namespace RM.Web.RMBase.SysATS
             string txtEndDate = tb_EndDate.Text;
             DateTime dtBeginDate = DateTime.Parse(txtBeginDate);
             DateTime dtEndDate = DateTime.Parse(txtEndDate);
+
+            //屏蔽按钮
+            btn_ATSCheck.Enabled = false;
+            btn_EditTravel.Enabled = false;
+            btn_Search.Enabled = false;
+            btn_SetNor.Enabled = false;
 
             //删除时间段内的记录
             string sql = "delete from Base_ATSResult where ATS_Date>='" + txtBeginDate + "' and ATS_Date<='" + txtEndDate + "' ";
@@ -304,7 +310,7 @@ namespace RM.Web.RMBase.SysATS
                         int int_sqlresultii = DataFactory.SqlDataBase().ExecuteBySql(insb_sqlii);
                         if (int_sqlresultii <= 0)
                         {
-                            ShowMsgHelper.Alert_Wern("Exam Error!");
+                            ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult001");
                         }
                     }
                 }
@@ -588,7 +594,7 @@ namespace RM.Web.RMBase.SysATS
                         int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
                         if (int_sqlresult <= 0)
                         {
-                            ShowMsgHelper.Alert_Wern("Exam Error!");
+                            ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult002");
                         }
                     }
                     else
@@ -601,7 +607,7 @@ namespace RM.Web.RMBase.SysATS
                         int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
                         if (int_sqlresult <= 0)
                         {
-                            ShowMsgHelper.Alert_Wern("Exam Error!");
+                            ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult003");
                         }
                     }
 
@@ -863,7 +869,7 @@ namespace RM.Web.RMBase.SysATS
                     int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
                     if (int_sqlresult <= 0)
                     {
-                        ShowMsgHelper.Alert_Wern("Exam Error!");
+                        ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult004");
                     }
                     //}
                     //else
@@ -881,8 +887,14 @@ namespace RM.Web.RMBase.SysATS
             }
             else
             {
-                ShowMsgHelper.Alert_Wern("Exam Error!");
+                ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult005");
             }
+
+            //恢复按钮
+            btn_ATSCheck.Enabled = true;
+            btn_EditTravel.Enabled = true;
+            btn_Search.Enabled = true;
+            btn_SetNor.Enabled = true;
         }
 
         protected void rp_ItemDataBound(object sender, RepeaterItemEventArgs e)
