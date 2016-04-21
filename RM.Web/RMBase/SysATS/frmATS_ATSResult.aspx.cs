@@ -105,6 +105,7 @@ namespace RM.Web.RMBase.SysATS
             btn_EditTravel.Enabled = false;
             btn_Search.Enabled = false;
             btn_SetNor.Enabled = false;
+            System.Threading.Thread.Sleep(5000);
 
             //删除时间段内的记录
             string sql = "delete from Base_ATSResult where ATS_Date>='" + txtBeginDate + "' and ATS_Date<='" + txtEndDate + "' ";
@@ -298,9 +299,82 @@ namespace RM.Web.RMBase.SysATS
                             }
                         }
 
+                        //获取节日记录
+                        int int_ATS_Holiday = 0;
+                        int int_ATS_HolidayStatus = 0;
+                        string strinsql = "select * from dbo.Base_ATS_HolidaySetting where '" + txt_ATS_Date + "' between BeginDate and EndDate";
+                        StringBuilder sbinsb_sql = new StringBuilder(strinsql);
+                        DataTable dtindt = DataFactory.SqlDataBase().GetDataTableBySQL(sbinsb_sql);
+                        if (dtindt.Rows.Count != 0 && dtindt.Rows[0].ItemArray[0].ToString().Length != 0)
+                        {
+                            DateTime dt_HBeginDate = DateTime.Parse(dtindt.Rows[0].ItemArray[2].ToString());
+                            DateTime dt_HEndDate = DateTime.Parse(dtindt.Rows[0].ItemArray[3].ToString());
+                            int int_HBeginDateFlag = int.Parse(dtindt.Rows[0].ItemArray[4].ToString());
+                            int int_HEndDateFlag = int.Parse(dtindt.Rows[0].ItemArray[5].ToString());
+
+                            int_ATS_Holiday = int.Parse(dtindt.Rows[0].ItemArray[0].ToString());
+
+                            if (dt_ATS_Date == dt_HBeginDate && dt_HBeginDate != dt_HEndDate)
+                            {
+                                switch (int_HBeginDateFlag)
+                                {
+                                    case 0:
+                                        {
+                                            int_ATS_HolidayStatus = 1;
+                                            intATSResult = 0;
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            int_ATS_HolidayStatus = 0;
+                                            intATSResult = 1;
+                                            break;
+                                        }
+                                }
+
+
+                            }
+                            if (dt_ATS_Date == dt_HEndDate && dt_HBeginDate != dt_HEndDate)
+                            {
+                                switch (int_HEndDateFlag)
+                                {
+                                    case 0:
+                                        {
+                                            int_ATS_HolidayStatus = 1;
+                                            intATSResult = 0;
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            int_ATS_HolidayStatus = 0;
+                                            intATSResult = 1;
+                                            break;
+                                        }
+                                }
+                            }
+                            if (dt_ATS_Date == dt_HEndDate && dt_HBeginDate == dt_HEndDate)
+                            {
+                                if (int_HBeginDateFlag == 0 && int_HEndDateFlag == 1)
+                                {
+                                    int_ATS_HolidayStatus = 1;
+                                    intATSResult = 0;
+                                }
+                                if (int_HBeginDateFlag == 1 && int_HEndDateFlag == 0)
+                                {
+                                    int_ATS_HolidayStatus = 1;
+                                    intATSResult = 0;
+                                }
+                                if (int_HBeginDateFlag == 1 && int_HEndDateFlag == 1)
+                                {
+                                    int_ATS_HolidayStatus = 0;
+                                    intATSResult = 1;
+                                }
+                            }
+                        }
+
                         //更新节日,休假,公出记录
                         string insqlii = "update Base_ATSResult ";
-                        //insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
+                        insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
                         insqlii = insqlii + "set ATS_Leave='" + int_ATS_Leave + "',ATS_LeaveID='" + int_ATS_LeaveID + "',ATS_LeaveStatus='" + int_ATS_LeaveStatus + "' ";
                         insqlii = insqlii + ", ATS_Travel='" + int_ATS_Travel + "',ATS_TravelID='" + int_ATS_TravelID + "',ATS_TravelStatus='" + int_ATS_TravelStatus + "' ";
                         //insqlii = insqlii + ", PunchINTime = '" + txt_PunchInTime + "',PunchOutTime = '" + txt_PunchOutTime + "',LunchTime = '" + txt_LunchTime + "' ";
@@ -858,16 +932,29 @@ namespace RM.Web.RMBase.SysATS
 
 
                     //更新节日,休假,公出记录及三组打卡记录
-                    insql = "update Base_ATSResult ";
-                    insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
-                    insql = insql + ", ATS_Leave='" + int_ATS_Leave + "',ATS_LeaveID='" + int_ATS_LeaveID + "',ATS_LeaveStatus='" + int_ATS_LeaveStatus + "' ";
-                    insql = insql + ", ATS_Travel='" + int_ATS_Travel + "',ATS_TravelID='" + int_ATS_TravelID + "',ATS_TravelStatus='" + int_ATS_TravelStatus + "' ";
-                    insql = insql + ", PunchINTime = '" + txt_PunchInTime + "',PunchOutTime = '" + txt_PunchOutTime + "',LunchTime = '" + txt_LunchTime + "' ";
-                    insql = insql + ", ATS_Result=" + intATSResult + " ";
-                    insql = insql + " where EmpID='" + txt_EmpID + "' and ATS_Date='" + txt_ATS_Date + "' ";
+                    if(int_ATS_Holiday==0)
+                    {
+                        insql = "update Base_ATSResult ";
+                        insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
+                        insql = insql + ", ATS_Leave='" + int_ATS_Leave + "',ATS_LeaveID='" + int_ATS_LeaveID + "',ATS_LeaveStatus='" + int_ATS_LeaveStatus + "' ";
+                        insql = insql + ", ATS_Travel='" + int_ATS_Travel + "',ATS_TravelID='" + int_ATS_TravelID + "',ATS_TravelStatus='" + int_ATS_TravelStatus + "' ";
+                        insql = insql + ", PunchINTime = '" + txt_PunchInTime + "',PunchOutTime = '" + txt_PunchOutTime + "',LunchTime = '" + txt_LunchTime + "' ";
+                        insql = insql + ", ATS_Result=" + intATSResult + " ";
+                        insql = insql + " where EmpID='" + txt_EmpID + "' and ATS_Date='" + txt_ATS_Date + "' and ATS_Holiday=0";
+                    }
+                    else
+                    {
+                        insql = "update Base_ATSResult ";
+                        //insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
+                        insql = insql + "set ATS_Leave='" + int_ATS_Leave + "',ATS_LeaveID='" + int_ATS_LeaveID + "',ATS_LeaveStatus='" + int_ATS_LeaveStatus + "' ";
+                        insql = insql + ", ATS_Travel='" + int_ATS_Travel + "',ATS_TravelID='" + int_ATS_TravelID + "',ATS_TravelStatus='" + int_ATS_TravelStatus + "' ";
+                        insql = insql + ", PunchINTime = '" + txt_PunchInTime + "',PunchOutTime = '" + txt_PunchOutTime + "',LunchTime = '" + txt_LunchTime + "' ";
+                        insql = insql + ", ATS_Result=" + intATSResult + " ";
+                        insql = insql + " where EmpID='" + txt_EmpID + "' and ATS_Date='" + txt_ATS_Date + "' and ATS_Holiday!=0";
+                    }
                     insb_sql = new StringBuilder(insql);
                     int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
-                    if (int_sqlresult <= 0)
+                    if (int_sqlresult < 0)
                     {
                         ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult004");
                     }
