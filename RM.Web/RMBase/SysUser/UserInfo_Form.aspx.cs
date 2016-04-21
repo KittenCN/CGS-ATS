@@ -454,6 +454,9 @@ namespace RM.Web.RMBase.SysUser
             }
             if (IsOk)
             {
+                string strsql = "insert into Base_LeaveConsole(EmpID) select USER_ID from Base_UserInfo where USER_ID not in (select empid from Base_LeaveConsole)";
+                StringBuilder sbsql = new StringBuilder(strsql);
+                DataFactory.SqlDataBase().ExecuteBySql(sbsql);
                 ShowMsgHelper.ParmAlertMsg("Success！");
             }
             else

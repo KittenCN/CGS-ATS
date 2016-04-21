@@ -193,7 +193,7 @@ namespace RM.Web.RMBase.SysATS
                         gm.SendMail2(gm.GetEMailFromID(strUserID), "Your TraveList has been updated!", "Your TraveList has been updated!");
                     }
                     ShowMsgHelper.AlertMsg("Success");
-                    string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + flotxDays + " where EmpID='" + txt_EmpID + "' ";
+                    string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + flotxDays + " where EmpID='" + strUserID + "' ";
                     StringBuilder sb_sql3 = new StringBuilder(sql3);
                     int i3 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql3);
                 }
