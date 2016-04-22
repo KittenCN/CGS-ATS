@@ -374,15 +374,15 @@ namespace RM.Web.RMBase.SysATS
 
                         //更新节日,休假,公出记录
                         string insqlii = "update Base_ATSResult ";
-                        insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
-                        insqlii = insqlii + "set ATS_Leave='" + int_ATS_Leave + "',ATS_LeaveID='" + int_ATS_LeaveID + "',ATS_LeaveStatus='" + int_ATS_LeaveStatus + "' ";
+                        insqlii = insqlii + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
+                        insqlii = insqlii + ", ATS_Leave='" + int_ATS_Leave + "',ATS_LeaveID='" + int_ATS_LeaveID + "',ATS_LeaveStatus='" + int_ATS_LeaveStatus + "' ";
                         insqlii = insqlii + ", ATS_Travel='" + int_ATS_Travel + "',ATS_TravelID='" + int_ATS_TravelID + "',ATS_TravelStatus='" + int_ATS_TravelStatus + "' ";
                         //insqlii = insqlii + ", PunchINTime = '" + txt_PunchInTime + "',PunchOutTime = '" + txt_PunchOutTime + "',LunchTime = '" + txt_LunchTime + "' ";
                         insqlii = insqlii + ", ATS_Result=" + intATSResult + " ";
                         insqlii = insqlii + " where EmpID='" + txt_EmpID + "' and EmpCode='" + txt_EmpCode + "' and ATS_Date='" + txt_ATS_Date + "' ";
                         StringBuilder insb_sqlii = new StringBuilder(insqlii);
                         int int_sqlresultii = DataFactory.SqlDataBase().ExecuteBySql(insb_sqlii);
-                        if (int_sqlresultii <= 0)
+                        if (int_sqlresultii < 0)
                         {
                             ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult001");
                         }
@@ -391,7 +391,7 @@ namespace RM.Web.RMBase.SysATS
                 sql = "update Base_ATSResult set ATS_Result=1 where ATS_DateStatus=0 or ATS_DateStatus=6";
                 sb_sql = new StringBuilder(sql);
                 int intsql = DataFactory.SqlDataBase().ExecuteBySql(sb_sql);
-                if (intsql <= 0)
+                if (intsql < 0)
                 {
                     ShowMsgHelper.Alert_Wern("Exam Error!");
                 }
@@ -666,7 +666,7 @@ namespace RM.Web.RMBase.SysATS
                         insql = insql + " where ATS_Date='" + txt_ATS_Date + "' ";
                         insb_sql = new StringBuilder(insql);
                         int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
-                        if (int_sqlresult <= 0)
+                        if (int_sqlresult < 0)
                         {
                             ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult002");
                         }
@@ -679,7 +679,7 @@ namespace RM.Web.RMBase.SysATS
                         insql = insql + " where ATS_Date='" + txt_ATS_Date + "' ";
                         insb_sql = new StringBuilder(insql);
                         int_sqlresult = DataFactory.SqlDataBase().ExecuteBySql(insb_sql);
-                        if (int_sqlresult <= 0)
+                        if (int_sqlresult < 0)
                         {
                             ShowMsgHelper.Alert_Wern("Exam Error!#ATSResult003");
                         }
@@ -929,10 +929,15 @@ namespace RM.Web.RMBase.SysATS
                         }
                     }
 
-
+                    //更新周末打卡记录
+                    int intWeek = (int)DateTime.Parse(txt_ATS_Date).DayOfWeek;
+                    if(intWeek==0 || intWeek==6)
+                    {
+                        intATSResult = 1;
+                    }
 
                     //更新节日,休假,公出记录及三组打卡记录
-                    if(int_ATS_Holiday==0)
+                    if (int_ATS_Holiday==0)
                     {
                         insql = "update Base_ATSResult ";
                         insql = insql + "set ATS_Holiday='" + int_ATS_Holiday + "',ATS_HolidayStatus='" + int_ATS_HolidayStatus + "' ";
