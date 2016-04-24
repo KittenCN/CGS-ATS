@@ -936,6 +936,7 @@ namespace RM.Web.RMBase.SysATS
                         intATSResult = 1;
                     }
 
+          
                     //更新节日,休假,公出记录及三组打卡记录
                     if (int_ATS_Holiday==0)
                     {
