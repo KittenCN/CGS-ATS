@@ -18,31 +18,31 @@
     <div>
         <table class="frm">
             <tr>
-                <th>员工姓名</th>
+                <th>Name</th>
                 <td><asp:Label ID="EmpID" runat="server"></asp:Label></td>
             </tr>
             <tr>
-                <th>审查状态</th>
+                <th>Status</th>
                 <td><asp:Label ID="Flag" runat="server"></asp:Label></td>
             </tr>
             <tr>
-                <th>考勤日期</th>
+                <th>Date</th>
                 <td><asp:Label ID="ATS_Date" runat="server"></asp:Label></td>
             </tr>
             <tr>
-                <th>日期状态</th>
+                <th>Date Status</th>
                 <td><asp:Label ID="ATS_DateStatus" runat="server"></asp:Label></td>
             </tr>
             <tr>
-                <th>节日名称</th>
+                <th>Holiday Name</th>
                 <td><asp:Label ID="ATS_Holiday" runat="server"></asp:Label></td>
             </tr>
             <tr>
-                <th>休    假</th>
+                <th>Vacation</th>
                 <td><asp:Label ID="ATS_Leave" runat="server"></asp:Label></td>
             </tr>
             <tr>
-                <th>公    出</th>
+                <th>Biz travel</th>
                 <td><asp:Label ID="ATS_Travel" runat="server"></asp:Label></td>
             </tr>
             <tr>
@@ -54,13 +54,13 @@
                 <td><asp:TextBox id="PunchOutTime" runat="server" type="time" /></td>
             </tr>
             <tr>
-                <th>考勤结果:</th>
+                <th>ATS Result</th>
                 <td>
                     <select id="ATS_Result" runat="server">
-                        <option value="0">打卡异常</option>
-                        <option value="1" selected="selected">打卡正常</option>
-                        <option value="2">小迟到/早退</option>
-                        <option value="3">大迟到/早退</option>
+                        <option value="0">Punch Error</option>
+                        <option value="1" selected="selected">Normal</option>
+                        <option value="2">LL Short</option>
+                        <option value="3">LL Long</option>
                     </select>
                 </td>
             </tr>

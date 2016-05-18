@@ -408,7 +408,7 @@ namespace RM.Web.RMBase.SysUser
             ht["User_Code"] = User_Code.Value;
             ht["User_Name"] = User_Name.Value;
             ht["User_Account"] = User_Account.Value;
-            ht["User_Pwd"] = Md5Helper.MD5(User_Pwd.Value,32);
+            ht["User_Pwd"] = Md5Helper.MD5(User_Pwd.Value,32);  //Md5Helper.MD5(pwd, 32)
             ht["User_Sex"] = User_Sex.Value;
             ht["Email"] = Email.Value;
             //ht["Title"] = Title.Value;
@@ -433,7 +433,10 @@ namespace RM.Web.RMBase.SysUser
             {
                 guid = _key;
                 ht["ModifyDate"] = DateTime.Now;
-                ht.Remove("User_Pwd");
+                if (User_Pwd.Value == "*************")
+                {
+                    ht.Remove("User_Pwd");
+                }               
                 ht["ModifyUserId"] = RequestSession.GetSessionUser().UserId;
                 ht["ModifyUserName"] = RequestSession.GetSessionUser().UserName;
             }

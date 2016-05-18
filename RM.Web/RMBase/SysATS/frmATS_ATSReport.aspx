@@ -97,9 +97,9 @@
     <form id="form1" runat="server">
         <div>
             <div>
-                <asp:Label Text="审查Begin Date:" runat="server"></asp:Label>
+                <asp:Label Text="Begin Date:" runat="server"></asp:Label>
                 <asp:TextBox ID="tb_BeginDate" type="date" runat="server" />
-                <asp:Label Text="审查End Date:" runat="server"></asp:Label>
+                <asp:Label Text="End Date:" runat="server"></asp:Label>
                 <asp:TextBox ID="tb_EndDate" type="date" runat="server" />
                 <asp:Button ID="btn_LVsearch" Text="Search" runat="server" OnClick="btn_LVsearch_Click" />
             </div>
@@ -112,17 +112,17 @@
                         <label id="checkAllOff">
                             &nbsp;</label>
                     </td>--%>
-                        <td style="text-align: center;">员工姓名
+                        <td style="text-align: center;">Name
                         </td>
-                        <td style="text-align: center;">应工作天数
+                        <td style="text-align: center;">Days of Work
                         </td>
-                        <td style="text-align: center;">节日天数
+                        <td style="text-align: center;">Working Days
                         </td>
-                        <td style="text-align: center; width: 120px">迟到早退次数(<=4h)
+                        <td style="text-align: center; width: 120px">LL times(<=4h)
                         </td>
-                        <td style="text-align: center; width: 120px">迟到早退次数(>4h)
+                        <td style="text-align: center; width: 120px">LL times(>4h)
                         </td>
-                        <td style="text-align: center;">旷工次数
+                        <td style="text-align: center;">Absent times
                         </td>
                         <td style="text-align: center;">事假天数
                         </td>

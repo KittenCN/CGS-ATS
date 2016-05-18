@@ -19,7 +19,7 @@
     <div>
         <table id="Main" class="frm">
             <tr>
-                <th>标准上班时间:</th>
+                <th>BeginTime:</th>
                 <td><asp:TextBox id="BeginTime" runat="server" type="time" style="width: 200px" /></td>
             </tr>
             <tr>
@@ -31,15 +31,15 @@
                 <td><asp:TextBox ID="PMBeginTime" runat="server" type="time" style="width: 200px"></asp:TextBox></td>
             </tr>
             <tr>
-                <th>标准下班时间:</th>
+                <th>EndTime:</th>
                 <td><asp:TextBox id="EndTime" runat="server" type="time" style="width: 200px" /></td>
             </tr>
             <tr>
-                <th>午休开始时间:</th>
+                <th>LunchBeginTime:</th>
                 <td><asp:TextBox id="LunchBeginTime" runat="server" type="time" style="width: 200px" /></td>
             </tr>
             <tr>
-                <th>午休结束时间:</th>
+                <th>LunchEndTime:</th>
                 <td><asp:TextBox id="LunchEndTime" runat="server" type="time" style="width: 200px" /></td>
             </tr>
             <tr>
@@ -47,15 +47,15 @@
                 <td><input id="ExWorkTime" runat="server" type="text" class="txt" style="width: 200px" />分钟</td>
             </tr>
             <tr>
-                <th>上午工作时间:</th>
+                <th>AMWorkTime:</th>
                 <td><input id="AMWorkTime" runat="server" type="text" class="txt" style="width: 200px" />小时</td>
             </tr>
             <tr>
-                <th>下午工作时间:</th>
+                <th>PMWorkTime:</th>
                 <td><input id="PMWorkTime" runat="server" type="text" class="txt" style="width: 200px" />小时</td>
             </tr>
             <tr>
-                <th>标准工作时间:</th>
+                <th>NorWorkTime:</th>
                 <td><input id="NorWorkTime" runat="server" type="text" class="txt" style="width: 200px" />小时</td>
             </tr>
         </table>

@@ -19,7 +19,7 @@
     <form id="form1" runat="server">
     <table class="frm">
         <tr>
-            <th>节日名称:</th>
+            <th>Holiday Name:</th>
             <td> <input id="Holiday_name" type="text" class="txt" runat="server" style="width: 200px" /> </td>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
             <td> <asp:TextBox id="BeginDate" runat="server" type="date" style="width: 200px"  /> </td>
         </tr>
         <tr>
-            <th>开始日类型:</th>
+            <th>BeginDateType:</th>
             <td><select id="BeginFlag" name="BeginFlag" runat="server" style="width: 200px" >
                 <option value="0">Afternoon</option>
                 <option value="1" selected="selected">Morning</option>
@@ -39,7 +39,7 @@
             <td> <asp:TextBox id="EndDate" runat="server" type="date"  style="width: 200px" /> </td>
         </tr>
         <tr>
-            <th>结束日类型:</th>
+            <th>EndDateType:</th>
             <td><select id="EndFlag" name="EndFlag" runat="server" style="width: 200px" >
                 <option value="0">Morning</option>
                 <option value="1" selected="selected">Aftermoon</option>

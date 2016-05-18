@@ -17,11 +17,11 @@ namespace RM.Web.RMBase.SysATS
         /// </summary>
         public string Content { get; set; }
         /// <summary>
-        /// 开始时间
+        /// Begin Time
         /// </summary>
         public DateTime StartDate { get; set; }
         /// <summary>
-        /// 结束时间
+        /// End Time
         /// </summary>
         public DateTime EndDate { get; set; }
     }

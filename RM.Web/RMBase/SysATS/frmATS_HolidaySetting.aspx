@@ -111,9 +111,9 @@
     <form id="form1" runat="server">
      <div class="btnbarcontetn">
         <div style="text-align: left;">
-            <asp:Button ID="btn_CreateHoliday" Text="新建节日" runat="server" OnClick="btn_CreateHoliday_Click" OnClientClick="add()" />
-            <asp:Button ID="btn_EditHoliday" Text="修改节日" runat="server" OnClick="btn_EditHoliday_Click" OnClientClick="edit()" />
-            <asp:Button ID="btn_DelHoliday" Text="删除节日" runat="server" OnClick="btn_DelHoliday_Click" />
+            <asp:Button ID="btn_CreateHoliday" Text="Create" runat="server" OnClick="btn_CreateHoliday_Click" OnClientClick="add()" />
+            <asp:Button ID="btn_EditHoliday" Text="Edit" runat="server" OnClick="btn_EditHoliday_Click" OnClientClick="edit()" />
+            <asp:Button ID="btn_DelHoliday" Text="Delete" runat="server" OnClick="btn_DelHoliday_Click" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
@@ -128,19 +128,19 @@
                             &nbsp;</label>
                     </td>
                     <td style="width: 100px; text-align: center;">
-                        节日名称
+                        Holiday Name
                     </td>
                     <td style="width: 80px; text-align: center;">
                         Begin Date
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        开始时间
+                        Begin Time
                     </td>
                     <td style="width: 80px; text-align: center;">
                         End Date
                     </td>
                     <td style="width: 80px; text-align: center;">
-                        结束时间
+                        End Time
                     </td>
                     <td>
                         Remark

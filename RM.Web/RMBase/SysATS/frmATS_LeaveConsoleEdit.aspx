@@ -17,7 +17,7 @@
     <div>
         <table class="frm">
             <tr>
-                <th>员工姓名</th>
+                <th>Name</th>
                 <td><asp:Label ID="EmpID" runat="server"></asp:Label></td>
             </tr>
             <tr>

@@ -212,7 +212,6 @@ namespace RM.Web.RMBase.SysATS
         private string GetNameFromID(string EmpID)
         {
             string txt_Result = "";
-
             string sql = "select User_name from Base_UserInfo where User_ID='" + EmpID + "' ";
             StringBuilder sb_sql = new StringBuilder(sql);
             DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
@@ -264,7 +263,7 @@ namespace RM.Web.RMBase.SysATS
             TimeSpan ts;
             //int differenceInDays = ts.Days;
             //产假Calculation
-            if(LeaveID.SelectedValue=="3")
+            if(LeaveID.SelectedValue=="3")  //产假特殊计算
             {
                 int intCJ = 98;
                 DateTime dtCJed = dtBeginDate.AddDays(intCJ+30);
@@ -278,7 +277,7 @@ namespace RM.Web.RMBase.SysATS
                 }
                 if(cbDBT.Checked==true)
                 {
-                    intDBT = int.Parse(DBT.Text) * 15;
+                    intDBT = (int.Parse(DBT.Text)-1) * 15;  //修改为输入所有胎数
                 }
                 intTotalCJ = intCJ + 30 + intCJT + intNC + intDBT;
                 EndDate.Text = dtBeginDate.AddDays(intTotalCJ).ToString("yyyy-MM-dd");
@@ -307,10 +306,55 @@ namespace RM.Web.RMBase.SysATS
                     ts = dtEndDate - dtBeginDate;
                     fResult = ts.Days;
                 }
-
+                //按工作日计算休假天数
+                if(LeaveID.SelectedValue!="11")  //非陪产假,陪产假按自然日计算
+                {
+                    int intHolieWeek = HoliWeek(dtBeginDate, dtEndDate);
+                    if (fResult - intHolieWeek < 0)
+                    {
+                        fResult = 0;
+                    }
+                    else
+                    {
+                        fResult = fResult - intHolieWeek;
+                    }
+                }
                 LeaveDays.Text = fResult.ToString();
             }
 
+        }
+
+        private int HoliWeek(DateTime dtBeginDate,DateTime dtEndDate)
+        {
+            int intResult = 0;
+            for(DateTime dti=dtBeginDate;dti<=dtEndDate;dti=dti.AddDays(1))
+            {
+                if(boolHoliWeek(dti))
+                {
+                    intResult = intResult + 1;
+                }
+            }
+            return intResult;
+        }
+
+        private Boolean boolHoliWeek(DateTime CurrDate)
+        {
+            Boolean boolResult = false;
+            string strSQL = "select * from Base_ATS_HolidaySetting where begindate>='" + CurrDate + "' and enddate<='" + CurrDate + "' ";
+            StringBuilder sbSQL = new StringBuilder(strSQL);
+            DataTable dtSQL = DataFactory.SqlDataBase().GetDataTableBySQL(sbSQL);
+            if(dtSQL.Rows.Count>0)
+            {
+                boolResult = true;
+            }
+            else
+            {
+                if((int)CurrDate.DayOfWeek == 0 || (int)CurrDate.DayOfWeek == 6)
+                {
+                    boolResult = true;
+                }
+            }
+            return boolResult;
         }
 
         private int CallCJDays(DateTime dtBeginDate,DateTime dtEndDate)

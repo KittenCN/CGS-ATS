@@ -106,8 +106,8 @@
             <asp:TextBox id="tb_EndDate" type="date" runat="server" />
             <asp:Button ID="btn_ATSCheck" Text="考勤审查" runat="server"  OnClick="btn_ATSCheck_Click"/>
             <asp:Button ID="btn_Search" Text="查询" runat="server" OnClick="btn_Search_Click" />--%>
-            <asp:Button ID="btn_EditLeaveConsole" Text="修改休假结果" runat="server"  OnClientClick="edit()" />
-            <asp:Button ID="btn_RunSQL" Text="Calculation所有年假" runat="server" OnClick="btn_RunSQL_Click" />
+            <asp:Button ID="btn_EditLeaveConsole" Text="EditResult" runat="server"  OnClientClick="edit()" />
+            <asp:Button ID="btn_RunSQL" Text="Calculation" runat="server" OnClick="btn_RunSQL_Click" />
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
@@ -122,7 +122,7 @@
                             &nbsp;</label>
                     </td>
                     <td style=" text-align: center;">
-                        员工姓名
+                        Name
                     </td>
                     <td style=" text-align: center;">
                         结转年假

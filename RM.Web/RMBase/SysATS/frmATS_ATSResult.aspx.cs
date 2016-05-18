@@ -507,7 +507,7 @@ namespace RM.Web.RMBase.SysATS
 
                     if (txt_PunchInTime == null || txt_PunchInTime == "" || txt_PunchInTime == "00:00:00" || txt_PunchOutTime == null || txt_PunchOutTime == "" || txt_PunchOutTime == "00:00:00")
                     {
-                        intATSResult = 0; //打卡异常
+                        intATSResult = 0; //Punch Error
                     }
                     if (dtPunchInTime > dtBeginTime || dtPunchOutTime < dtEndTime || intResult < intNorWorkHour)
                     {
