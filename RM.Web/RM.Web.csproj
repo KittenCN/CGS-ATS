@@ -2933,6 +2933,8 @@
     <Content Include="Themes\Scripts\jquery-1.8.2.min.js" />
     <Content Include="Themes\Scripts\jquery.md5.js" />
     <Content Include="Themes\Scripts\jquery.pullbox.js" />
+    <Content Include="Themes\Scripts\prettify.js" />
+    <Content Include="Themes\Styles\mui-switch.css" />
     <Content Include="Themes\Scripts\Plugins\fullcalendar.css" />
     <Content Include="Themes\Scripts\Plugins\fullcalendar.js" />
     <Content Include="Themes\Scripts\Plugins\fullcalendar.min.js" />
@@ -2974,6 +2976,8 @@
     <Content Include="Themes\Styles\login.css" />
     <Content Include="Themes\Styles\Menu.css" />
     <Content Include="Themes\Styles\pagination.css" />
+    <Content Include="Themes\Styles\prettify.css" />
+    <Content Include="Themes\Styles\reset.css" />
     <Content Include="Themes\Styles\Site.css" />
     <Content Include="UserControl\LoadButton.ascx" />
     <Content Include="UserControl\PageControl.ascx" />

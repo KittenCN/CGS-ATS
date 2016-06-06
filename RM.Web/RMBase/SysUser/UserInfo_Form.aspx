@@ -173,7 +173,7 @@
         <table id="table1" border="0" cellpadding="0" cellspacing="0" class="frm">
             <tr>
                 <th>
-                    User Code:
+                    User Code *:
                 </th>
                 <td>
                     <input id="User_Code" runat="server" type="text" class="txt" datacol="yes" err="职工工号"
@@ -189,7 +189,7 @@
             </tr>
             <tr>
                 <th>
-                    Birthday:
+                    Birthday *:
                 </th>
                 <td>
                     <asp:TextBox id="birthday" runat="server" type="date" err="员工生日" checkexpession="NotNull" style="width: 200px" />
@@ -204,7 +204,7 @@
             </tr>
             <tr>
                 <th>
-                    Join Date:
+                    Join Date *:
                 </th>
                 <td>
                     <asp:TextBox id="join_date" runat="server" type="date" err="入职日期" checkexpession="NotNull" style="width: 200px" />
@@ -218,7 +218,7 @@
             </tr>
           <tr>
             <th>
-                Status:
+                Status *:
             </th>
             <td>
                 <select id="work_flag" name="work_flag" runat="server" style="width:200px">
@@ -262,7 +262,7 @@
                     </select>
                 </td>
                 <th>
-                    EMail:
+                    EMail *:
                 </th>
                 <td>
                     <input id="Email" runat="server" type="text" class="txt" datacol="yes" err="电子邮箱"
@@ -299,7 +299,7 @@
             </tr>
             <tr>
             <th>
-                User Level:
+                User Level *:
             </th>
              <td>
                  <select id="Boss_Flag" runat="server">
@@ -308,7 +308,7 @@
                  </select>
              </td>
              <th>
-                 ATS_Code:
+                 ATS_Code *:
              </th>
              <td>
                  <input id="ATS_Code" runat="server" type="text" class="txt" style="width: 200px" />

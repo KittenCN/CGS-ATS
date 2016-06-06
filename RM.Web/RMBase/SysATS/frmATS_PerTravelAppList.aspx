@@ -124,6 +124,7 @@
         </div>
          <div style="text-align: right">
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
+             <asp:CheckBox ID="cb_auto" runat="server" Text="Auto Approval" OnCheckedChanged="cb_auto_CheckedChanged" AutoPostBack="true"/>
         </div>
     </div>
     <div>

@@ -8,6 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Leave List</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="/Themes/Styles/mui-switch.css" rel="stylesheet" type="text/css" />
+    <link href="/Themes/Styles/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/Themes/Styles/prettify.css" rel="stylesheet" type="text/css" />
+    <script src="/Themes/Scripts/prettify.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/FunctionJS.js" type="text/javascript"></script>
@@ -122,8 +126,9 @@
             <asp:Button ID="btn_EditHoliday" Text="Edit Leave" runat="server"  OnClientClick="edit()" />
             <asp:Button ID="btn_DelHoliday" Text="Cancel Leave" runat="server" />--%>
         </div>
-         <div style="text-align: right">
+         <div>
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
+             <asp:CheckBox ID="cb_auto" runat="server" Text="Auto Approval" OnCheckedChanged="cb_auto_CheckedChanged" AutoPostBack="true"/>
         </div>
     </div>
     <div>

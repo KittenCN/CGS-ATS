@@ -34,6 +34,17 @@ namespace RM.Web.RMBase.SysATS
             StringBuilder SqlWhere = new StringBuilder();
             IList<SqlParam> IList_param = new List<SqlParam>();
             //DataTable dt = DataFactory.SqlDataBase().GetDataTable("Base_ATS_OriDataIn");
+            string strSQL = "select Auto_Approval from Base_UserInfo where User_ID='" + EmpID + "' ";
+            StringBuilder sbSQL = new StringBuilder(strSQL);
+            DataTable dtSQL = DataFactory.SqlDataBase().GetDataTableBySQL(sbSQL);
+            if(dtSQL.Rows[0][0].ToString()=="1")
+            {
+                cb_auto.Checked = true;
+            }
+            else
+            {
+                cb_auto.Checked = false;
+            }
             string sql = "select * from Base_PerLeaveApply where (ApprovalFlag=0 or ApprovalFlag=1) and empid in (select User_ID from Base_UserInfo where boss_id='" + EmpID + "') ";
             StringBuilder sb_sql = new StringBuilder(sql);
             // DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
@@ -117,6 +128,24 @@ namespace RM.Web.RMBase.SysATS
             }
 
             return txt_Result;
+        }
+
+        protected void cb_auto_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cb_auto.Checked==true)
+            {
+                string strSQL = "update Base_UserInfo set Auto_Approval=1 where User_ID='" + EmpID + "' ";
+                StringBuilder sbSQL = new StringBuilder(strSQL);
+                DataFactory.SqlDataBase().ExecuteBySql(sbSQL);
+                ShowMsgHelper.AlertMsg("Set Auto Approval Success!");
+            }
+            else
+            {
+                string strSQL = "update Base_UserInfo set Auto_Approval=0 where User_ID='" + EmpID + "' ";
+                StringBuilder sbSQL = new StringBuilder(strSQL);
+                DataFactory.SqlDataBase().ExecuteBySql(sbSQL);
+                ShowMsgHelper.AlertMsg("Set Manual Approval Success!");
+            }
         }
     }
 }
