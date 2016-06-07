@@ -128,7 +128,7 @@
         </div>
          <div>
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
-            <asp:Label ID="lab_title" Text="Select Approve Mode:" runat="server" />
+            <asp:Label ID="lab_title" Text="Select Approval Mode:" runat="server" />
             <select id="Auto_Approval" name="Auto_Approval" runat="server" style="width: 90px" >
                 <option value="0">Manual</option>
                 <option value="1" selected="selected">Auto</option>
