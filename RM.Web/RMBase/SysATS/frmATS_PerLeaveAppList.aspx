@@ -128,7 +128,12 @@
         </div>
          <div>
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
-             <asp:CheckBox ID="cb_auto" runat="server" Text="Auto Approval" OnCheckedChanged="cb_auto_CheckedChanged" AutoPostBack="true"/>
+            <asp:Label ID="lab_title" Text="Select Approve Mode:" runat="server" />
+            <select id="Auto_Approval" name="Auto_Approval" runat="server" style="width: 90px" >
+                <option value="0">Manual</option>
+                <option value="1" selected="selected">Auto</option>
+            </select>
+            <asp:Button ID="btn_auto" Text="Save" runat="server" OnClick="btn_auto_Click" />
         </div>
     </div>
     <div>

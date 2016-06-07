@@ -8,6 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>公出审批</title>
     <link href="/Themes/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="/Themes/Styles/mui-switch.css" rel="stylesheet" type="text/css" />
+    <link href="/Themes/Styles/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/Themes/Styles/prettify.css" rel="stylesheet" type="text/css" />
+    <script src="/Themes/Scripts/prettify.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/jquery.pullbox.js" type="text/javascript"></script>
     <script src="/Themes/Scripts/FunctionJS.js" type="text/javascript"></script>
@@ -122,10 +126,15 @@
             <asp:Button ID="btn_EditTravel" Text="Edit BizTravel" runat="server"  OnClientClick="edit()" />
             <asp:Button ID="btn_DelTravel" Text="Cancel BizTravel" runat="server" />--%>
         </div>
-         <div style="text-align: right">
+         <div>
             <%--<uc2:LoadButton ID="LoadButton1" runat="server" />--%>
-             <asp:CheckBox ID="cb_auto" runat="server" Text="Auto Approval" OnCheckedChanged="cb_auto_CheckedChanged" AutoPostBack="true"/>
-        </div>
+            <asp:Label ID="lab_title" Text="Select Approve Mode:" runat="server" />
+            <select id="Auto_Approval" name="Auto_Approval" runat="server" style="width: 90px" >
+                <option value="0">Manual</option>
+                <option value="1" selected="selected">Auto</option>
+            </select>
+            <asp:Button ID="btn_auto" Text="Save" runat="server" OnClick="btn_auto_Click" />       
+         </div>
     </div>
     <div>
         <table id="table1" class="grid" singleselect="true" >

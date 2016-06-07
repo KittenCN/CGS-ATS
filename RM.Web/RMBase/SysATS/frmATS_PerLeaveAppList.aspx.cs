@@ -39,11 +39,11 @@ namespace RM.Web.RMBase.SysATS
             DataTable dtSQL = DataFactory.SqlDataBase().GetDataTableBySQL(sbSQL);
             if(dtSQL.Rows[0][0].ToString()=="1")
             {
-                cb_auto.Checked = true;
+                Auto_Approval.Value = "1";
             }
             else
             {
-                cb_auto.Checked = false;
+                Auto_Approval.Value = "0";
             }
             string sql = "select * from Base_PerLeaveApply where (ApprovalFlag=0 or ApprovalFlag=1) and empid in (select User_ID from Base_UserInfo where boss_id='" + EmpID + "') ";
             StringBuilder sb_sql = new StringBuilder(sql);
@@ -130,9 +130,10 @@ namespace RM.Web.RMBase.SysATS
             return txt_Result;
         }
 
-        protected void cb_auto_CheckedChanged(object sender, EventArgs e)
+        protected void btn_auto_Click(object sender, EventArgs e)
         {
-            if(cb_auto.Checked==true)
+            string[] str_Auto_Approval = Request.Form.GetValues("Auto_Approval");
+            if (str_Auto_Approval[0]=="1")
             {
                 string strSQL = "update Base_UserInfo set Auto_Approval=1 where User_ID='" + EmpID + "' ";
                 StringBuilder sbSQL = new StringBuilder(strSQL);
