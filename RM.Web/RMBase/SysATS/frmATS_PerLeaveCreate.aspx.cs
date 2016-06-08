@@ -298,13 +298,13 @@ namespace RM.Web.RMBase.SysATS
             txt_Remark = "System Auto Approval!";
             float flotxDays = float.Parse(txDays.Text);
 
-            sql1 = "update Base_PerTravelApply set ApprovalFlag=" + int_AppStatus + ",NextApprover='" + txt_NextApprover + "' where id='" + _key + "' ";
+            sql1 = "update Base_PerLeaveApply set ApprovalFlag=" + int_AppStatus + ",NextApprover='" + txt_NextApprover + "' where id='" + _key + "' ";
             sb_sql1 = new StringBuilder(sql1);
             int i1 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql1);
             if (i1 > 0)
             {
                 string Cur_Date = DateTime.Now.ToString("yyyy-MM-dd");
-                string sql2 = "insert into Base_PerTravelApplyDetail(PTid,ApproverId,ApprovalStatus,ApprovalRemark,ApprovalDate) ";
+                string sql2 = "insert into Base_PerLeaveApplyDetail(PTid,ApproverId,ApprovalStatus,ApprovalRemark,ApprovalDate) ";
                 sql2 = sql2 + "select " + _key + ",'" + strApproverID + "'," + int_AppStatus + ",'" + txt_Remark + "','" + Cur_Date + "' ";
                 StringBuilder sb_sql2 = new StringBuilder(sql2);
                 int i2 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql2);
@@ -316,12 +316,6 @@ namespace RM.Web.RMBase.SysATS
                         gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your TraveList has been updated!", "Your TraveList has been updated!");
                     }
                     ShowMsgHelper.AlertMsg("Success");
-                    if (txt_NextApprover == null || txt_NextApprover == "")
-                    {
-                        string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + flotxDays + " where EmpID='" + txt_EmpID + "' ";
-                        StringBuilder sb_sql3 = new StringBuilder(sql3);
-                        int i3 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql3);
-                    }
                 }
                 else
                 {

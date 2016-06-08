@@ -34,36 +34,16 @@ namespace RM.Web.RMBase.SysATS
             txt_EmpID = RequestSession.GetSessionUser().UserId.ToString();
             txt_EmpName = RequestSession.GetSessionUser().UserName.ToString();
 
-            string sql = "select ApprovalFlag,EmpID from Base_PerLeaveApply where id='" + _key + "' ";
-            StringBuilder sbsql = new StringBuilder(sql);
-            DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
-            if (dtsql.Rows[0].ItemArray[0].ToString() == "0")
+            string sql1 = "select Boss_id from Base_UserInfo where user_id='" + txt_EmpID + "'";
+            StringBuilder sb_sql1 = new StringBuilder(sql1);
+            DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);
+            if (dt1.Rows[0].ItemArray[0] != null)
             {
-                string sql1 = "select Boss_id from Base_UserInfo where user_id='" + dtsql.Rows[0].ItemArray[1].ToString() + "'";
-                StringBuilder sb_sql1 = new StringBuilder(sql1);
-                DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);
-                if (dt1.Rows[0].ItemArray[0] != null)
-                {
-                    txt_NextApprover = dt1.Rows[0].ItemArray[0].ToString();
-                }
-                else
-                {
-                    txt_NextApprover = "";
-                }
+                txt_NextApprover = dt1.Rows[0].ItemArray[0].ToString();
             }
             else
             {
-                string sql1 = "select Boss_id from Base_UserInfo where user_id='" + txt_EmpID + "'";
-                StringBuilder sb_sql1 = new StringBuilder(sql1);
-                DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);
-                if (dt1.Rows[0].ItemArray[0] != null)
-                {
-                    txt_NextApprover = dt1.Rows[0].ItemArray[0].ToString();
-                }
-                else
-                {
-                    txt_NextApprover = "";
-                }
+                txt_NextApprover = "";
             }
 
             if (!IsPostBack)
@@ -71,7 +51,7 @@ namespace RM.Web.RMBase.SysATS
                 if (!string.IsNullOrEmpty(_key))
                 {
 
-                    sql = "select ApprovalFlag,FilesAdd from Base_PerTravelApply where id='" + _key + "'";
+                    string sql = "select ApprovalFlag,FilesAdd from Base_PerTravelApply where id='" + _key + "'";
                     StringBuilder sb_sql = new StringBuilder(sql);
                     DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
                     if (dt.Rows[0].ItemArray[0] != null)
@@ -221,7 +201,7 @@ namespace RM.Web.RMBase.SysATS
                     else
                     {
                         //string strNextApprover = AutoApproval(txt_NextApprover, _key);
-                        string strNextApprover = txt_NextApprover;
+                        string strNextApprover=txt_NextApprover;
                         while (BLisAutoApproval(strNextApprover))
                         {
                             strNextApprover = AutoApproval(strNextApprover, _key);
@@ -269,7 +249,7 @@ namespace RM.Web.RMBase.SysATS
         {
             string strResult = "";
             string txt_NextApprover = "";
-            //CallDays();
+            CallDays();
             string sql1 = "select Boss_id from Base_UserInfo where user_id='" + strApproverID + "'";
             StringBuilder sb_sql1 = new StringBuilder(sql1);
             DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);

@@ -42,6 +42,8 @@ namespace RM.Web.RMBase.SysATS
 
         protected void Save_Click(object sender, EventArgs e)
         {
+            string strNextApprover = "";
+
             btnTravelDays_Click(null, null);
 
             DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
@@ -80,6 +82,20 @@ namespace RM.Web.RMBase.SysATS
                     {
                         gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your TraveList has been updated!", "Your TraveList has been updated!");
                     }
+
+                    if (BLisAutoApproval(txt_NextApprover))
+                    {
+                        string strsql = "select id from Base_PerTravelApply where EmpID='" + txt_EmpID + "' and BeginDate='" + BeginDate.Text + "' and EndDate='" + EndDate.Text + "' and CreateDate='" + CreateDate.Text + "' ";
+                        StringBuilder sbsql = new StringBuilder(strsql);
+                        DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
+                        string strid = dtsql.Rows[0].ItemArray[0].ToString();
+                        strNextApprover = AutoApproval(txt_NextApprover, strid);
+                        while (BLisAutoApproval(strNextApprover))
+                        {
+                            strNextApprover = AutoApproval(strNextApprover, strid);
+                        }
+                    }
+
                     ShowMsgHelper.AlertMsg("Success！");
                 }
                 else
@@ -87,6 +103,100 @@ namespace RM.Web.RMBase.SysATS
                     ShowMsgHelper.Alert_Error("Error！");
                 }             
             }
+        }
+
+        private Boolean BLisAutoApproval(string empid)
+        {
+            Boolean BLResult = false;
+            string strsql = "select Auto_Approval from Base_UserInfo where user_id='" + empid + "' ";
+            StringBuilder sbsql = new StringBuilder(strsql);
+            DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
+            if (dtsql.Rows.Count > 0 && dtsql.Rows[0].ItemArray[0] != null)
+            {
+                if (dtsql.Rows[0].ItemArray[0].ToString() == "1")
+                {
+                    BLResult = true;
+                }
+                else
+                {
+                    BLResult = false;
+                }
+            }
+            else
+            {
+                BLResult = false;
+            }
+            return BLResult;
+        }
+
+        private string AutoApproval(string strApproverID, string _key)
+        {
+            string strResult = "";
+            string txt_NextApprover = "";
+            //CallDays();
+            string sql1 = "select Boss_id from Base_UserInfo where user_id='" + strApproverID + "'";
+            StringBuilder sb_sql1 = new StringBuilder(sql1);
+            DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);
+            if (dt1.Rows[0].ItemArray[0] != null)
+            {
+                txt_NextApprover = dt1.Rows[0].ItemArray[0].ToString();
+            }
+            else
+            {
+                txt_NextApprover = "";
+            }
+            string txt_Remark = "";
+            int int_AppStatus = 99;
+
+            if (txt_NextApprover == null || txt_NextApprover.Length <= 0)
+            {
+                int_AppStatus = 2;
+                txt_NextApprover = "";
+            }
+            else
+            {
+                int_AppStatus = 1;
+            }
+
+            //txt_Remark = ApprovalRemark.InnerText;
+            flotxDays = float.Parse(txDays.Text);
+
+            sql1 = "update Base_PerTravelApply set ApprovalFlag=" + int_AppStatus + ",NextApprover='" + txt_NextApprover + "' where id='" + _key + "' ";
+            sb_sql1 = new StringBuilder(sql1);
+            int i1 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql1);
+            if (i1 > 0)
+            {
+                string Cur_Date = DateTime.Now.ToString("yyyy-MM-dd");
+                string sql2 = "insert into Base_PerTravelApplyDetail(PTid,ApproverId,ApprovalStatus,ApprovalRemark,ApprovalDate) ";
+                sql2 = sql2 + "select " + _key + ",'" + strApproverID + "'," + int_AppStatus + ",'" + txt_Remark + "','" + Cur_Date + "' ";
+                StringBuilder sb_sql2 = new StringBuilder(sql2);
+                int i2 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql2);
+                if (i2 > 0)
+                {
+                    GenModel gm = new GenModel();
+                    if (gm.GetEMailFromID(txt_EmpID) != null)
+                    {
+                        gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your TraveList has been updated!", "Your TraveList has been updated!");
+                    }
+                    if (txt_NextApprover == null || txt_NextApprover == "")
+                    {
+                        string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + flotxDays + " where EmpID='" + txt_EmpID + "' ";
+                        StringBuilder sb_sql3 = new StringBuilder(sql3);
+                        int i3 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql3);
+                    }
+                    ShowMsgHelper.AlertMsg("Success");
+                }
+                else
+                {
+                    ShowMsgHelper.Alert_Wern("Error");
+                }
+            }
+            else
+            {
+                ShowMsgHelper.Alert_Wern("Error");
+            }
+            strResult = txt_NextApprover;
+            return strResult;
         }
 
         private string GetNameFromID(string EmpID)

@@ -33,16 +33,36 @@ namespace RM.Web.RMBase.SysATS
             txt_EmpID = RequestSession.GetSessionUser().UserId.ToString();
             txt_EmpName = RequestSession.GetSessionUser().UserName.ToString();
 
-            string sql1 = "select Boss_id from Base_UserInfo where user_id='" + txt_EmpID + "'";
-            StringBuilder sb_sql1 = new StringBuilder(sql1);
-            DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);
-            if (dt1.Rows[0].ItemArray[0] != null)
+            string sql = "select ApprovalFlag,EmpID from Base_PerLeaveApply where id='" + _key + "' ";
+            StringBuilder sbsql = new StringBuilder(sql);
+            DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
+            if (dtsql.Rows[0].ItemArray[0].ToString() == "0")
             {
-                txt_NextApprover = dt1.Rows[0].ItemArray[0].ToString();
+                string sql1 = "select Boss_id from Base_UserInfo where user_id='" + dtsql.Rows[0].ItemArray[1].ToString() + "'";
+                StringBuilder sb_sql1 = new StringBuilder(sql1);
+                DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);
+                if (dt1.Rows[0].ItemArray[0] != null)
+                {
+                    txt_NextApprover = dt1.Rows[0].ItemArray[0].ToString();
+                }
+                else
+                {
+                    txt_NextApprover = "";
+                }
             }
             else
             {
-                txt_NextApprover = "";
+                string sql1 = "select Boss_id from Base_UserInfo where user_id='" + txt_EmpID + "'";
+                StringBuilder sb_sql1 = new StringBuilder(sql1);
+                DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);
+                if (dt1.Rows[0].ItemArray[0] != null)
+                {
+                    txt_NextApprover = dt1.Rows[0].ItemArray[0].ToString();
+                }
+                else
+                {
+                    txt_NextApprover = "";
+                }
             }
 
             if (!IsPostBack)
@@ -50,7 +70,7 @@ namespace RM.Web.RMBase.SysATS
                 if (!string.IsNullOrEmpty(_key))
                 {
 
-                    string sql = "select ApprovalFlag,FilesAdd from Base_PerLeaveApply where id='" + _key + "'";
+                    sql = "select ApprovalFlag,FilesAdd from Base_PerLeaveApply where id='" + _key + "'";
                     StringBuilder sb_sql = new StringBuilder(sql);
                     DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
                     if (dt.Rows[0].ItemArray[0] != null)
@@ -148,6 +168,19 @@ namespace RM.Web.RMBase.SysATS
                     {
                         gm.SendMail2(gm.GetEMailFromID(strUserID), "Your LeaveList has been updated!", "Your LeaveList has been updated!");
                     }
+                    if (txt_NextApprover == null || txt_NextApprover == "")
+                    {
+                        
+                    }
+                    else
+                    {
+                        //string strNextApprover = AutoApproval(txt_NextApprover, _key);
+                        string strNextApprover = txt_NextApprover;
+                        while (BLisAutoApproval(strNextApprover))
+                        {
+                            strNextApprover = AutoApproval(strNextApprover, _key);
+                        }
+                    }
                     ShowMsgHelper.AlertMsg("Success");
                 }
                 else
@@ -161,6 +194,95 @@ namespace RM.Web.RMBase.SysATS
             }
 
         }
+
+        private Boolean BLisAutoApproval(string empid)
+        {
+            Boolean BLResult = false;
+            string strsql = "select Auto_Approval from Base_UserInfo where user_id='" + empid + "' ";
+            StringBuilder sbsql = new StringBuilder(strsql);
+            DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
+            if (dtsql.Rows.Count > 0 && dtsql.Rows[0].ItemArray[0] != null)
+            {
+                if (dtsql.Rows[0].ItemArray[0].ToString() == "1")
+                {
+                    BLResult = true;
+                }
+                else
+                {
+                    BLResult = false;
+                }
+            }
+            else
+            {
+                BLResult = false;
+            }
+            return BLResult;
+        }
+
+        private string AutoApproval(string strApproverID, string _key)
+        {
+            string strResult = "";
+            string txt_NextApprover = "";
+            //CallDays();
+            string sql1 = "select Boss_id from Base_UserInfo where user_id='" + strApproverID + "'";
+            StringBuilder sb_sql1 = new StringBuilder(sql1);
+            DataTable dt1 = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql1);
+            if (dt1.Rows[0].ItemArray[0] != null)
+            {
+                txt_NextApprover = dt1.Rows[0].ItemArray[0].ToString();
+            }
+            else
+            {
+                txt_NextApprover = "";
+            }
+            string txt_Remark = "";
+            int int_AppStatus = 99;
+
+            if (txt_NextApprover == null || txt_NextApprover.Length <= 0)
+            {
+                int_AppStatus = 2;
+                txt_NextApprover = "";
+            }
+            else
+            {
+                int_AppStatus = 1;
+            }
+
+            txt_Remark = "System Auto Approval!";
+            //float flotxDays = float.Parse(txDays.Text);
+
+            sql1 = "update Base_PerLeaveApply set ApprovalFlag=" + int_AppStatus + ",NextApprover='" + txt_NextApprover + "' where id='" + _key + "' ";
+            sb_sql1 = new StringBuilder(sql1);
+            int i1 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql1);
+            if (i1 > 0)
+            {
+                string Cur_Date = DateTime.Now.ToString("yyyy-MM-dd");
+                string sql2 = "insert into Base_PerLeaveApplyDetail(PTid,ApproverId,ApprovalStatus,ApprovalRemark,ApprovalDate) ";
+                sql2 = sql2 + "select " + _key + ",'" + strApproverID + "'," + int_AppStatus + ",'" + txt_Remark + "','" + Cur_Date + "' ";
+                StringBuilder sb_sql2 = new StringBuilder(sql2);
+                int i2 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql2);
+                if (i2 > 0)
+                {
+                    GenModel gm = new GenModel();
+                    if (gm.GetEMailFromID(txt_EmpID) != null)
+                    {
+                        gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your LeaveList has been updated!", "Your LeaveList has been updated!");
+                    }
+                    ShowMsgHelper.AlertMsg("Success");
+                }
+                else
+                {
+                    ShowMsgHelper.Alert_Wern("Error");
+                }
+            }
+            else
+            {
+                ShowMsgHelper.Alert_Wern("Error");
+            }
+            strResult = txt_NextApprover;
+            return strResult;
+        }
+
 
         protected void Reject_Click(object sender, EventArgs e)
         {
