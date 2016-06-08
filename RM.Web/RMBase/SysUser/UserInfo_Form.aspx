@@ -141,6 +141,11 @@
             })
         }
     </script>
+    <style type="text/css">
+        .auto-style1 {
+            height: 25px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -284,16 +289,16 @@
                 </td>
             </tr>
             <tr>
-                <th>
+                <th class="auto-style1">
                     Edit User:
                 </th>
-                <td>
+                <td class="auto-style1">
                     <input id="ModifyUserName" disabled runat="server" type="text" class="txt" style="width: 200px" />
                 </td>
-                <th>
+                <th class="auto-style1">
                     Edit Date:
                 </th>
-                <td>
+                <td class="auto-style1">
                     <input id="ModifyDate" disabled runat="server" type="text" class="txt" style="width: 200px" />
                 </td>
             </tr>
@@ -316,10 +321,19 @@
             </tr>
             <tr>
                 <th>
+                    Is HR?
+                </th>
+                <td>
+                    <select id="HR" runat="server">
+                     <option value="0" selected="selected">NO</option>
+                     <option value="1">Yes</option>
+                 </select>
+                </td>
+                <th>
                     Remark:
                 </th>
                 <td colspan="3">
-                    <textarea id="User_Remark" class="txtRemark" runat="server" style="width: 552px;
+                    <textarea id="User_Remark" class="txtRemark" runat="server" style="width: 200px;
                         height: 83px;"></textarea>
                 </td>
             </tr>

@@ -23,6 +23,7 @@ namespace RM.Web.RMBase.SysATS
         public static string txt_FilesAdd;
         public static float flo_njDays;
         public static float flo_txDays;
+        public static string strHRid;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -44,6 +45,17 @@ namespace RM.Web.RMBase.SysATS
                 {
                     flo_njDays = 0;
                     flo_txDays = 0;
+                }
+                sql = "select top 1 USER_ID from Base_UserInfo where hr=1 order by User_Code";
+                sb_sql = new StringBuilder(sql);
+                dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+                if(dt!=null && dt.Rows.Count>0)
+                {
+                    strHRid = dt.Rows[0].ItemArray[0].ToString();
+                }
+                else
+                {
+                    strHRid = "0000";
                 }
                 DataBindGrid();
             }
@@ -79,6 +91,7 @@ namespace RM.Web.RMBase.SysATS
             int intMaxPerTime = 9999;
             int intMaxPerYear = 9999;
             int intMustFile = 0;
+            string strNextApprover = "";
 
             String yy = DateTime.Now.Year.ToString();
             String mm = DateTime.Now.Month.ToString();
@@ -147,9 +160,16 @@ namespace RM.Web.RMBase.SysATS
                             string sql = "select Boss_id from Base_UserInfo where user_id='" + txt_EmpID + "'";
                             StringBuilder sb_sql = new StringBuilder(sql);
                             DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
-                            if (dt.Rows[0].ItemArray[0] != null)
+                            if (strHRid != "0000")
                             {
-                                txt_NextApprover = dt.Rows[0].ItemArray[0].ToString();
+                                txt_NextApprover = strHRid;
+                            }
+                            else
+                            {
+                                if (dt.Rows[0].ItemArray[0] != null)
+                                {
+                                    txt_NextApprover = dt.Rows[0].ItemArray[0].ToString(); ;
+                                }
                             }
                             Hashtable ht = new Hashtable();
                             ht = ControlBindHelper.GetWebControls(this.Page);
@@ -197,11 +217,18 @@ namespace RM.Web.RMBase.SysATS
                                     gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your LeaveList has been updated!", "Your LeaveList has been updated!");
                                 }
 
-                                string strsql = "select id from Base_PerLeaveApply where EmpID='" + txt_EmpID + "' and LeaveID='" + LeaveID.SelectedValue + "' and BeginDate='" + BeginDate.Text + "' and EndDate='" + EndDate.Text + "' and CreateDate='" + CreateDate.Text + "' ";
-                                StringBuilder sbsql = new StringBuilder(strsql);
-                                DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
-                                string strid = dtsql.Rows[0].ItemArray[0].ToString();
-                                string strNextApprover = AutoApproval(txt_NextApprover, strid);
+                                if(BLisAutoApproval(txt_NextApprover))
+                                {
+                                    string strsql = "select id from Base_PerLeaveApply where EmpID='" + txt_EmpID + "' and LeaveID='" + LeaveID.SelectedValue + "' and BeginDate='" + BeginDate.Text + "' and EndDate='" + EndDate.Text + "' and CreateDate='" + CreateDate.Text + "' ";
+                                    StringBuilder sbsql = new StringBuilder(strsql);
+                                    DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
+                                    string strid = dtsql.Rows[0].ItemArray[0].ToString();
+                                    strNextApprover = AutoApproval(txt_NextApprover, strid);
+                                    while(BLisAutoApproval(strNextApprover))
+                                    {
+                                        strNextApprover = AutoApproval(strNextApprover, strid);
+                                    }
+                                }                               
 
                                 ShowMsgHelper.AlertMsg("Success!");
                             }
@@ -213,6 +240,30 @@ namespace RM.Web.RMBase.SysATS
                     }                   
                 }
             }
+        }
+
+        private Boolean BLisAutoApproval(string empid)
+        {
+            Boolean BLResult = false;
+            string strsql = "select Auto_Approval from Base_UserInfo where user_id='" + empid + "' ";
+            StringBuilder sbsql = new StringBuilder(strsql);
+            DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
+            if(dtsql.Rows.Count>0 && dtsql.Rows[0].ItemArray[0]!=null)
+            {
+                if(dtsql.Rows[0].ItemArray[0].ToString()=="1")
+                {
+                    BLResult = true;
+                }
+                else
+                {
+                    BLResult = false;
+                }
+            }
+            else
+            {
+                BLResult = false;
+            }
+            return BLResult;
         }
 
         private string AutoApproval(string strApproverID,string _key)
@@ -265,9 +316,12 @@ namespace RM.Web.RMBase.SysATS
                         gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your TraveList has been updated!", "Your TraveList has been updated!");
                     }
                     ShowMsgHelper.AlertMsg("Success");
-                    string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + flotxDays + " where EmpID='" + txt_EmpID + "' ";
-                    StringBuilder sb_sql3 = new StringBuilder(sql3);
-                    int i3 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql3);
+                    if (txt_NextApprover == null || txt_NextApprover == "")
+                    {
+                        string sql3 = "update Base_LeaveConsole set SYTX=SYTX+" + flotxDays + " where EmpID='" + txt_EmpID + "' ";
+                        StringBuilder sb_sql3 = new StringBuilder(sql3);
+                        int i3 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql3);
+                    }
                 }
                 else
                 {
