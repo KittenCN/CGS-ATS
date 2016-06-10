@@ -313,7 +313,7 @@ namespace RM.Web.RMBase.SysATS
                     GenModel gm = new GenModel();
                     if (gm.GetEMailFromID(txt_EmpID) != null)
                     {
-                        gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your TraveList has been updated!", "Your TraveList has been updated!");
+                        gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your LeaveList has been updated!", "Your LeaveList has been updated!");
                     }
                     ShowMsgHelper.AlertMsg("Success");
                 }
