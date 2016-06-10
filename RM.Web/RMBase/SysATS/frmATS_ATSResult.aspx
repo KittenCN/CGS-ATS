@@ -119,7 +119,7 @@
             <thead>
                 <tr>
                     <td style="text-align: left;" class="auto-style1">
-                        <label id="checkAllOff">
+                        <label id="checkAllOff" onclick="CheckAllLine()" title="全选">
                             &nbsp;</label>
                     </td>
                     <td style=" text-align: center;">
