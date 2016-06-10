@@ -304,7 +304,7 @@ namespace RM.Web.RMBase.SysATS
             if (i1 > 0)
             {
                 string Cur_Date = DateTime.Now.ToString("yyyy-MM-dd");
-                string sql2 = "insert into Base_PerLeaveApplyDetail(PTid,ApproverId,ApprovalStatus,ApprovalRemark,ApprovalDate) ";
+                string sql2 = "insert into Base_PerLeaveApplyDetail(PAid,ApproverId,ApprovalStatus,ApprovalRemark,ApprovalDate) ";
                 sql2 = sql2 + "select " + _key + ",'" + strApproverID + "'," + int_AppStatus + ",'" + txt_Remark + "','" + Cur_Date + "' ";
                 StringBuilder sb_sql2 = new StringBuilder(sql2);
                 int i2 = DataFactory.SqlDataBase().ExecuteBySql(sb_sql2);
