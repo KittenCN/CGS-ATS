@@ -290,6 +290,10 @@ namespace RM.Web.RMBase.SysATS
                 if (i2 > 0)
                 {
                     GenModel gm = new GenModel();
+                    if (txt_NextApprover != null && txt_NextApprover != "" && gm.GetEMailFromID(txt_NextApprover) != "" && gm.GetEMailFromID(txt_NextApprover) != null)
+                    {
+                        gm.SendMail2(gm.GetEMailFromID(txt_NextApprover), "You have a new Task!", "You have a new Task!");
+                    }
                     if (gm.GetEMailFromID(txt_EmpID) != null)
                     {
                         gm.SendMail2(gm.GetEMailFromID(txt_EmpID), "Your TraveList has been updated!", "Your TraveList has been updated!");
