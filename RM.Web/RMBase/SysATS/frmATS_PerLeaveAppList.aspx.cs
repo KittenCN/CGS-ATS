@@ -45,7 +45,7 @@ namespace RM.Web.RMBase.SysATS
             {
                 Auto_Approval.Value = "0";
             }
-            string sql = "select * from Base_PerLeaveApply where (ApprovalFlag=0 or ApprovalFlag=1) and empid in (select User_ID from Base_UserInfo where boss_id='" + EmpID + "') ";
+            string sql = "select * from Base_PerLeaveApply where (ApprovalFlag=0 or ApprovalFlag=1) and (empid in (select User_ID from Base_UserInfo where boss_id='" + EmpID + "') or NextApprover='" + EmpID + "') ";
             StringBuilder sb_sql = new StringBuilder(sql);
             // DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
             DataTable dt = DataFactory.SqlDataBase().GetPageList(sql, null, "CreateDate", "asc", PageControl1.PageIndex, PageControl1.PageSize, ref count);
