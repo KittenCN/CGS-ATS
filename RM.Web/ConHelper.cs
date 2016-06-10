@@ -52,12 +52,13 @@ namespace RM.Web
         public void GetMailSetting()
         {
             //读取配置文件config.xml
-            if (File.Exists(HttpContext.Current.Server.MapPath("MailSetting.config")))
+            //string tt = HttpRuntime.AppDomainAppPath.ToString();
+            if (File.Exists(HttpRuntime.AppDomainAppPath.ToString() + "MailSetting.config"))
             {
                 try
                 {
                     XmlDocument xmlCon = new XmlDocument();
-                    xmlCon.Load(HttpContext.Current.Server.MapPath("MailSetting.config"));
+                    xmlCon.Load(HttpRuntime.AppDomainAppPath.ToString() + "MailSetting.config");
                     XmlNode xnCon = xmlCon.SelectSingleNode("configuration");
                     strHost = xnCon.SelectSingleNode("host").InnerText;
                     strUname = xnCon.SelectSingleNode("uname").InnerText;
