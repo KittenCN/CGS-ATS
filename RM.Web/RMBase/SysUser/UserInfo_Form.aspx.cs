@@ -19,6 +19,7 @@ using RM.Common.DotNetEncrypt;
 
 namespace RM.Web.RMBase.SysUser
 {
+
     public partial class UserInfo_Form : PageBase
     {
         public StringBuilder str_OutputHtml = new StringBuilder();//附加信息
@@ -30,6 +31,8 @@ namespace RM.Web.RMBase.SysUser
         RM_UserInfo_IDAO user_idao = new RM_UserInfo_Dal();
         string _key;
         string Property_Function = "用户附加信息";
+        public static string strHRtemp = "0";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             _key = Request["key"];                  //主键
@@ -80,6 +83,7 @@ namespace RM.Web.RMBase.SysUser
                 User_Pwd.Value = "*************";
                 Boss_id.Value = GetNameFromID(Boss_id.Value);
                 AppendProperty_value.Value = systemidao.GetPropertyInstancepk(Property_Function, _key);
+                strHRtemp = HR.Value;
             }
         }
 
@@ -421,6 +425,12 @@ namespace RM.Web.RMBase.SysUser
             ht["Boss_id"] = GetIDFromName(Boss_id.Value);
             ht["Boss_Flag"] = Boss_Flag.Value;
             ht["ATS_Code"] = ATS_Code.Value;
+            if(HR.Value!=strHRtemp)
+            {
+                string strsql = "update Base_UserInfo set HR=0";
+                StringBuilder sbsql = new StringBuilder(strsql);
+                DataTable dtsql = DataFactory.SqlDataBase().GetDataTableBySQL(sbsql);
+            }
             ht["HR"] = HR.Value;
             if (work_flag.Value == "0")
             {
