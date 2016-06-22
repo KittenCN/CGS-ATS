@@ -48,6 +48,10 @@
     <Reference Include="GVdata">
       <HintPath>..\GVdata\bin\Debug\GVdata.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -3633,6 +3637,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="RMBase\SysATS\LeaveFiles\" />
     <Folder Include="RMBase\SysATS\OriATSFiles\" />
+    <Folder Include="RMBase\SysATS\ReportFiles\" />
     <Folder Include="RMBase\SysATS\TravelFiles\" />
     <Folder Include="Themes\Scripts\DatePicker\skin\default\.svn\props\" />
     <Folder Include="Themes\Scripts\DatePicker\skin\default\.svn\tmp\prop-base\" />

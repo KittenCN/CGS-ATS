@@ -86,13 +86,29 @@
                 });
             }
         }
-    </script>
-    <style type="text/css">
-        .auto-style1 {
-            width: 30px;
+        function browseFolder(path) {
+            try {
+                var Message = "\u8bf7\u9009\u62e9\u6587\u4ef6\u5939"; //选择框提示信息
+                var Shell = new ActiveXObject("Shell.Application");
+                var Folder = Shell.BrowseForFolder(0, Message, 64, 17); //起始目录为：我的电脑
+                //var Folder = Shell.BrowseForFolder(0,Message,0); //起始目录为：桌面
+                if (Folder != null) {
+                    Folder = Folder.items(); // 返回 FolderItems 对象
+                    Folder = Folder.item(); // 返回 Folderitem 对象
+                    Folder = Folder.Path; // 返回路径
+                    if (Folder.charAt(Folder.length - 1) != "") {
+                        Folder = Folder + "";
+                    }
+                    document.getElementById(path).value = Folder;
+                    return Folder;
+                }
+            }
+            catch (e) {
+                alert(e.message);
+            }
         }
-    </style>
-</head>
+    </script>
+    </head>
 <body>
     <form id="form1" runat="server">
         <div>
@@ -102,6 +118,7 @@
                 <asp:Label Text="End Date:" runat="server"></asp:Label>
                 <asp:TextBox ID="tb_EndDate" type="date" runat="server" />
                 <asp:Button ID="btn_LVsearch" Text="Search" runat="server" OnClick="btn_LVsearch_Click" />
+                <asp:Button ID="btn_Export" Text="Export" runat="server" OnClick="btn_Export_Click" Height="20px" />
             </div>
         </div>
         <div class="div-body">
@@ -124,21 +141,21 @@
                         </td>
                         <td style="text-align: center;">Absent times
                         </td>
-                        <td style="text-align: center;">事假天数
+                        <td style="text-align: center;">Personal leave
                         </td>
-                        <td style="text-align: center;">婚假天数
+                        <td style="text-align: center;">Marital Leave
                         </td>
-                        <td style="text-align: center;">产假天数
+                        <td style="text-align: center;">Maternity Leave
                         </td>
-                        <td style="text-align: center;">丧假天数
+                        <td style="text-align: center;">Funeral Leave
                         </td>
-                        <td style="text-align: center;">调休假天数
+                        <td style="text-align: center;">Leave in lieu
                         </td>
-                        <td style="text-align: center;">病假天数
+                        <td style="text-align: center;">Sick Leave
                         </td>
-                        <td style="text-align: center;">年假天数
+                        <td style="text-align: center;">Annual Leave
                         </td>
-                        <td style="text-align: center;">实工作天数
+                        <td style="text-align: center;">Actual Working Days
                         </td>
                     </tr>
                 </thead>

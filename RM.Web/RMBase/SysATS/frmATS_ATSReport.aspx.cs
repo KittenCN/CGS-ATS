@@ -13,6 +13,8 @@ using RM.Busines.DAL;
 using RM.Common.DotNetData;
 using System.Collections;
 using System.Threading;
+using System.IO;    
+//using Microsoft.Office.Interop.Excel;
 
 namespace RM.Web.RMBase.SysATS
 {
@@ -20,6 +22,8 @@ namespace RM.Web.RMBase.SysATS
     {
         public static string txtJoinDate;
         public static string txtOutDate;
+        public static string txt_FilesAdd;
+        public static DataTable dtExport=new DataTable();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,12 +39,35 @@ namespace RM.Web.RMBase.SysATS
 
                 tb_BeginDate.Text = FirstDay.ToString("yyyy-MM-dd");
                 tb_EndDate.Text = LastDay.ToString("yyyy-MM-dd");
+
+                dtExport = new DataTable();
+                dtExport.Columns.Add(new DataColumn("Name", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Days of Work", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Working Days", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("LL times(<= 4h)", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("LL times(> 4h)", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Absent times", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Personal leave", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Marital Leave", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Maternity Leave", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Funeral Leave", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Leave in lieu", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Sick Leave", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Annual Leave", typeof(string)));
+                dtExport.Columns.Add(new DataColumn("Actual Working Days", typeof(string)));
             }
         }
 
         private void DataBindGrid()
         {
             int count = 0;
+            if (dtExport.Rows.Count > 0)
+            {
+                for (int i = dtExport.Rows.Count - 1; i >= 0; i--)
+                {
+                    dtExport.Rows.RemoveAt(i);
+                }
+            }
             txtJoinDate = tb_BeginDate.Text;
             txtOutDate = tb_EndDate.Text;
             if(txtJoinDate!="" || txtOutDate!="")
@@ -183,6 +210,23 @@ namespace RM.Web.RMBase.SysATS
                 lab_njts.Text = njts.ToString();
                 lab_sjgz.Text = sjgz.ToString();
                 lab_sjgz.Text = (float.Parse(lab_ygzts.Text) - float.Parse(lab_jrts.Text) - shjts - hjts - cjts - sjts - txjts - bjts - njts - sjgz).ToString();
+
+                DataRow drRow = dtExport.NewRow();
+                drRow[0] = lab_EmpID.Text;
+                drRow[1] = lab_ygzts.Text;
+                drRow[2] = lab_jrts.Text;
+                drRow[3] = lab_czl.Text;
+                drRow[4] = lab_czp.Text;
+                drRow[5] = lab_kgcs.Text;
+                drRow[6] = lab_shjts.Text;
+                drRow[7] = lab_hjts.Text;
+                drRow[8] = lab_cjts.Text;
+                drRow[9] = lab_sjts.Text;
+                drRow[10] = lab_txjts.Text;
+                drRow[11] = lab_bjts.Text;
+                drRow[12] = lab_njts.Text;
+                drRow[13] = lab_sjgz.Text;
+                dtExport.Rows.Add(drRow);
             }
 
         }
@@ -321,6 +365,43 @@ namespace RM.Web.RMBase.SysATS
         protected void btn_LVsearch_Click(object sender, EventArgs e)
         {
             DataBindGrid();
+        }
+
+        protected void btn_Export_Click(object sender, EventArgs e)
+        {
+            txtJoinDate = tb_BeginDate.Text;
+            txtOutDate = tb_EndDate.Text;
+            if (txtJoinDate != "" || txtOutDate != "")
+            {
+                //string sql = "select User_Name,USER_ID from Base_UserInfo where (join_date<='" + txtOutDate + "' and (out_date is null or out_date='1900-01-01' or out_date>='" + txtJoinDate + "'))";
+                //StringBuilder sb_sql = new StringBuilder(sql);
+                //DataTable dt = DataFactory.SqlDataBase().GetPageList(sql, null, "User_Name", "asc", 1, 99999, ref count);
+                DataTable dt = dtExport;
+                GenModel GM = new GenModel();
+                string fn = txtJoinDate + "_" + txtOutDate + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + "ATSReport.xls";
+                string SaveLocation = Server.MapPath("TravelFiles") + "\\" + fn;
+                GM.ExportExcel(dt, SaveLocation);
+                //GM.rpExportExcel(ref rp_Item, fn, "application/ms-excel");
+
+                string fileName = "ceshi.rar";//客户端保存的文件名
+                string filePath = SaveLocation;//路径
+                FileInfo fileInfo = new FileInfo(filePath);
+                fileName = Path.GetFileName(filePath);
+                Response.Clear();
+                Response.ClearContent();
+                Response.ClearHeaders();
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
+                Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+                Response.AddHeader("Content-Transfer-Encoding", "binary");
+                Response.ContentType = "application/octet-stream";
+                Response.ContentEncoding = System.Text.Encoding.GetEncoding("gb2312");
+                Response.WriteFile(fileInfo.FullName);
+                Response.Flush();
+                Response.End();
+            }
+        }
+        public override void VerifyRenderingInServerForm(System.Web.UI.Control control)
+        {
         }
     }
 }

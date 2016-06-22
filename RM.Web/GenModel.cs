@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using RM.Busines;
+using Microsoft.Office.Interop.Excel;
 
 namespace RM.Web
 {
@@ -159,13 +160,96 @@ namespace RM.Web
 
             string sql = "select EMail from Base_UserInfo where User_ID='" + EmpID + "' ";
             StringBuilder sb_sql = new StringBuilder(sql);
-            DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
+            System.Data.DataTable dt = DataFactory.SqlDataBase().GetDataTableBySQL(sb_sql);
             if (dt.Rows.Count != 0 && dt.Rows[0].ItemArray[0].ToString() != "")
             {
                 txt_Result = dt.Rows[0].ItemArray[0].ToString();
             }
 
             return txt_Result;
+        }
+
+        public void ExportExcel(System.Data.DataTable tmpDataTable, string strFileName)
+        {
+            if (tmpDataTable == null)
+                return;
+            int rowNum = tmpDataTable.Rows.Count;
+            int columnNum = tmpDataTable.Columns.Count;
+            int rowIndex = 1;
+            int columnIndex = 0;
+
+            //Application xlApp = new ApplicationClass();
+            dynamic xlApp = new ApplicationClass();
+            xlApp.DefaultFilePath = "";
+            xlApp.DisplayAlerts = true;
+            xlApp.SheetsInNewWorkbook = 1;
+            //Workbook xlBook = xlApp.Workbooks.Add(true);
+            dynamic xlBook = xlApp.Workbooks.Add(true);
+
+            //将DataTable的列名导入Excel表第一行
+            foreach (DataColumn dc in tmpDataTable.Columns)
+            {
+                columnIndex++;
+                xlApp.Cells[rowIndex, columnIndex] = dc.ColumnName;
+            }
+
+            //将DataTable中的数据导入Excel中
+            for (int i = 0; i < rowNum; i++)
+            {
+                rowIndex++;
+                columnIndex = 0;
+                for (int j = 0; j < columnNum; j++)
+                {
+                    columnIndex++;
+                    xlApp.Cells[rowIndex, columnIndex] = tmpDataTable.Rows[i][j].ToString();
+                }
+            }
+            //xlBook.SaveCopyAs(HttpUtility.UrlDecode(strFileName, System.Text.Encoding.UTF8));
+            xlBook.SaveCopyAs(strFileName);
+        }
+
+        public void rpExportExcel(ref System.Web.UI.WebControls.Repeater rp, string strFileName, String FileType)
+        {
+            //	DataTable dt = (DataTable)this.Session["GridToExcel"];
+            //	if (dt==null) return;
+            strFileName = System.Web.HttpUtility.UrlEncode(strFileName, System.Text.Encoding.UTF8);
+
+            //System.IO.StringWriter sw = new System.IO.StringWriter();
+            //System.Web.UI.HtmlTextWriter hw = new System.Web.UI.HtmlTextWriter(sw);
+            //rp.RenderControl(hw);
+
+            //System.Web.HttpContext.Current.Response.Clear();
+            //System.Web.HttpContext.Current.Response.ContentType = "application/vnd.ms-excel";
+            //System.Web.HttpContext.Current.Response.Charset = "";
+            //rp.Page.EnableViewState = false;
+
+            //System.Web.HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename=" + strFileName + ".xls");
+            //System.Web.HttpContext.Current.Response.Write("<html><head><meta http-equiv=Content-Type content=\"text/html; charset=GB2312\"><title>Copyright by SDU</title></head><body><center>");
+            //System.Web.HttpContext.Current.Response.Write(sw.ToString());
+            //System.Web.HttpContext.Current.Response.Write("</center></body></html>");
+            //System.Web.HttpContext.Current.Response.End();
+
+            System.Web.HttpContext.Current.Response.Clear();
+            System.Web.HttpContext.Current.Response.BufferOutput = true;
+            //设定输出字符集
+            System.Web.HttpContext.Current.Response.Charset = "GB2312";
+            System.Web.HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.UTF8;
+            System.Web.HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment;filename="
+            + HttpUtility.UrlEncode(strFileName, System.Text.Encoding.UTF8));
+            //设置输出流HttpMiME类型(导出文件格式)
+            System.Web.HttpContext.Current.Response.ContentType = FileType;
+            //关闭ViewState
+            rp.Page.EnableViewState = false;
+            System.Globalization.CultureInfo cultureInfo = new System.Globalization.CultureInfo("ZH-CN", true);
+            System.IO.StringWriter stringWriter = new System.IO.StringWriter(cultureInfo);
+            HtmlTextWriter textWriter = new HtmlTextWriter(stringWriter);
+            //rpt_pro为repeater控件的ID
+            //数据源要有边框，否则导出数据也无边框
+            rp.RenderControl(textWriter);
+            //把HTML写回游览器
+            System.Web.HttpContext.Current.Response.Write(stringWriter.ToString());
+            System.Web.HttpContext.Current.Response.End();
+            System.Web.HttpContext.Current.Response.Flush();
         }
     }
 }

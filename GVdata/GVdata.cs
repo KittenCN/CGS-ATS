@@ -21,8 +21,8 @@ namespace GVdata
             for (int i = 0; i < GVData.Rows.Count; i++)
             {
                 GridViewRow row = GVData.Rows[i];
-                CheckBox Chk = (CheckBox)row.FindControl(CheckBoxName);
-                Label LabVis = (Label)row.FindControl(LabID);
+                System.Web.UI.WebControls.CheckBox Chk = (System.Web.UI.WebControls.CheckBox)row.FindControl(CheckBoxName);
+                System.Web.UI.WebControls.Label LabVis = (System.Web.UI.WebControls.Label)row.FindControl(LabID);
                 if (Chk.Checked == true)
                 {
                     if (str == "")
