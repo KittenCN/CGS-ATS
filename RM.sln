@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RM_Base", "RM_Base", "{9B36098C-5910-4686-A802-BE7D22BDC417}"
 EndProject
@@ -32,8 +32,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{433371E2-1E66-4C7C-A80B-6FB57F33FE81}.Release|Any CPU.Build.0 = Release|Any CPU
