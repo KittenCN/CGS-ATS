@@ -371,6 +371,8 @@ namespace RM.Web.RMBase.SysATS
         {
             txtJoinDate = tb_BeginDate.Text;
             txtOutDate = tb_EndDate.Text;
+            string currentPath = System.Web.HttpContext.Current.Server.MapPath("TravelFiles");
+
             if (txtJoinDate != "" || txtOutDate != "")
             {
                 //string sql = "select User_Name,USER_ID from Base_UserInfo where (join_date<='" + txtOutDate + "' and (out_date is null or out_date='1900-01-01' or out_date>='" + txtJoinDate + "'))";
@@ -384,8 +386,8 @@ namespace RM.Web.RMBase.SysATS
                 //GM.rpExportExcel(ref rp_Item, fn, "application/ms-excel");
                 if(intResult!=-1)
                 {
-                    string fileName = "ceshi.rar";//客户端保存的文件名
-                    string filePath = SaveLocation;//路径
+                    string fileName = fn;//客户端保存的文件名
+                    string filePath = currentPath + "\\" + fileName; ;//路径
                     FileInfo fileInfo = new FileInfo(filePath);
                     fileName = Path.GetFileName(filePath);
                     Response.Clear();
