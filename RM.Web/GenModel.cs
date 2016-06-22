@@ -12,7 +12,12 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using RM.Busines;
-using Microsoft.Office.Interop.Excel;
+//using Microsoft.Office.Interop.Excel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
+using System.IO;
+using System.Data;
 
 namespace RM.Web
 {
@@ -169,43 +174,66 @@ namespace RM.Web
             return txt_Result;
         }
 
-        public void ExportExcel(System.Data.DataTable tmpDataTable, string strFileName)
+        public int ExportExcel(System.Data.DataTable tmpDataTable, string strFileName)
         {
-            if (tmpDataTable == null)
-                return;
-            int rowNum = tmpDataTable.Rows.Count;
-            int columnNum = tmpDataTable.Columns.Count;
-            int rowIndex = 1;
-            int columnIndex = 0;
+            int i = 0;
+            int j = 0;
+            int count = 0;
+            ISheet sheet = null;
+            FileStream fs = null;
+            IWorkbook workbook = null;
+            string sheetName = "ATSReport";
+            bool isColumnWritten = true;
 
-            //Application xlApp = new ApplicationClass();
-            dynamic xlApp = new ApplicationClass();
-            xlApp.DefaultFilePath = "";
-            xlApp.DisplayAlerts = true;
-            xlApp.SheetsInNewWorkbook = 1;
-            //Workbook xlBook = xlApp.Workbooks.Add(true);
-            dynamic xlBook = xlApp.Workbooks.Add(true);
+            fs = new FileStream(strFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            if (strFileName.IndexOf(".xlsx") > 0) // 2007版本
+                workbook = new XSSFWorkbook();
+            else if (strFileName.IndexOf(".xls") > 0) // 2003版本
+                workbook = new HSSFWorkbook();
 
-            //将DataTable的列名导入Excel表第一行
-            foreach (DataColumn dc in tmpDataTable.Columns)
+            try
             {
-                columnIndex++;
-                xlApp.Cells[rowIndex, columnIndex] = dc.ColumnName;
-            }
-
-            //将DataTable中的数据导入Excel中
-            for (int i = 0; i < rowNum; i++)
-            {
-                rowIndex++;
-                columnIndex = 0;
-                for (int j = 0; j < columnNum; j++)
+                if (workbook != null)
                 {
-                    columnIndex++;
-                    xlApp.Cells[rowIndex, columnIndex] = tmpDataTable.Rows[i][j].ToString();
+                    sheet = workbook.CreateSheet(sheetName);
                 }
+                else
+                {
+                    return -1;
+                }
+
+                if (isColumnWritten == true) //写入DataTable的列名
+                {
+                    IRow row = sheet.CreateRow(0);
+                    for (j = 0; j < tmpDataTable.Columns.Count; ++j)
+                    {
+                        row.CreateCell(j).SetCellValue(tmpDataTable.Columns[j].ColumnName);
+                    }
+                    count = 1;
+                }
+                else
+                {
+                    count = 0;
+                }
+
+                for (i = 0; i < tmpDataTable.Rows.Count; ++i)
+                {
+                    IRow row = sheet.CreateRow(count);
+                    for (j = 0; j < tmpDataTable.Columns.Count; ++j)
+                    {
+                        row.CreateCell(j).SetCellValue(tmpDataTable.Rows[i][j].ToString());
+                    }
+                    ++count;
+                }
+                workbook.Write(fs); //写入到excel
+                fs.Close();
+                return count;
             }
-            //xlBook.SaveCopyAs(HttpUtility.UrlDecode(strFileName, System.Text.Encoding.UTF8));
-            xlBook.SaveCopyAs(strFileName);
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+                return -1;
+            }
         }
 
         public void rpExportExcel(ref System.Web.UI.WebControls.Repeater rp, string strFileName, String FileType)

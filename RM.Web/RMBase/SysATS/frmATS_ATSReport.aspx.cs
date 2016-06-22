@@ -380,24 +380,26 @@ namespace RM.Web.RMBase.SysATS
                 GenModel GM = new GenModel();
                 string fn = txtJoinDate + "_" + txtOutDate + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + "ATSReport.xls";
                 string SaveLocation = Server.MapPath("TravelFiles") + "\\" + fn;
-                GM.ExportExcel(dt, SaveLocation);
+                int intResult = GM.ExportExcel(dt, SaveLocation);
                 //GM.rpExportExcel(ref rp_Item, fn, "application/ms-excel");
-
-                string fileName = "ceshi.rar";//客户端保存的文件名
-                string filePath = SaveLocation;//路径
-                FileInfo fileInfo = new FileInfo(filePath);
-                fileName = Path.GetFileName(filePath);
-                Response.Clear();
-                Response.ClearContent();
-                Response.ClearHeaders();
-                Response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
-                Response.AddHeader("Content-Length", fileInfo.Length.ToString());
-                Response.AddHeader("Content-Transfer-Encoding", "binary");
-                Response.ContentType = "application/octet-stream";
-                Response.ContentEncoding = System.Text.Encoding.GetEncoding("gb2312");
-                Response.WriteFile(fileInfo.FullName);
-                Response.Flush();
-                Response.End();
+                if(intResult!=-1)
+                {
+                    string fileName = "ceshi.rar";//客户端保存的文件名
+                    string filePath = SaveLocation;//路径
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    fileName = Path.GetFileName(filePath);
+                    Response.Clear();
+                    Response.ClearContent();
+                    Response.ClearHeaders();
+                    Response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
+                    Response.AddHeader("Content-Length", fileInfo.Length.ToString());
+                    Response.AddHeader("Content-Transfer-Encoding", "binary");
+                    Response.ContentType = "application/octet-stream";
+                    Response.ContentEncoding = System.Text.Encoding.GetEncoding("gb2312");
+                    Response.WriteFile(fileInfo.FullName);
+                    Response.Flush();
+                    Response.End();
+                }               
             }
         }
         public override void VerifyRenderingInServerForm(System.Web.UI.Control control)
