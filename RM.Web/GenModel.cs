@@ -184,13 +184,11 @@ namespace RM.Web
             IWorkbook workbook = null;
             string sheetName = "ATSReport";
             bool isColumnWritten = true;
-
             fs = new FileStream(strFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             if (strFileName.IndexOf(".xlsx") > 0) // 2007版本
                 workbook = new XSSFWorkbook();
             else if (strFileName.IndexOf(".xls") > 0) // 2003版本
                 workbook = new HSSFWorkbook();
-
             try
             {
                 if (workbook != null)
@@ -201,7 +199,6 @@ namespace RM.Web
                 {
                     return -1;
                 }
-
                 if (isColumnWritten == true) //写入DataTable的列名
                 {
                     IRow row = sheet.CreateRow(0);
